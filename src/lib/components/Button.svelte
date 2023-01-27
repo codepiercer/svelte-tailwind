@@ -4,10 +4,13 @@
   export let size = 'md' // sm, md, lg
   export let isDisabled = false
   export let href = ''
+  export let isLoading = false
+
+  import LoadingSpinnerIcon from '$lib/icons/LoadingSpinnerIcon.svelte'
 
   const { class: extraClasses, ...restProps } = $$restProps
 
-  let classes = `inline-flex items-center rounded-md border border-transparent font-medium ring-1 transition focus:outline-none focus:ring-2 focus:ring-offset-1 ring-${color}-200 hover:ring-${color}-300 focus:ring-${color}-500 ${extraClasses}`
+  let classes = `inline-flex items-center justify-center h-fit rounded-md border border-transparent font-medium ring-1 transition focus:outline-none focus:ring-2 focus:ring-offset-1 ring-${color}-200 hover:ring-${color}-300 focus:scale-95 focus:ring-${color}-500 ${extraClasses}`
 
   if (style === `primary`) {
     classes += ` text-white bg-${color}-600 hover:bg-${color}-700`
@@ -24,28 +27,48 @@
   } else if (size === `lg`) {
     classes += ` px-6 py-3 text-base`
   }
-
-  if (isDisabled) {
-    classes += ` !cursor-not-allowed !text-gray-600 !bg-gray-200 !ring-gray-100 !focus:ring-gray-100 !hover:ring-gray-100`
-  }
 </script>
 
 {#if href !== ''}
   <a
     {href}
     on:click={(e) => {
-      if (isDisabled) {
+      if (isDisabled || isLoading) {
         e.preventDefault()
       }
     }}
     tabindex={isDisabled ? -1 : 0}
     class={classes}
+    class:!cursor-not-allowed={isDisabled}
+    class:!text-gray-500={isDisabled}
+    class:!bg-gray-200={isDisabled}
+    class:!ring-gray-100={isDisabled}
+    class:!focus:ring-gray-100={isDisabled}
+    class:!hover:ring-gray-100={isDisabled}
     {...restProps}
   >
+    {#if isLoading}
+      <LoadingSpinnerIcon {color} class="mr-2" />
+    {/if}
     <slot />
   </a>
 {:else}
-  <button on:click type="button" disabled={isDisabled} class={classes} {...restProps}
-    ><slot /></button
+  <button
+    on:click
+    type="button"
+    disabled={isDisabled || isLoading}
+    class={classes}
+    class:!cursor-not-allowed={isDisabled}
+    class:!text-gray-500={isDisabled}
+    class:!bg-gray-200={isDisabled}
+    class:!ring-gray-100={isDisabled}
+    class:!focus:ring-gray-100={isDisabled}
+    class:!hover:ring-gray-100={isDisabled}
+    {...restProps}
+  >
+    {#if isLoading}
+      <LoadingSpinnerIcon {color} class="mr-2" />
+    {/if}
+    <slot /></button
   >
 {/if}

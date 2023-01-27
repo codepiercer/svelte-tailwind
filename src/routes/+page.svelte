@@ -1,11 +1,5 @@
 <script>
   import { Button } from '$lib'
-
-  const installScript = `
-  module.exports = {
-    presets: require('@codepiercer/svelte-tailwind/config.cjs')
-  }
-  `
 </script>
 
 <main class="grid h-screen place-items-center">
@@ -33,12 +27,37 @@
       <span class="ml-1 text-base " aria-hidden="true">&rarr;</span>
     </Button>
 
-    <div class="m-2 flex max-w-2xl flex-col gap-4 rounded-md bg-gray-100 p-4 text-left text-xs">
-      <code> npm i -D @codepiercer/svelte-tailwind </code>
+    <div
+      class="m-2 flex max-w-2xl flex-col gap-4 rounded-lg bg-gray-100 p-4 text-left text-xs text-gray-900"
+    >
       <code>
-        <span class="text-gray-500">#tailwind.config.cjs</span> <br />
-        {installScript}
+        npm create svelte@latest newProject <br /> npm i -D @codepiercer/svelte-tailwind
       </code>
+      <code>
+        <span class="text-gray-400">#tailwind.config.cjs</span>
+        <pre>
+{`module.exports = {
+  presets: require('@codepiercer/svelte-tailwind/config.cjs')
+}`}
+        </pre>
+
+        <span class="text-gray-400">#postcss.config.cjs</span>
+        <pre>
+{`module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {}
+  }
+}`}</pre>
+      </code>
+    </div>
+    <div>
+      <p class="text-sm text-blue-900">or simply use the pre configured template</p>
+      <div
+        class="m-2 flex max-w-2xl flex-col gap-4 rounded-lg bg-gray-100 p-4 text-left text-xs text-gray-900"
+      >
+        <code> npx degit git@github.com:codepiercer/sveltekit-template.git newProject </code>
+      </div>
     </div>
 
     <Button
