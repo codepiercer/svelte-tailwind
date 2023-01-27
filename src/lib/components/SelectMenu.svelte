@@ -8,6 +8,7 @@
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
   import LoadingSpinnerIcon from '$lib/icons/LoadingSpinnerIcon.svelte'
 
+  const uniqueId = `fieldName-${Math.random()}`
   export let color = 'blue' // blue, red, green, yellow, gray
   export let name = 'fieldName'
   export let placeholder = 'placeholder'
@@ -23,7 +24,7 @@
   const { form, errors } = formLib
 
   let inputRef = null
-  let searchValue = ''
+  let searchValue = options.find((option) => option.value === $form[name])?.label || ''
   let isOptionsOpen = false
   let isActive = null
 
@@ -104,14 +105,14 @@
   class:border-red-300={$errors[name] || color === 'red'}
 >
   <label
-    for={name}
+    for={uniqueId}
     class={`absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
     class:isRequired>{label}</label
   >
   <div class="relative">
     <div class="flex items-center justify-between">
       <input
-        id={name}
+        id={uniqueId}
         {name}
         bind:this={inputRef}
         required={isRequired}

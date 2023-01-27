@@ -105,7 +105,7 @@
       </div>
     {/if}
     <!-- main content of dialog -->
-    <div class="flex flex-col overflow-y-auto p-4">
+    <div class="flex flex-col overflow-y-auto p-4 {$$props.class}">
       <slot name="content" />
     </div>
     {#if $$slots.footer}

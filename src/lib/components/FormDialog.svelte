@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+  import { Toaster } from 'svelte-french-toast'
 
   import Button from './Button.svelte'
 
@@ -19,10 +20,11 @@
   }
 </script>
 
-<Dialog bind:dialog={formDialog} closeOnEscape={false}>
+<Dialog bind:dialog={formDialog} closeOnEscape={false} class={$$props.class}>
   <h2 slot="header" class="text-xl font-semibold text-gray-900">{title}</h2>
 
   <form slot="content" id={uniqueId} on:submit={formLib.handleSubmit}>
+    <Toaster />
     <slot />
   </form>
 

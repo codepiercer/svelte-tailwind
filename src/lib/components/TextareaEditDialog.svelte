@@ -9,6 +9,7 @@
   export let name = 'fieldName'
   export let label = name // use name if label is not provided
   export let placeholder = 'placeholder'
+  export let isDisabled = false
   export let isRequired = false
   export let formLib // svelte-forms-lib
   export let mutation // svelte-query mutation
@@ -34,7 +35,7 @@
     >
   {/if}
   <span class="px-1 text-sm">{$form[name]}</span>
-  <Button size="small" style="outline" on:click={editDialog.show} {color}
+  <Button size="small" style="outline" on:click={editDialog.show} {color} {isDisabled}
     ><PencilSquareIcon />
     <span class="sr-only">Edit</span>
   </Button>

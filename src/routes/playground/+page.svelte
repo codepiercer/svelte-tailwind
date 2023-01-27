@@ -7,10 +7,12 @@
     Clipboard,
     FormDialog,
     SelectMenu,
+    SelectMenuEditDialog,
     DropdownMenu,
     TextEditDialog,
     TextareaEditDialog,
     ToggleInput,
+    Tooltip,
     ToggleEditDialog,
     ConfirmationDialog
   } from '$lib'
@@ -29,6 +31,7 @@
   let dialog
   let formDialog
   let editDialog
+  let editMenuDialog
   let editDateDialog
   let editToggleDialog
   let confirmationDialog
@@ -68,11 +71,13 @@
 
   const formLibEditable = createForm({
     validationSchema: yup.object().shape({
-      editableText: yup.string().required().min(3),
-      toggle: yup.boolean().required()
+      // editableText: yup.string().required().min(3),
+      // toggle: yup.boolean().required(),
+      selectValue: yup.string().required()
     }),
     initialValues: {
-      editableText: 'Editable text value'
+      editableText: 'Editable text value',
+      selectValue: 'apple'
     },
     onSubmit: () => {
       $sampleMutation.mutate()
@@ -85,6 +90,7 @@
     $sampleMutation.reset()
     formDialog.hide()
     editDialog.hide()
+    editMenuDialog.hide()
     editDateDialog.hide()
   }
 </script>
@@ -141,6 +147,29 @@
         { label: 'Dog', value: 'dog' }
       ]}
     />
+
+    <SelectMenuEditDialog
+      formLib={formLibEditable}
+      class="max-w-fit"
+      name="selectValue"
+      color="yellow"
+      isRequired
+      label="Select menu"
+      options={[
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' },
+        { label: 'Orange', value: 'orange' },
+        { label: 'Pineapple', value: 'pineapple' },
+        { label: 'Strawberry', value: 'strawberry' },
+        { label: 'Watermelon', value: 'watermelon' },
+        { label: 'Monkey', value: 'monkey' },
+        { label: 'Money', value: 'money' },
+        { label: 'Dog', value: 'dog' }
+      ]}
+      mutation={sampleMutation}
+      bind:editMenuDialog
+    />
+
     <TextEditDialog
       name="editableText"
       color="green"
@@ -203,7 +232,9 @@
       </div>
     </DropdownMenu>
     <Button class="max-w-fit" color="green" size="sm" style="outline"><PencilSquareIcon /></Button>
-    <Button class="max-w-fit" color="red" size="sm" style="primary"><TrashIcon /></Button>
+    <Tooltip tip="view on github">
+      <Button class="max-w-fit" color="red" size="sm" style="primary"><TrashIcon /></Button>
+    </Tooltip>
     <Button class="max-w-fit" color="blue" size="sm" style="outline"><PlusIcon /></Button>
     <Button class="max-w-fit" color="yellow" size="sm" style="outline"
       ><ClipboardDocumentIcon /></Button
