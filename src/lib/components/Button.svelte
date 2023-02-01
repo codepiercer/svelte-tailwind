@@ -1,5 +1,5 @@
 <script>
-  export let style = 'primary' // primary, secondary, outline
+  export let style = 'primary' // primary, secondary, outline, ghost
   export let color = 'blue' // blue, red, green, yellow, gray
   export let size = 'md' // sm, md, lg
   export let isDisabled = false
@@ -10,7 +10,7 @@
 
   const { class: extraClasses, ...restProps } = $$restProps
 
-  let classes = `inline-flex items-center justify-center h-fit rounded-md border border-transparent font-medium ring-1 transition focus:outline-none focus:ring-2 focus:ring-offset-1 ring-${color}-200 hover:ring-${color}-300 focus:scale-95 focus:ring-${color}-500 ${extraClasses}`
+  let classes = `inline-flex items-center justify-center h-fit rounded-md border border-transparent font-medium transition focus:outline-none focus:scale-95  ${extraClasses}`
 
   if (style === `primary`) {
     classes += ` text-white bg-${color}-600 hover:bg-${color}-700`
@@ -18,6 +18,11 @@
     classes += ` text-${color}-700 bg-${color}-100 hover:bg-${color}-200`
   } else if (style === `outline`) {
     classes += ` text-${color}-700 hover:bg-${color}-50`
+  } else if (style === `ghost`) {
+    classes += ` text-${color}-700 hover:bg-${color}-100 focus:bg-${color}-100`
+  }
+  if (style !== `ghost`) {
+    classes += ` ring-1 focus:ring-${color}-500 focus:ring-2 focus:ring-offset-1 ring-${color}-200 hover:ring-${color}-300 `
   }
 
   if (size === `sm`) {

@@ -107,6 +107,8 @@
       >yellow secondary loading Button</Button
     >
     <Button color="green" style="outline">green outline Button</Button>
+    <Button color="green" style="ghost">green ghost Button</Button>
+
     <Button color="red" size="lg">red primary Button large</Button>
     <Button color="blue" size="sm" style="secondary">blue secondary Button small</Button>
     <Button color="gray" style="outline">gray outline Button</Button>

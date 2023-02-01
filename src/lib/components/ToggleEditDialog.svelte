@@ -27,10 +27,10 @@
 
 <div
   class={classes}
-  class:max-w-[15ch]={label.length < 25}
-  class:max-w-[10ch]={label.length < 20}
-  class:max-w-[8ch]={label.length < 5}
-  class:max-w-[5ch]={label.length < 5}
+  class:!max-w-[5ch]={label.length < 5}
+  class:!max-w-[8ch]={label.length < 10}
+  class:!max-w-[10ch]={label.length < 20}
+  class:!max-w-[15ch]={label.length < 25}
 >
   {#if !inline}
     <span
