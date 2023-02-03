@@ -14,3 +14,4 @@ export { default as SelectMenuEditDialog } from './components/SelectMenuEditDial
 export { default as DropdownMenu } from './components/DropdownMenu.svelte'
 export { default as Clipboard } from './components/Clipboard.svelte'
 export { default as Tooltip } from './components/Tooltip.svelte'
+export { default as ErrorAlert } from './components/ErrorAlert.svelte'

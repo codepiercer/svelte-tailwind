@@ -9,7 +9,7 @@
   export let color = 'blue' // blue, red, green, yellow, gray
   export let name = 'fieldName'
   export let label = name // use name if label is not provided
-  export let placeholder = 'placeholder'
+  export let placeholder = ''
   export let isDisabled = false
   export let isRequired = false
   export let formLib // svelte-forms-lib

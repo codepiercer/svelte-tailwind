@@ -11,7 +11,7 @@
   const uniqueId = `fieldName-${Math.random()}`
   export let color = 'blue' // blue, red, green, yellow, gray
   export let name = 'fieldName'
-  export let placeholder = 'placeholder'
+  export let placeholder = ''
   export let isRequired = false
   export let label = 'Select menu'
   export let options = [
