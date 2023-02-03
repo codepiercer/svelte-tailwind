@@ -8,7 +8,7 @@
   import Dialog from './Dialog.svelte'
 
   const uniqueId = `dropdown-${Math.random()}`
-  export let formDialog
+  export let dialog
   export let title = 'Form Dialog'
   export let formLib
   export let mutation
@@ -20,7 +20,7 @@
   }
 </script>
 
-<Dialog bind:dialog={formDialog} closeOnEscape={false} class={$$props.class}>
+<Dialog bind:dialog closeOnEscape={false} class={$$props.class}>
   <h2 slot="header" class="text-xl font-semibold text-gray-900">{title}</h2>
 
   <form slot="content" id={uniqueId} on:submit={formLib.handleSubmit}>

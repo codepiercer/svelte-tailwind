@@ -277,7 +277,7 @@
 </ConfirmationDialog>
 
 <FormDialog
-  bind:formDialog
+  bind:dialog={formDialog}
   title="Form dialog title"
   {formLib}
   mutation={sampleMutation}
