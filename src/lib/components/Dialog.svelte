@@ -47,7 +47,7 @@
   const onDialogClick = (e) => {
     if (closeOnOverlayClick && e.target === e.currentTarget) {
       dialog.hide()
-      dispatch('close')
+      dispatch('closeOnOverlay')
     }
   }
 
