@@ -7,7 +7,7 @@
   import Dialog from './Dialog.svelte'
 
   const uniqueId = `dropdown-${Math.random()}`
-  export let confirmationDialog
+  export let dialog
   export let title = 'Form Dialog'
   export let mutation
 
@@ -22,7 +22,7 @@
   }
 </script>
 
-<Dialog bind:dialog={confirmationDialog} closeOnEscape={false}>
+<Dialog bind:dialog closeOnEscape={false}>
   <h2 slot="header" class="text-xl font-semibold text-gray-900">{title}</h2>
 
   <div slot="content">

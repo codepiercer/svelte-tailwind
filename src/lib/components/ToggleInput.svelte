@@ -1,4 +1,6 @@
 <script>
+  import { twMerge } from 'tailwind-merge'
+
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
 
   export let color = 'blue' // blue, red, green, yellow, gray
@@ -8,10 +10,12 @@
   export let formLib // svelte-forms-lib
 
   const { form, errors, touched } = formLib
-  let classes = `relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1 ${$$props.class}`
+
+  let classes = 'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1'
   if (!$errors[name]) {
-    classes += ` border-${color}-300`
+    classes = twMerge(classes, `border-${color}-300`)
   }
+  classes = twMerge(classes, $$props.class)
 </script>
 
 <div

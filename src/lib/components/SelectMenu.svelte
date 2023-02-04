@@ -1,4 +1,6 @@
 <script>
+  import { twMerge } from 'tailwind-merge'
+
   import { createEventDispatcher } from 'svelte'
 
   import clickOutside from '$lib/utils/clickOutside'
@@ -87,7 +89,10 @@
     onClose()
   }}
   on:keydown={onKeyDown}
-  class={`relative h-fit w-full rounded-md border p-1 shadow-sm focus-within:ring-1 ${$$props.class}`}
+  class={twMerge(
+    'relative h-fit w-full rounded-md border p-1 shadow-sm focus-within:ring-1',
+    $$props.class
+  )}
   class:focus-within:border-blue-600={!$errors[name] && color === 'blue'}
   class:focus-within:ring-blue-600={!$errors[name] && color === 'blue'}
   class:border-blue-300={!$errors[name] && color === 'blue'}

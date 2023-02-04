@@ -1,9 +1,11 @@
 <script>
+  import { twMerge } from 'tailwind-merge'
+
   export let color = 'blue' // blue, red, green, yellow, gray
 </script>
 
 <svg
-  class="h-5 w-5 animate-spin text-${color}-500 {$$props.class}"
+  class={twMerge(`h-5 w-5 animate-spin text-${color}-500`, $$props.class)}
   xmlns="http://www.w3.org/2000/svg"
   fill="none"
   viewBox="0 0 24 24"

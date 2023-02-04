@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte'
 
+  import { twMerge } from 'tailwind-merge'
+
   export let dialog
   export let size = 'md'
   export let closeOnOverlayClick = false
@@ -105,7 +107,7 @@
       </div>
     {/if}
     <!-- main content of dialog -->
-    <div class="flex flex-col overflow-y-auto p-4 {$$props.class}">
+    <div class={twMerge('flex flex-col overflow-y-auto p-4', $$props.class)}>
       <slot name="content" />
     </div>
     {#if $$slots.footer}

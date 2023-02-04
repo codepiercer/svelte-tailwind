@@ -171,7 +171,7 @@
         { label: 'Dog', value: 'dog' }
       ]}
       mutation={sampleMutation}
-      bind:editMenuDialog
+      bind:dialog={editMenuDialog}
     />
 
     <TextEditDialog
@@ -180,7 +180,7 @@
       formLib={formLibEditable}
       label="Editable text"
       mutation={sampleMutation}
-      bind:editDialog
+      bind:dialog={editDialog}
     />
     <TextEditDialog
       inline
@@ -189,7 +189,7 @@
       formLib={formLibEditable}
       label="Editable text"
       mutation={sampleMutation}
-      bind:editDialog
+      bind:dialog={editDialog}
     />
     <TextEditDialog
       type="datetime-local"
@@ -197,14 +197,14 @@
       {formLib}
       label="Editable date"
       mutation={sampleMutation}
-      bind:editDateDialog
+      bind:dialog={editDateDialog}
     />
     <TextareaEditDialog
       name="editableText"
       formLib={formLibEditable}
       label="Editable text area"
       mutation={sampleMutation}
-      bind:editDialog
+      bind:dialog={editDialog}
     />
     <ToggleEditDialog
       name="toggle"
@@ -212,7 +212,7 @@
       formLib={formLibEditable}
       label="Editable text area"
       mutation={sampleMutation}
-      bind:editToggleDialog
+      bind:dialog={editToggleDialog}
     />
     <ToggleEditDialog
       inline
@@ -221,7 +221,7 @@
       formLib={formLibEditable}
       label="Editable text area"
       mutation={sampleMutation}
-      bind:editToggleDialog
+      bind:dialog={editToggleDialog}
     />
     <DropdownMenu let:menuItemProps let:triggerProps color="green" placement="left" let:onOpen>
       <Button slot="trigger" on:click={onOpen} {...triggerProps} color="green" style="outline"
@@ -235,7 +235,7 @@
         </div>
       </div>
     </DropdownMenu>
-    <Button class="max-w-fit" color="green" size="sm" style="outline"><PencilSquareIcon /></Button>
+    <Button class="" color="green" size="sm" style="outline"><PencilSquareIcon /></Button>
     <Tooltip tip="view on github">
       <Button class="max-w-fit" color="red" size="sm" style="primary"><TrashIcon /></Button>
     </Tooltip>
@@ -265,7 +265,7 @@
 <ConfirmationDialog
   title="Are you sure you want to delete this item?"
   mutation={sampleMutation}
-  bind:confirmationDialog
+  bind:dialog={confirmationDialog}
   on:close={() => {
     confirmationDialog.hide()
   }}

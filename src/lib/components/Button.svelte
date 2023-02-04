@@ -1,4 +1,6 @@
 <script>
+  import { twMerge } from 'tailwind-merge'
+
   export let style = 'primary' // primary, secondary, outline, ghost
   export let color = 'blue' // blue, red, green, yellow, gray
   export let size = 'md' // sm, md, lg
@@ -10,28 +12,34 @@
 
   const { class: extraClasses, ...restProps } = $$restProps
 
-  let classes = `inline-flex items-center justify-center h-fit rounded-md border border-transparent font-medium transition focus:outline-none focus:scale-95  ${extraClasses}`
+  let classes =
+    'inline-flex items-center justify-center h-fit rounded-md border border-transparent font-medium transition focus:outline-none focus:scale-95'
 
   if (style === `primary`) {
-    classes += ` text-white bg-${color}-600 hover:bg-${color}-700`
+    classes = twMerge(classes, `text-white bg-${color}-600 hover:bg-${color}-700`)
   } else if (style === `secondary`) {
-    classes += ` text-${color}-700 bg-${color}-100 hover:bg-${color}-200`
+    classes = twMerge(classes, `text-${color}-700 bg-${color}-100 hover:bg-${color}-200`)
   } else if (style === `outline`) {
-    classes += ` text-${color}-700 hover:bg-${color}-50`
+    classes = twMerge(classes, `text-${color}-700 hover:bg-${color}-50`)
   } else if (style === `ghost`) {
-    classes += ` text-${color}-700 hover:bg-${color}-100 focus:bg-${color}-100`
+    classes = twMerge(classes, `text-${color}-700 hover:bg-${color}-100 focus:bg-${color}-100`)
   }
   if (style !== `ghost`) {
-    classes += ` ring-1 focus:ring-${color}-500 focus:ring-2 focus:ring-offset-1 ring-${color}-200 hover:ring-${color}-300 `
+    classes = twMerge(
+      classes,
+      `ring-1 focus:ring-${color}-500 focus:ring-2 focus:ring-offset-1 ring-${color}-200 hover:ring-${color}-300`
+    )
   }
 
   if (size === `sm`) {
-    classes += ` px-2.5 py-1.5 text-xs`
+    classes = twMerge(classes, `px-2.5 py-1.5 text-xs`)
   } else if (size === `md`) {
-    classes += ` px-4 py-2 text-sm`
+    classes = twMerge(classes, `px-4 py-2 text-sm`)
   } else if (size === `lg`) {
-    classes += ` px-6 py-3 text-base`
+    classes = twMerge(classes, `px-6 py-3 text-base`)
   }
+
+  classes = twMerge(classes, extraClasses)
 </script>
 
 {#if href !== ''}

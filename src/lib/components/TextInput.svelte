@@ -1,4 +1,6 @@
 <script>
+  import { twMerge } from 'tailwind-merge'
+
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
   import EyeIcon from '$lib/icons/EyeIcon.svelte'
   import EyeSlashIcon from '$lib/icons/EyeSlashIcon.svelte'
@@ -14,10 +16,11 @@
   export let formLib // svelte-forms-lib
 
   const { form, errors, touched, handleChange } = formLib
-  let classes = `relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1 w-full ${$$props.class}`
+  let classes = 'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1 w-full'
   if (!$errors[name]) {
-    classes += ` border-${color}-300`
+    classes = twMerge(classes, `border-${color}-300`)
   }
+  classes = twMerge(classes, $$props.class)
 
   function typeAction(node) {
     node.type = type

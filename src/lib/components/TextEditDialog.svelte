@@ -1,8 +1,10 @@
 <script>
+  import { twMerge } from 'tailwind-merge'
+
   import { TextInput, FormDialog, Button } from '$lib'
   import PencilSquareIcon from '$lib/icons/PencilSquareIcon.svelte'
 
-  export let editDialog
+  export let dialog
 
   export let inline = false // if true, will not show border and label
   export let type = 'text' // text, email, password, number, tel, url
@@ -16,15 +18,16 @@
   export let mutation // svelte-query mutation
   const { form } = formLib
 
-  let classes = `relative flex h-fit items-center justify-between gap-2 rounded-md ${$$props.class}`
+  let classes = 'relative flex h-fit items-center justify-between gap-2 rounded-md'
   if (!inline) {
-    classes += ` border ring-1 shadow-sm px-3 py-3`
+    classes = twMerge(classes, 'border ring-1 shadow-sm px-3 py-3')
   }
+  classes = twMerge(classes, $$props.class)
 
   const onClose = () => {
     formLib.handleReset()
     $mutation.reset()
-    editDialog.hide()
+    dialog.hide()
   }
 </script>
 
@@ -46,19 +49,13 @@
     {/if}
   </span>
 
-  <Button size="small" style="outline" on:click={editDialog.show} {color} {isDisabled}
+  <Button size="small" style="outline" on:click={dialog.show} {color} {isDisabled}
     ><PencilSquareIcon />
     <span class="sr-only">Edit</span>
   </Button>
 </div>
 
-<FormDialog
-  bind:formDialog={editDialog}
-  title={`Update ${label}`}
-  {formLib}
-  {mutation}
-  on:close={onClose}
->
+<FormDialog bind:dialog title={`Update ${label}`} {formLib} {mutation} on:close={onClose}>
   <div class="flex flex-col gap-8">
     <TextInput {color} {type} {label} {name} {formLib} {isRequired} {placeholder} />
   </div>
