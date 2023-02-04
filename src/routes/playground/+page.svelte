@@ -5,6 +5,7 @@
     TextareaInput,
     Dialog,
     Clipboard,
+    LoadingAlert,
     FormDialog,
     SelectMenu,
     SelectMenuEditDialog,
@@ -103,6 +104,7 @@
 
   <div class="mt-4 flex flex-wrap gap-8">
     <Button>blue primary Button</Button>
+    <LoadingAlert>Loading ...</LoadingAlert>
     <Button color="yellow" style="secondary" isLoading class="max-w-fit"
       >yellow secondary loading Button</Button
     >
