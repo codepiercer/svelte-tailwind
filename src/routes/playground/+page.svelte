@@ -6,6 +6,7 @@
     Dialog,
     Clipboard,
     LoadingAlert,
+    ErrorAlert,
     FormDialog,
     SelectMenu,
     SelectMenuEditDialog,
@@ -38,10 +39,11 @@
   let confirmationDialog
 
   const sampleMutation = createMutation(fakeFetch, {
-    onSuccess: (data) => {
-      console.log(data)
-      successToast('Successfully reset your password')
-      onClose()
+    onSuccess: () => {
+      successToast('Successfully edited something')
+      setTimeout(() => {
+        onClose()
+      })
     }
   })
 
@@ -93,6 +95,7 @@
     editDialog.hide()
     editMenuDialog.hide()
     editDateDialog.hide()
+    editToggleDialog.hide()
   }
 </script>
 
@@ -104,7 +107,6 @@
 
   <div class="mt-4 flex flex-wrap gap-8">
     <Button>blue primary Button</Button>
-    <LoadingAlert>Loading ...</LoadingAlert>
     <Button color="yellow" style="secondary" isLoading class="max-w-fit"
       >yellow secondary loading Button</Button
     >
@@ -117,6 +119,8 @@
     <Button href="#" style="outline">blue Link Button</Button>
     <Button color="red" isDisabled>red disabled Button</Button>
     <Button color="green" href="#" isDisabled>green disabled Link</Button>
+    <LoadingAlert>Loading alert text...</LoadingAlert>
+    <ErrorAlert>Error alert text...</ErrorAlert>
     <TextInput name="fullName" {formLib} class="max-w-fit" />
     <TextInput name="fullName" {formLib} color="green" placeholder="red" class="max-w-fit" />
     <TextInput name="dob" {formLib} color="green" type="date" class="max-w-fit" />
@@ -229,7 +233,25 @@
         <ChevronDownIcon class="ml-2 -mr-1" aria-hidden="true" />
       </Button>
       <div slot="content" class="min-w-[12rem]">
-        <div class="divide-y divide-gray-100" role="none">
+        <div class="mb-1 divide-y divide-gray-100" role="none">
+          <a {...menuItemProps} href="/">Home</a>
+          <a href="/playground" {...menuItemProps}>Playground</a>
+        </div>
+      </div>
+    </DropdownMenu>
+    <DropdownMenu let:menuItemProps let:triggerProps color="green" placement="right" let:onOpen>
+      <Button
+        slot="trigger"
+        on:click={onOpen}
+        {...triggerProps}
+        color="green"
+        style="outline"
+        class="p-0"
+      >
+        <ChevronDownIcon />
+      </Button>
+      <div slot="content" class="min-w-[12rem]">
+        <div class="mb-1 divide-y divide-gray-100" role="none">
           <a {...menuItemProps} href="/">Home</a>
           <a href="/playground" {...menuItemProps}>Playground</a>
         </div>
