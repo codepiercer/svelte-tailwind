@@ -227,9 +227,16 @@
       mutation={sampleMutation}
       bind:dialog={editToggleDialog}
     />
-    <DropdownMenu let:menuItemProps let:triggerProps color="green" placement="left" let:onOpen>
-      <Button slot="trigger" on:click={onOpen} {...triggerProps} color="green" style="outline"
-        >Open Menu
+    <DropdownMenu
+      let:menuItemProps
+      let:triggerProps
+      color="green"
+      let:onOpen
+      placement="top-center"
+      class="mb-12"
+    >
+      <Button slot="trigger" on:click={onOpen} {...triggerProps} color="green" style="outline">
+        <span>Open Menu</span>
         <ChevronDownIcon class="ml-2 -mr-1" aria-hidden="true" />
       </Button>
       <div slot="content" class="min-w-[12rem]">
@@ -239,7 +246,13 @@
         </div>
       </div>
     </DropdownMenu>
-    <DropdownMenu let:menuItemProps let:triggerProps color="green" placement="right" let:onOpen>
+    <DropdownMenu
+      let:menuItemProps
+      let:triggerProps
+      color="green"
+      let:onOpen
+      placement="bottom-left"
+    >
       <Button
         slot="trigger"
         on:click={onOpen}

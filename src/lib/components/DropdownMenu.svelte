@@ -1,12 +1,13 @@
 <script>
-  import { scale } from 'svelte/transition'
-  import { quintOut } from 'svelte/easing'
+  import { cubicOut } from 'svelte/easing'
+
+  import { twMerge } from 'tailwind-merge'
 
   import clickOutside from '$lib/utils/clickOutside'
 
   export let isOpen = false
   export let color = 'blue' // blue, red, green, yellow, gray
-  export let placement = 'right'
+  export let placement = 'bottom-left' // top-left, top-center, top-right, bottom-left, bottom-center, bottom-right
   const uniqueId = `dropdown-${Math.random()}`
 
   const onOpen = () => {
@@ -54,9 +55,55 @@
       items[newIndex]?.focus()
     }
   }
+
+  let classes =
+    'absolute z-20 w-fit rounded-md bg-white/90 shadow-lg ring-1 ring-blue-500 ring-opacity-5 backdrop-blur-sm focus:outline-none'
+
+  if (placement === 'bottom-left') {
+    classes = twMerge(classes, 'top-0 right-0 mt-10')
+  } else if (placement === 'bottom-center') {
+    classes = twMerge(classes, 'top-0 mt-10')
+  } else if (placement === 'bottom-right') {
+    classes = twMerge(classes, 'top-0 left-0 mt-10')
+  } else if (placement === 'top-left') {
+    classes = twMerge(classes, 'bottom-0 right-0 mb-10')
+  } else if (placement === 'top-center') {
+    classes = twMerge(classes, 'bottom-0 mb-10')
+  } else if (placement === 'top-right') {
+    classes = twMerge(classes, 'bottom-0 left-0 mb-10')
+  }
+
+  classes = twMerge(classes, $$props.class)
+
+  let transformOrigin = 'top left'
+  if (placement === 'bottom-left') {
+    transformOrigin = 'top left'
+  } else if (placement === 'bottom-center') {
+    transformOrigin = 'top center'
+  } else if (placement === 'bottom-right') {
+    transformOrigin = 'top right'
+  } else if (placement === 'top-left') {
+    transformOrigin = 'bottom left'
+  } else if (placement === 'top-center') {
+    transformOrigin = 'bottom center'
+  } else if (placement === 'top-right') {
+    transformOrigin = 'bottom right'
+  }
+
+  function slideFade(node, params) {
+    const existingTransform = getComputedStyle(node).transform.replace('none', '')
+
+    return {
+      delay: params.delay || 0,
+      duration: params.duration || 400,
+      easing: params.easing || cubicOut,
+      css: (t) =>
+        `transform-origin: ${transformOrigin}; transform: ${existingTransform} scaleY(${t}); opacity: ${t};`
+    }
+  }
 </script>
 
-<div class="relative inline-block text-left" on:keydown={onKeyDown}>
+<div class="relative inline-flex items-center justify-center" on:keydown={onKeyDown}>
   <slot
     name="trigger"
     triggerProps={{
@@ -73,12 +120,8 @@
       id="menu"
       use:clickOutside
       on:clickOutside={onClose}
-      transition:scale|local={{ duration: 300, opacity: 0.5, easing: quintOut }}
-      class="absolute z-20 mt-2 w-max rounded-md bg-white/90 shadow-lg ring-1 ring-blue-500 ring-opacity-5 backdrop-blur-sm focus:outline-none"
-      class:right-0={placement === 'right'}
-      class:origin-top-right={placement === 'right'}
-      class:left-0={placement === 'left'}
-      class:origin-top-left={placement === 'left'}
+      transition:slideFade
+      class={classes}
       role="menu"
       aria-orientation="vertical"
       aria-labelledby={uniqueId}
