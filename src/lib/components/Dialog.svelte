@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
 
   import { twMerge } from 'tailwind-merge'
 
@@ -26,6 +27,8 @@
     })
   }
 
+  const dispatch = createEventDispatcher()
+
   // expose methods to open and close the dialog
   onMount(() => {
     dialog.show = () => {
@@ -44,6 +47,7 @@
   const onDialogClick = (e) => {
     if (closeOnOverlayClick && e.target === e.currentTarget) {
       dialog.hide()
+      dispatch('close')
     }
   }
 
