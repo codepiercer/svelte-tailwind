@@ -98,6 +98,8 @@
       </span>
     </button>
 
+    <slot />
+
     {#if $errors[name]}
       <div class="inset-y-0 right-0 flex items-center">
         <ExclamationCircleIcon class="text-red-500" />

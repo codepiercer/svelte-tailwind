@@ -122,11 +122,61 @@
     <LoadingAlert>Loading alert text...</LoadingAlert>
     <ErrorAlert>Error alert text...</ErrorAlert>
     <TextInput name="fullName" {formLib} class="max-w-fit" />
-    <TextInput name="fullName" {formLib} color="green" placeholder="red" class="max-w-fit" />
+    <TextInput name="fullName" {formLib} color="green" placeholder="red" class="max-w-fit">
+      <DropdownMenu
+        let:menuItemProps
+        let:triggerProps
+        color="green"
+        let:onOpen
+        placement="bottom-left"
+      >
+        <Button
+          slot="trigger"
+          on:click={onOpen}
+          {...triggerProps}
+          color="green"
+          style="outline"
+          class="p-0"
+        >
+          <ChevronDownIcon />
+        </Button>
+        <div slot="content" class="min-w-[12rem]">
+          <div class="mb-1 divide-y divide-gray-100" role="none">
+            <a {...menuItemProps} href="/">Home</a>
+            <a href="/playground" {...menuItemProps}>Playground</a>
+          </div>
+        </div>
+      </DropdownMenu>
+    </TextInput>
     <TextInput name="dob" {formLib} color="green" type="date" class="max-w-fit" />
     <Clipboard text="Your Text Need to Copy" />
     <ToggleInput name="toggle" {formLib} color="yellow" />
-    <ToggleInput name="toggle" {formLib} color="green" inline />
+    <ToggleInput name="toggle" {formLib} color="green">
+      <DropdownMenu
+        let:menuItemProps
+        let:triggerProps
+        color="green"
+        let:onOpen
+        placement="bottom-left"
+      >
+        <Button
+          slot="trigger"
+          on:click={onOpen}
+          {...triggerProps}
+          color="green"
+          style="outline"
+          class="ml-2 p-0"
+        >
+          <ChevronDownIcon />
+        </Button>
+        <div slot="content" class="min-w-[12rem]">
+          <div class="mb-1 divide-y divide-gray-100" role="none">
+            <a {...menuItemProps} href="/">Home</a>
+            <a href="/playground" {...menuItemProps}>Playground</a>
+          </div>
+        </div>
+      </DropdownMenu>
+    </ToggleInput>
 
     <TextInput name="fullName" {formLib} isRequired placeholder="required field" />
     <TextInput name="fullName" {formLib} />
