@@ -3,6 +3,7 @@
   import flatpickr from 'flatpickr'
   import { twMerge } from 'tailwind-merge'
 
+  import { Button } from '$lib'
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
 
   const uniqueId = `fieldName-${Math.random()}`
@@ -56,6 +57,21 @@
     class:isRequired>{label}</label
   >
   <div class="relative flex flex-col items-center justify-between">
+    {#if inputRef?.value}
+      <div class="inset-y-0 right-0 flex items-center">
+        <Button
+          {color}
+          style="outline"
+          class="mb-2"
+          on:click={() => {
+            $form[name] = null
+            inputRef._flatpickr.setDate(null)
+          }}
+        >
+          <span>Clear</span>
+        </Button>
+      </div>
+    {/if}
     <input
       bind:this={inputRef}
       type="text"

@@ -3,7 +3,8 @@
   import flatpickr from 'flatpickr'
   import { twMerge } from 'tailwind-merge'
 
-  import CalendarIcon from '$lib/icons/CalendarIcon.svelte'
+  import { Button } from '$lib'
+  import XMarkIcon from '$lib/icons/XMarkIcon.svelte'
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
 
   const uniqueId = `fieldName-${Math.random()}`
@@ -64,9 +65,23 @@
       on:change={handleChange}
       on:keyup|trusted={handleChange}
     />
-    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-      <CalendarIcon class={`h-4 w-4 text-${color}-500`} />
-    </div>
+
+    {#if inputRef?.value}
+      <div class="inset-y-0 right-0 flex items-center">
+        <Button
+          {color}
+          style="ghost"
+          class="p-0"
+          on:click={() => {
+            $form[name] = null
+            inputRef._flatpickr.setDate(null)
+          }}
+        >
+          <span class="sr-only">Clear</span>
+          <XMarkIcon class={`text-${color}-500`} />
+        </Button>
+      </div>
+    {/if}
 
     <slot />
 

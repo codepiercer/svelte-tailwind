@@ -2,6 +2,7 @@
   import { twMerge } from 'tailwind-merge'
 </script>
 
+<!-- Heroicon name: mini/calendar -->
 <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 20 20"
