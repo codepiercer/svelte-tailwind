@@ -137,7 +137,7 @@
         }}
         {placeholder}
         type="text"
-        class="sh w-full rounded-md border-none bg-white py-2 pl-3 pr-12 outline-none focus:ring-0 sm:text-sm"
+        class="w-fit rounded-md border-none bg-white py-2 text-sm outline-none focus:ring-0"
         role="combobox"
         aria-controls="options"
         aria-expanded="false"
