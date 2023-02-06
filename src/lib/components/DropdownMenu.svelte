@@ -29,6 +29,8 @@
     }
     // we're only interested in handling up & down arrow keys
     if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return
+    // prevent the default behavior of scrolling the page
+    e.preventDefault()
     // currently focused element (if any)
     const current = document.activeElement
     // get our collection of list elements and turn it into an actual array
@@ -56,8 +58,7 @@
     }
   }
 
-  let classes =
-    'absolute z-20 w-fit rounded-md bg-white/90 shadow-lg ring-1 ring-blue-500 ring-opacity-5 backdrop-blur-sm focus:outline-none'
+  let classes = `absolute z-20 w-fit rounded-md shadow-lg ring-1 ring-${color}-500 ring-opacity-5 backdrop-blur-sm focus:outline-none`
 
   if (placement === 'bottom-left') {
     classes = twMerge(classes, 'top-0 right-0 mt-10')

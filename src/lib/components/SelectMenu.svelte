@@ -111,7 +111,7 @@
 >
   <label
     for={uniqueId}
-    class={`absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
+    class={`absolute -top-2 left-2 z-10 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
     class:isRequired>{label}</label
   >
   <div class="relative">
@@ -122,12 +122,18 @@
         bind:this={inputRef}
         required={isRequired}
         bind:value={searchValue}
-        on:click={() => (isOptionsOpen = true)}
+        on:click={() => {
+          isOptionsOpen = true
+          searchValue = ''
+        }}
         on:keyup={(e) => {
           if (e.key === 'Escape' || e.key === 'Tab') {
             return
           }
-          if (!isOptionsOpen) isOptionsOpen = true
+          if (!isOptionsOpen) {
+            isOptionsOpen = true
+            searchValue = ''
+          }
         }}
         {placeholder}
         type="text"

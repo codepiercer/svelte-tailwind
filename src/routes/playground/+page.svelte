@@ -138,7 +138,7 @@
 
     <SelectMenu
       {formLib}
-      class="max-w-fit"
+      class="max-w-fit py-0"
       name="selectValue"
       color="yellow"
       isRequired
@@ -227,49 +227,51 @@
       mutation={sampleMutation}
       bind:dialog={editToggleDialog}
     />
-    <DropdownMenu
-      let:menuItemProps
-      let:triggerProps
-      color="green"
-      let:onOpen
-      placement="top-center"
-      class="mb-12"
-    >
-      <Button slot="trigger" on:click={onOpen} {...triggerProps} color="green" style="outline">
-        <span>Open Menu</span>
-        <ChevronDownIcon class="ml-2 -mr-1" aria-hidden="true" />
-      </Button>
-      <div slot="content" class="min-w-[12rem]">
-        <div class="mb-1 divide-y divide-gray-100" role="none">
-          <a {...menuItemProps} href="/">Home</a>
-          <a href="/playground" {...menuItemProps}>Playground</a>
-        </div>
-      </div>
-    </DropdownMenu>
-    <DropdownMenu
-      let:menuItemProps
-      let:triggerProps
-      color="green"
-      let:onOpen
-      placement="bottom-left"
-    >
-      <Button
-        slot="trigger"
-        on:click={onOpen}
-        {...triggerProps}
+    <div class="flex flex-1 gap-2">
+      <DropdownMenu
+        let:menuItemProps
+        let:triggerProps
         color="green"
-        style="outline"
-        class="p-0"
+        let:onOpen
+        placement="top-center"
+        class="mb-12"
       >
-        <ChevronDownIcon />
-      </Button>
-      <div slot="content" class="min-w-[12rem]">
-        <div class="mb-1 divide-y divide-gray-100" role="none">
-          <a {...menuItemProps} href="/">Home</a>
-          <a href="/playground" {...menuItemProps}>Playground</a>
+        <Button slot="trigger" on:click={onOpen} {...triggerProps} color="green" style="outline">
+          <span>Open Menu</span>
+          <ChevronDownIcon class="ml-2 -mr-1" aria-hidden="true" />
+        </Button>
+        <div slot="content" class="min-w-[12rem]">
+          <div class="mb-1 divide-y divide-gray-100" role="none">
+            <a {...menuItemProps} href="/">Home</a>
+            <a href="/playground" {...menuItemProps}>Playground</a>
+          </div>
         </div>
-      </div>
-    </DropdownMenu>
+      </DropdownMenu>
+      <DropdownMenu
+        let:menuItemProps
+        let:triggerProps
+        color="green"
+        let:onOpen
+        placement="bottom-left"
+      >
+        <Button
+          slot="trigger"
+          on:click={onOpen}
+          {...triggerProps}
+          color="green"
+          style="outline"
+          class="p-0"
+        >
+          <ChevronDownIcon />
+        </Button>
+        <div slot="content" class="min-w-[12rem]">
+          <div class="mb-1 divide-y divide-gray-100" role="none">
+            <a {...menuItemProps} href="/">Home</a>
+            <a href="/playground" {...menuItemProps}>Playground</a>
+          </div>
+        </div>
+      </DropdownMenu>
+    </div>
     <Button class="" color="green" size="sm" style="outline"><PencilSquareIcon /></Button>
     <Tooltip tip="view on github">
       <Button class="max-w-fit" color="red" size="sm" style="primary"><TrashIcon /></Button>
