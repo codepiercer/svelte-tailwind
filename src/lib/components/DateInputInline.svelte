@@ -3,7 +3,6 @@
   import flatpickr from 'flatpickr'
   import { twMerge } from 'tailwind-merge'
 
-  import CalendarIcon from '$lib/icons/CalendarIcon.svelte'
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
 
   const uniqueId = `fieldName-${Math.random()}`
