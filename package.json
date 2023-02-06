@@ -1,6 +1,6 @@
 {
   "name": "@codepiercer/svelte-tailwind",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "scripts": {
     "dev": "vite dev",
     "build": "npm run lint && svelte-package",
@@ -30,6 +30,7 @@
     "eslint": "8.33.0",
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-svelte3": "4.0.0",
+    "flatpickr": "4.6.13",
     "husky": "8.0.3",
     "postcss": "8.4.21",
     "prettier": "2.8.3",

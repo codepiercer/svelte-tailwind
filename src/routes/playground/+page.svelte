@@ -2,6 +2,7 @@
   import {
     Button,
     TextInput,
+    DateInput,
     TextareaInput,
     Dialog,
     Clipboard,
@@ -12,6 +13,7 @@
     SelectMenuEditDialog,
     DropdownMenu,
     TextEditDialog,
+    DateEditDialog,
     TextareaEditDialog,
     ToggleInput,
     Tooltip,
@@ -122,6 +124,8 @@
     <LoadingAlert>Loading alert text...</LoadingAlert>
     <ErrorAlert>Error alert text...</ErrorAlert>
     <TextInput name="fullName" {formLib} class="max-w-fit" />
+    <DateInput name="dob" label="Date of Birth" {formLib} class="max-w-fit" />
+
     <TextInput name="fullName" {formLib} color="green" placeholder="red" class="max-w-fit">
       <DropdownMenu
         let:menuItemProps
@@ -245,8 +249,8 @@
       mutation={sampleMutation}
       bind:dialog={editDialog}
     />
-    <TextEditDialog
-      type="datetime-local"
+    <DateEditDialog
+      type="datetime"
       name="createdAt"
       {formLib}
       label="Editable date"
