@@ -14,7 +14,7 @@
   export let placeholder = ''
   export let isRequired = false
   export let formLib // svelte-forms-lib
-  export let flatpickrOptions = {}
+  export let options = {}
 
   const { form, errors, touched, handleChange } = formLib
 
@@ -27,7 +27,7 @@
   onMount(() => {
     flatpickr(inputRef, {
       defaultDate: $form[name],
-      ...flatpickrOptions
+      ...options
     })
   })
 </script>

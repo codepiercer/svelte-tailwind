@@ -65,7 +65,7 @@
       {formLib}
       {isRequired}
       {placeholder}
-      flatpickrOptions={{
+      options={{
         enableTime: type === 'datetime' || type === 'time',
         noCalendar: type === 'time'
       }}
