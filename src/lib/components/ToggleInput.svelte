@@ -40,7 +40,7 @@
     <button
       {name}
       type="button"
-      class={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none`}
+      class={`relative mx-auto inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none`}
       class:bg-gray-200={!$form[name]}
       class:bg-blue-600={!!$form[name] && color === 'blue'}
       class:bg-red-600={!!$form[name] && color === 'red'}

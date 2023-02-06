@@ -6,7 +6,7 @@
   const { form } = formLib
 </script>
 
-<div class="relative flex items-center justify-between bg-white">
+<div class="relative flex items-center bg-white">
   <button
     {name}
     type="button"
