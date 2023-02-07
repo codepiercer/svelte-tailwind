@@ -30,12 +30,22 @@
   let isOptionsOpen = false
   let isActive = null
 
+  // add a clear option to the list
+  $: if ($form[name]) {
+    if (options.find((option) => option.value === '') === undefined) {
+      options = [{ label: 'Clear', value: '' }, ...options]
+    }
+  } else {
+    // remove clear option if value is null
+    options = options.filter((option) => option.value !== '')
+  }
+
   const dispatch = createEventDispatcher()
 
   const onSelect = (option) => {
     $form[name] = option.value
     onClose()
-    searchValue = option.label
+    searchValue = option.value ? option.label : ''
     inputRef.focus()
     dispatch('select', option)
   }
@@ -210,7 +220,7 @@
             >
               <span class="block truncate" class:font-semibold={isSelected}>{option.label}</span>
 
-              {#if isSelected}
+              {#if isSelected && option?.value}
                 <span
                   class="absolute inset-y-0 right-0 flex items-center pr-4 "
                   class:text-white={isActive === idx}
