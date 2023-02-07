@@ -127,6 +127,7 @@
     <DateInput name="dob" label="Date of Birth" {formLib} class="max-w-fit" />
 
     <TextInput name="fullName" {formLib} color="green" placeholder="red" class="max-w-fit">
+      <span slot="label">Full Name</span>
       <DropdownMenu
         let:menuItemProps
         let:triggerProps

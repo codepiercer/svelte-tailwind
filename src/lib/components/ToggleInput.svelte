@@ -34,7 +34,7 @@
 >
   <span
     class={`absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
-    class:isRequired>{label}</span
+    class:isRequired><slot name="label">{label}</slot></span
   >
   <div class="relative flex items-center justify-between">
     <button

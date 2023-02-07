@@ -54,7 +54,7 @@
   <label
     for={uniqueId}
     class={`absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
-    class:isRequired>{label}</label
+    class:isRequired><slot name="label">{label}</slot></label
   >
   <div class="relative flex flex-col items-center justify-between">
     {#if inputRef?.value}
