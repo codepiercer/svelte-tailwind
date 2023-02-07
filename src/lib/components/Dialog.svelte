@@ -89,7 +89,7 @@
   bind:this={dialog}
   on:click={onDialogClick}
   on:close
-  class="max-h-[80%] min-h-[8rem] w-full rounded-lg border-none p-0 shadow-lg"
+  class="max-h-[80%] min-h-[8rem] w-[96%] rounded-lg border-none p-0 shadow-lg"
   class:max-w-xs={size === 'xs'}
   class:max-w-sm={size === 'sm'}
   class:max-w-md={size === 'md'}
@@ -131,6 +131,8 @@
   dialog[open] {
     -webkit-animation: show 500ms ease normal;
     animation: show 500ms ease normal;
+    position: absolute;
+    top: -50%;
   }
   @-webkit-keyframes show {
     from {
