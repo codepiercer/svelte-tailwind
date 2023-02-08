@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
 
   import { ToggleInput, ToggleInputReadonly, FormDialog, Button } from '$lib'
@@ -12,8 +13,10 @@
   export let label = name // use name if label is not provided
   export let isDisabled = false
   export let isRequired = false
-  export let formLib // svelte-forms-lib
-  export let mutation // svelte-query mutation
+  export let isLoading = false
+  export let isTouched = false
+  export let error = ''
+  export let value = ''
 
   let classes = 'relative flex h-fit items-center justify-between gap-2 rounded-md'
   if (!inline) {
@@ -21,10 +24,11 @@
   }
   classes = twMerge(classes, $$props.class)
 
+  const dispatch = createEventDispatcher()
+
   const onClose = () => {
-    formLib.handleReset()
-    $mutation.reset()
     dialog.hide()
+    dispatch('close')
   }
 </script>
 
@@ -41,15 +45,15 @@
       class:isRequired>{label}</span
     >
   {/if}
-  <ToggleInputReadonly {color} {name} {formLib} />
+  <ToggleInputReadonly {color} {name} {value} />
   <Button size="small" style="outline" on:click={dialog.show} {color} {isDisabled}
     ><PencilSquareIcon />
     <span class="sr-only">Edit</span>
   </Button>
 </div>
 
-<FormDialog bind:dialog title={`Update ${label}`} {formLib} {mutation} on:close={onClose}>
+<FormDialog bind:dialog title={`Update ${label}`} {error} {isLoading} on:submit on:close={onClose}>
   <div class="flex flex-col gap-8">
-    <ToggleInput {color} {label} {name} {formLib} {isRequired} />
+    <ToggleInput {color} {label} {name} {isLoading} {error} {value} {isTouched} {isRequired} />
   </div>
 </FormDialog>

@@ -1,9 +1,7 @@
 <script>
   export let color = 'blue' // blue, red, green, yellow, gray
   export let name = 'fieldName'
-  export let formLib // svelte-forms-lib
-
-  const { form } = formLib
+  export let value = ''
 </script>
 
 <div class="relative flex items-center bg-white">
@@ -12,29 +10,29 @@
     type="button"
     disabled
     class={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-default rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-${color}-500 focus:ring-offset-2`}
-    class:bg-gray-200={!$form[name]}
-    class:bg-blue-600={!!$form[name] && color === 'blue'}
-    class:bg-red-600={!!$form[name] && color === 'red'}
-    class:bg-green-600={!!$form[name] && color === 'green'}
-    class:bg-yellow-600={!!$form[name] && color === 'yellow'}
-    class:bg-gray-600={!!$form[name] && color === 'gray'}
+    class:bg-gray-200={!value}
+    class:bg-blue-600={!!value && color === 'blue'}
+    class:bg-red-600={!!value && color === 'red'}
+    class:bg-green-600={!!value && color === 'green'}
+    class:bg-yellow-600={!!value && color === 'yellow'}
+    class:bg-gray-600={!!value && color === 'gray'}
     role="switch"
-    aria-checked={!!$form[name]}
+    aria-checked={!!value}
   >
     <span class="sr-only">Use setting</span>
     <span
       class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
-      class:translate-x-0={!$form[name]}
-      class:translate-x-5={!!$form[name]}
+      class:translate-x-0={!value}
+      class:translate-x-5={!!value}
     >
       <span
         class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
-        class:opacity-100={!$form[name]}
-        class:ease-in={!$form[name]}
-        class:duration-200={!$form[name]}
-        class:opacity-0={!!$form[name]}
-        class:ease-out={!!$form[name]}
-        class:duration-100={!!$form[name]}
+        class:opacity-100={!value}
+        class:ease-in={!value}
+        class:duration-200={!value}
+        class:opacity-0={!!value}
+        class:ease-out={!!value}
+        class:duration-100={!!value}
         aria-hidden="true"
       >
         <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
@@ -49,12 +47,12 @@
       </span>
       <span
         class="absolute inset-0 flex h-full w-full items-center justify-center  transition-opacity"
-        class:opacity-0={!$form[name]}
-        class:ease-out={!$form[name]}
-        class:duration-100={!$form[name]}
-        class:opacity-100={!!$form[name]}
-        class:ease-in={!!$form[name]}
-        class:duration-200={!!$form[name]}
+        class:opacity-0={!value}
+        class:ease-out={!value}
+        class:duration-100={!value}
+        class:opacity-100={!!value}
+        class:ease-in={!!value}
+        class:duration-200={!!value}
         aria-hidden="true"
       >
         <svg class="h-3 w-3 text-{color}-600" fill="currentColor" viewBox="0 0 12 12">

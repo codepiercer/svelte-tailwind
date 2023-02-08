@@ -49,7 +49,7 @@
     }
   })
 
-  const formLib = createForm({
+  const { form, errors, touched, handleChange, handleReset, handleSubmit } = createForm({
     validationSchema: yup.object().shape({
       fullName: yup.string().required().min(3),
       age: yup.number().typeError('Age must be a number').required().min(18),
@@ -66,23 +66,10 @@
       selectValue: yup.string().required()
     }),
     initialValues: {
-      dob: '2021-01-01',
-      createdAt: '2021-01-01 00:00:00'
-    },
-    onSubmit: () => {
-      $sampleMutation.mutate()
-    }
-  })
-
-  const formLibEditable = createForm({
-    validationSchema: yup.object().shape({
-      // editableText: yup.string().required().min(3),
-      // toggle: yup.boolean().required(),
-      selectValue: yup.string().required()
-    }),
-    initialValues: {
-      editableText: 'Editable text value',
-      selectValue: 'apple'
+      dob: new Date(),
+      createdAt: new Date(),
+      selectValue: 'apple',
+      editableText: 'Editable text'
     },
     onSubmit: () => {
       $sampleMutation.mutate()
@@ -90,8 +77,7 @@
   })
 
   const onClose = () => {
-    formLib.handleReset()
-    formLibEditable.handleReset()
+    handleReset()
     $sampleMutation.reset()
     formDialog.hide()
     editDialog.hide()
@@ -123,10 +109,42 @@
     <Button color="green" href="#" isDisabled>green disabled Link</Button>
     <LoadingAlert>Loading alert text...</LoadingAlert>
     <ErrorAlert>Error alert text...</ErrorAlert>
-    <TextInput name="fullName" {formLib} class="max-w-fit" />
-    <DateInput name="dob" label="Date of Birth" {formLib} class="max-w-fit" />
+    <TextInput
+      name="fullName"
+      isTouched={$touched['fullName']}
+      value={$form['fullName']}
+      error={$errors['fullName']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      class="max-w-fit"
+    />
+    <DateInput
+      name="dob"
+      label="Date of Birth"
+      isTouched={$touched['dob']}
+      value={$form['dob']}
+      error={$errors['dob']}
+      on:change={handleChange}
+      class="max-w-fit"
+    />
+    <Button
+      on:click={() => {
+        $form['dob'] = ''
+      }}
+    >
+      today date
+    </Button>
 
-    <TextInput name="fullName" {formLib} color="green" placeholder="red" class="max-w-fit">
+    <TextInput
+      name="fullName"
+      isTouched={$touched['fullName']}
+      value={$form['fullName']}
+      error={$errors['fullName']}
+      on:keyup={handleChange}
+      color="green"
+      placeholder="red"
+      class="max-w-fit"
+    >
       <span slot="label">Full Name</span>
       <DropdownMenu
         let:menuItemProps
@@ -153,10 +171,26 @@
         </div>
       </DropdownMenu>
     </TextInput>
-    <TextInput name="dob" {formLib} color="green" type="date" class="max-w-fit" />
+
     <Clipboard text="Your Text Need to Copy" />
-    <ToggleInput name="toggle" {formLib} color="yellow" />
-    <ToggleInput name="toggle" {formLib} color="green">
+    <ToggleInput
+      name="toggle"
+      isTouched={$touched['toggle']}
+      value={$form['toggle']}
+      error={$errors['toggle']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      color="yellow"
+    />
+    <ToggleInput
+      name="toggle"
+      isTouched={$touched['toggle']}
+      value={$form['toggle']}
+      error={$errors['toggle']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      color="green"
+    >
       <DropdownMenu
         let:menuItemProps
         let:triggerProps
@@ -183,8 +217,24 @@
       </DropdownMenu>
     </ToggleInput>
 
-    <TextInput name="fullName" {formLib} isRequired placeholder="required field" />
-    <TextInput name="fullName" {formLib} />
+    <TextInput
+      name="fullName"
+      isTouched={$touched['fullName']}
+      value={$form['fullName']}
+      error={$errors['fullName']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      isRequired
+      placeholder="required field"
+    />
+    <TextInput
+      name="fullName"
+      isTouched={$touched['fullName']}
+      value={$form['fullName']}
+      error={$errors['fullName']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+    />
     <Button on:click={dialog.show}>open dialog</Button>
     <Button on:click={formDialog.show}>open form dialog</Button>
     <Button on:click={confirmationDialog.show} color="red" style="outline"
@@ -192,7 +242,11 @@
     >
 
     <SelectMenu
-      {formLib}
+      value={$form['selectValue']}
+      error={$errors['selectValue']}
+      on:select={(option) => {
+        $form['selectValue'] = option.value
+      }}
       class="max-w-fit py-0"
       name="selectValue"
       color="yellow"
@@ -212,7 +266,10 @@
     />
 
     <SelectMenuEditDialog
-      formLib={formLibEditable}
+      value={$form['selectValue']}
+      error={$errors['selectValue']}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
       class="max-w-fit"
       name="selectValue"
       color="yellow"
@@ -236,50 +293,80 @@
     <TextEditDialog
       name="editableText"
       color="green"
-      formLib={formLibEditable}
+      value={$form['editableText']}
+      error={$errors['editableText']}
+      isTouched={$touched['editableText']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
       label="Editable text"
-      mutation={sampleMutation}
       bind:dialog={editDialog}
     />
     <TextEditDialog
       inline
       color="green"
       name="editableText"
-      formLib={formLibEditable}
+      value={$form['editableText']}
+      error={$errors['editableText']}
+      isTouched={$touched['editableText']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
       label="Editable text"
-      mutation={sampleMutation}
       bind:dialog={editDialog}
     />
     <DateEditDialog
       type="datetime"
       name="createdAt"
-      {formLib}
+      value={$form['createdAt']}
+      error={$errors['createdAt']}
+      isTouched={$touched['createdAt']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
       label="Editable date"
-      mutation={sampleMutation}
       bind:dialog={editDateDialog}
     />
     <TextareaEditDialog
       name="editableText"
-      formLib={formLibEditable}
+      value={$form['editableText']}
+      error={$errors['editableText']}
+      isTouched={$touched['editableText']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
       label="Editable text area"
-      mutation={sampleMutation}
       bind:dialog={editDialog}
     />
     <ToggleEditDialog
       name="toggle"
       class="max-w-xs"
-      formLib={formLibEditable}
+      value={$form['toggle']}
+      error={$errors['toggle']}
+      isTouched={$touched['toggle']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
       label="Editable text area"
-      mutation={sampleMutation}
       bind:dialog={editToggleDialog}
     />
     <ToggleEditDialog
       inline
       class="max-w-xs"
       name="toggle"
-      formLib={formLibEditable}
+      value={$form['toggle']}
+      error={$errors['toggle']}
+      isTouched={$touched['toggle']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
       label="Editable text area"
-      mutation={sampleMutation}
       bind:dialog={editToggleDialog}
     />
     <div class="flex flex-1 gap-2">
@@ -335,9 +422,36 @@
     <Button class="max-w-fit" color="yellow" size="sm" style="outline"
       ><ClipboardDocumentIcon /></Button
     >
-    <TextInput name="password" type="password" placeholder="password" class="max-w-fit" {formLib} />
-    <TextInput name="age" type="number" placeholder="number" {formLib} />
-    <TextareaInput name="notes" placeholder="textarea" {formLib} />
+    <TextInput
+      name="password"
+      type="password"
+      placeholder="password"
+      class="max-w-fit"
+      isTouched={$touched['password']}
+      value={$form['password']}
+      error={$errors['password']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+    />
+    <TextInput
+      name="age"
+      type="number"
+      placeholder="number"
+      isTouched={$touched['age']}
+      value={$form['age']}
+      error={$errors['age']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+    />
+    <TextareaInput
+      name="notes"
+      placeholder="textarea"
+      isTouched={$touched['notes']}
+      value={$form['notes']}
+      error={$errors['notes']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+    />
   </div>
 </div>
 
@@ -373,8 +487,8 @@
 <FormDialog
   bind:dialog={formDialog}
   title="Form dialog title"
-  {formLib}
-  mutation={sampleMutation}
+  error={$sampleMutation?.error?.message}
+  isLoading={$sampleMutation.isLoading}
   on:close={onClose}
 >
   <div class="flex flex-col gap-8">
@@ -382,7 +496,11 @@
       type="password"
       label="Password"
       name="password"
-      {formLib}
+      isTouched={$touched['password']}
+      value={$form['password']}
+      error={$errors['password']}
+      on:change={handleChange}
+      on:keyup={handleChange}
       isRequired
       placeholder="required field"
     />
@@ -390,7 +508,11 @@
       type="password"
       label="Confirm Password"
       name="confirmPassword"
-      {formLib}
+      isTouched={$touched['confirmPassword']}
+      value={$form['confirmPassword']}
+      error={$errors['confirmPassword']}
+      on:change={handleChange}
+      on:keyup={handleChange}
       isRequired
       placeholder="required field"
     />

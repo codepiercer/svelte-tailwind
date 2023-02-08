@@ -1,8 +1,6 @@
 <script>
-  import { twMerge } from 'tailwind-merge'
-
   import { createEventDispatcher } from 'svelte'
-
+  import { twMerge } from 'tailwind-merge'
   import clickOutside from '$lib/utils/clickOutside'
 
   import CheckOutlineIcon from '$lib/icons/CheckOutlineIcon.svelte'
@@ -22,16 +20,16 @@
     { label: 'Orange', value: 'orange' }
   ]
   export let isLoading = false
-  export let formLib // svelte-forms-lib
-  const { form, errors } = formLib
+  export let error = ''
+  export let value = ''
 
   let inputRef = null
-  let searchValue = options.find((option) => option.value === $form[name])?.label || ''
+  let searchValue = options.find((option) => option.value === value)?.label || ''
   let isOptionsOpen = false
   let isActive = null
 
   // add a clear option to the list
-  $: if ($form[name]) {
+  $: if (value) {
     if (options.find((option) => option.value === '') === undefined) {
       options = [{ label: 'Clear', value: '' }, ...options]
     }
@@ -43,7 +41,7 @@
   const dispatch = createEventDispatcher()
 
   const onSelect = (option) => {
-    $form[name] = option.value
+    value = option.value
     onClose()
     searchValue = option.value ? option.label : ''
     inputRef.focus()
@@ -52,8 +50,8 @@
 
   const onClose = () => {
     isOptionsOpen = false
-    if ($form[name] !== null && isRequired) {
-      searchValue = options.find((option) => option.value === $form[name])?.label || ''
+    if (value !== null && isRequired) {
+      searchValue = options.find((option) => option.value === value)?.label || ''
     }
   }
 
@@ -103,21 +101,21 @@
     'relative h-fit w-full rounded-md border p-1 shadow-sm focus-within:ring-1',
     $$props.class
   )}
-  class:focus-within:border-blue-600={!$errors[name] && color === 'blue'}
-  class:focus-within:ring-blue-600={!$errors[name] && color === 'blue'}
-  class:border-blue-300={!$errors[name] && color === 'blue'}
-  class:focus-within:border-green-600={!$errors[name] && color === 'green'}
-  class:focus-within:ring-green-600={!$errors[name] && color === 'green'}
-  class:border-green-300={!$errors[name] && color === 'green'}
-  class:focus-within:border-yellow-600={!$errors[name] && color === 'yellow'}
-  class:focus-within:ring-yellow-600={!$errors[name] && color === 'yellow'}
-  class:border-yellow-300={!$errors[name] && color === 'yellow'}
-  class:focus-within:border-gray-600={!$errors[name] && color === 'gray'}
-  class:focus-within:ring-gray-600={!$errors[name] && color === 'gray'}
-  class:border-gray-300={!$errors[name] && color === 'gray'}
-  class:focus-within:border-red-600={$errors[name] || color === 'red'}
-  class:focus-within:ring-red-600={$errors[name] || color === 'red'}
-  class:border-red-300={$errors[name] || color === 'red'}
+  class:focus-within:border-blue-600={!error && color === 'blue'}
+  class:focus-within:ring-blue-600={!error && color === 'blue'}
+  class:border-blue-300={!error && color === 'blue'}
+  class:focus-within:border-green-600={!error && color === 'green'}
+  class:focus-within:ring-green-600={!error && color === 'green'}
+  class:border-green-300={!error && color === 'green'}
+  class:focus-within:border-yellow-600={!error && color === 'yellow'}
+  class:focus-within:ring-yellow-600={!error && color === 'yellow'}
+  class:border-yellow-300={!error && color === 'yellow'}
+  class:focus-within:border-gray-600={!error && color === 'gray'}
+  class:focus-within:ring-gray-600={!error && color === 'gray'}
+  class:border-gray-300={!error && color === 'gray'}
+  class:focus-within:border-red-600={error || color === 'red'}
+  class:focus-within:ring-red-600={error || color === 'red'}
+  class:border-red-300={error || color === 'red'}
 >
   <label
     for={uniqueId}
@@ -153,7 +151,7 @@
         aria-expanded="false"
       />
 
-      {#if $errors[name]}
+      {#if error}
         <div class="inset-y-0 right-0 flex items-center">
           <ExclamationCircleIcon class="text-red-500" />
         </div>
@@ -167,9 +165,9 @@
         <ChevronUpDownIcon class="text-{color}-400" />
       </button>
     </div>
-    {#if $errors[name]}
+    {#if error}
       <p class="ml-3 text-xs text-red-600" id="{label}-error">
-        {$errors[name]}
+        {error}
       </p>
     {/if}
 
@@ -193,7 +191,7 @@
               .toLowerCase()
               .trim()
               .startsWith(searchValue.toLowerCase().trim())) as option, idx (option.value)}
-            {@const isSelected = option.value === $form[name]}
+            {@const isSelected = option.value === value}
             <li
               class="relative cursor-default select-none rounded-md py-2 pl-3 pr-9 focus:outline-none"
               on:mouseenter={() => (isActive = idx)}

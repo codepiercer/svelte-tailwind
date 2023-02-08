@@ -1,5 +1,6 @@
 <script>
   import { twMerge } from 'tailwind-merge'
+  import { stopTyping } from '$lib/utils/stopTyping.js'
 
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
 
@@ -9,13 +10,12 @@
   export let label = name // use name if label is not provided
   export let placeholder = ''
   export let isRequired = false
-
-  export let formLib // svelte-forms-lib
-
-  const { form, errors, touched, handleChange } = formLib
+  export let isTouched = false
+  export let error = ''
+  export let value = ''
 
   let classes = 'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1 w-full'
-  if (!$errors[name]) {
+  if (!error) {
     classes = twMerge(classes, `border-${color}-300`)
   }
   classes = twMerge(classes, $$props.class)
@@ -23,17 +23,17 @@
 
 <div
   class={classes}
-  class:focus-within:border-blue-600={color === 'blue' && !$errors[name]}
-  class:focus-within:ring-blue-600={color === 'blue' && !$errors[name]}
-  class:focus-within:border-red-600={(color === 'red' && !$errors[name]) || $errors[name]}
-  class:focus-within:ring-red-600={(color === 'red' && !$errors[name]) || $errors[name]}
-  class:focus-within:border-green-600={color === 'green' && !$errors[name]}
-  class:focus-within:ring-green-600={color === 'green' && !$errors[name]}
-  class:focus-within:border-yellow-600={color === 'yellow' && !$errors[name]}
-  class:focus-within:ring-yellow-600={color === 'yellow' && !$errors[name]}
-  class:focus-within:border-gray-600={color === 'gray' && !$errors[name]}
-  class:focus-within:ring-gray-600={color === 'gray' && !$errors[name]}
-  class:border-red-300={$errors[name]}
+  class:focus-within:border-blue-600={color === 'blue' && !error}
+  class:focus-within:ring-blue-600={color === 'blue' && !error}
+  class:focus-within:border-red-600={(color === 'red' && !error) || error}
+  class:focus-within:ring-red-600={(color === 'red' && !error) || error}
+  class:focus-within:border-green-600={color === 'green' && !error}
+  class:focus-within:ring-green-600={color === 'green' && !error}
+  class:focus-within:border-yellow-600={color === 'yellow' && !error}
+  class:focus-within:ring-yellow-600={color === 'yellow' && !error}
+  class:focus-within:border-gray-600={color === 'gray' && !error}
+  class:focus-within:ring-gray-600={color === 'gray' && !error}
+  class:border-red-300={error}
 >
   <label
     for={uniqueId}
@@ -43,27 +43,29 @@
   <div class="relative flex items-center justify-between">
     <textarea
       id={uniqueId}
+      use:stopTyping
+      on:stopTyping
       rows="4"
       required={isRequired}
       {name}
-      on:change={handleChange}
-      on:keyup|trusted={handleChange}
-      bind:value={$form[name]}
+      on:change
+      on:keyup|trusted
+      bind:value
       class="block w-full border-0 p-0 text-sm text-gray-900 focus:ring-0"
       aria-invalid="true"
       aria-describedby="{label}-error"
       {placeholder}
     />
 
-    {#if $errors[name]}
+    {#if error}
       <div class="inset-y-0 right-0 flex items-center">
         <ExclamationCircleIcon class="text-red-500" />
       </div>
     {/if}
   </div>
-  {#if $errors[name] && $touched[name]}
+  {#if error && isTouched}
     <p class="mt-2 text-xs text-red-600" id="{label}-error">
-      {$errors[name]}
+      {error}
     </p>
   {/if}
 </div>

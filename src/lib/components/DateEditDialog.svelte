@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
 
   import { DateInputInline, FormDialog, Button } from '$lib'
@@ -14,9 +15,10 @@
   export let placeholder = ''
   export let isDisabled = false
   export let isRequired = false
-  export let formLib // svelte-forms-lib
-  export let mutation // svelte-query mutation
-  const { form } = formLib
+  export let isTouched = false
+  export let error = ''
+  export let value = ''
+  export let isLoading = false
 
   let classes = 'relative flex h-fit items-center justify-between gap-2 rounded-md'
   if (!inline) {
@@ -24,10 +26,11 @@
   }
   classes = twMerge(classes, $$props.class)
 
+  const dispatch = createEventDispatcher()
+
   const onClose = () => {
-    formLib.handleReset()
-    $mutation.reset()
     dialog.hide()
+    dispatch('close')
   }
 </script>
 
@@ -40,12 +43,12 @@
   {/if}
   <span class="px-1 text-sm">
     {#if type === 'date'}
-      {new Date($form[name]).toISOString().slice(0, 10)}
+      {new Date(value).toISOString().slice(0, 10)}
     {:else if type === 'datetime'}
-      {new Date($form[name]).toISOString().slice(0, 10)},
-      {new Date($form[name]).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
+      {new Date(value).toISOString().slice(0, 10)},
+      {new Date(value).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
     {:else}
-      {new Date($form[name]).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
+      {new Date(value).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
     {/if}
   </span>
 
@@ -55,14 +58,16 @@
   </Button>
 </div>
 
-<FormDialog bind:dialog title={`Update ${label}`} {formLib} {mutation} on:close={onClose}>
+<FormDialog bind:dialog title={`Update ${label}`} {error} {isLoading} on:close={onClose} on:submit>
   <div class="flex flex-col gap-8">
     <DateInputInline
       {color}
       {type}
       {label}
       {name}
-      {formLib}
+      {isTouched}
+      {error}
+      {value}
       {isRequired}
       {placeholder}
       options={{

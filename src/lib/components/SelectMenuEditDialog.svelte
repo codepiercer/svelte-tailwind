@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
 
   import { SelectMenu, FormDialog, Button } from '$lib'
@@ -17,9 +18,9 @@
   ]
   export let isDisabled = false
   export let isRequired = false
-  export let formLib // svelte-forms-lib
-  export let mutation // svelte-query mutation
-  const { form } = formLib
+  export let isLoading = false
+  export let error = ''
+  export let value = ''
 
   let classes = 'relative flex h-fit items-center justify-between gap-2 rounded-md'
   if (!inline) {
@@ -28,10 +29,11 @@
 
   classes = twMerge(classes, $$props.class)
 
+  const dispatch = createEventDispatcher()
+
   const onClose = () => {
-    formLib.handleReset()
-    $mutation.reset()
     dialog.hide()
+    dispatch('close')
   }
 </script>
 
@@ -43,7 +45,7 @@
     >
   {/if}
   <span class="px-1 text-sm">
-    {options.find((option) => option.value === $form[name])?.label || 'select option'}
+    {options.find((option) => option.value === value)?.label || 'select option'}
   </span>
 
   <Button size="small" style="outline" on:click={dialog.show} {color} {isDisabled}
@@ -55,12 +57,13 @@
 <FormDialog
   bind:dialog
   title={`Update ${label}`}
-  {formLib}
-  {mutation}
+  {error}
+  {isLoading}
+  on:submit
   on:close={onClose}
   class="min-h-[18rem]"
 >
   <div class="flex flex-col gap-8">
-    <SelectMenu {formLib} {name} {color} {isRequired} {label} {options} />
+    <SelectMenu {isLoading} {error} {value} {name} {color} {isRequired} {label} {options} />
   </div>
 </FormDialog>

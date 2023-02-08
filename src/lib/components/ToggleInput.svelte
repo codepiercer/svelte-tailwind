@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
+
   import { twMerge } from 'tailwind-merge'
 
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
@@ -7,30 +9,37 @@
   export let name = 'fieldName'
   export let label = name // use name if label is not provided
   export let isRequired = false
-  export let formLib // svelte-forms-lib
-
-  const { form, errors, touched } = formLib
+  export let isTouched = false
+  export let error = ''
+  export let value = ''
 
   let classes = 'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1'
-  if (!$errors[name]) {
+  if (!error) {
     classes = twMerge(classes, `border-${color}-300`)
   }
   classes = twMerge(classes, $$props.class)
+
+  const dispatch = createEventDispatcher()
+
+  const onToggle = () => {
+    value = !value
+    dispatch('toggle')
+  }
 </script>
 
 <div
   class={classes}
-  class:focus-within:border-blue-600={color === 'blue' && !$errors[name]}
-  class:focus-within:ring-blue-600={color === 'blue' && !$errors[name]}
-  class:focus-within:border-red-600={(color === 'red' && !$errors[name]) || $errors[name]}
-  class:focus-within:ring-red-600={(color === 'red' && !$errors[name]) || $errors[name]}
-  class:focus-within:border-green-600={color === 'green' && !$errors[name]}
-  class:focus-within:ring-green-600={color === 'green' && !$errors[name]}
-  class:focus-within:border-yellow-600={color === 'yellow' && !$errors[name]}
-  class:focus-within:ring-yellow-600={color === 'yellow' && !$errors[name]}
-  class:focus-within:border-gray-600={color === 'gray' && !$errors[name]}
-  class:focus-within:ring-gray-600={color === 'gray' && !$errors[name]}
-  class:border-red-300={$errors[name]}
+  class:focus-within:border-blue-600={color === 'blue' && !error}
+  class:focus-within:ring-blue-600={color === 'blue' && !error}
+  class:focus-within:border-red-600={(color === 'red' && !error) || error}
+  class:focus-within:ring-red-600={(color === 'red' && !error) || error}
+  class:focus-within:border-green-600={color === 'green' && !error}
+  class:focus-within:ring-green-600={color === 'green' && !error}
+  class:focus-within:border-yellow-600={color === 'yellow' && !error}
+  class:focus-within:ring-yellow-600={color === 'yellow' && !error}
+  class:focus-within:border-gray-600={color === 'gray' && !error}
+  class:focus-within:ring-gray-600={color === 'gray' && !error}
+  class:border-red-300={error}
 >
   <span
     class={`absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
@@ -41,32 +50,30 @@
       {name}
       type="button"
       class={`relative mx-auto inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none`}
-      class:bg-gray-200={!$form[name]}
-      class:bg-blue-600={!!$form[name] && color === 'blue'}
-      class:bg-red-600={!!$form[name] && color === 'red'}
-      class:bg-green-600={!!$form[name] && color === 'green'}
-      class:bg-yellow-600={!!$form[name] && color === 'yellow'}
-      class:bg-gray-600={!!$form[name] && color === 'gray'}
+      class:bg-gray-200={!value}
+      class:bg-blue-600={!!value && color === 'blue'}
+      class:bg-red-600={!!value && color === 'red'}
+      class:bg-green-600={!!value && color === 'green'}
+      class:bg-yellow-600={!!value && color === 'yellow'}
+      class:bg-gray-600={!!value && color === 'gray'}
       role="switch"
-      aria-checked={!!$form[name]}
-      on:click={() => {
-        $form[name] = !$form[name]
-      }}
+      aria-checked={!!value}
+      on:click={onToggle}
     >
       <span class="sr-only">Use setting</span>
       <span
         class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
-        class:translate-x-0={!$form[name]}
-        class:translate-x-5={!!$form[name]}
+        class:translate-x-0={!value}
+        class:translate-x-5={!!value}
       >
         <span
           class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
-          class:opacity-100={!$form[name]}
-          class:ease-in={!$form[name]}
-          class:duration-200={!$form[name]}
-          class:opacity-0={!!$form[name]}
-          class:ease-out={!!$form[name]}
-          class:duration-100={!!$form[name]}
+          class:opacity-100={!value}
+          class:ease-in={!value}
+          class:duration-200={!value}
+          class:opacity-0={!!value}
+          class:ease-out={!!value}
+          class:duration-100={!!value}
           aria-hidden="true"
         >
           <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
@@ -81,12 +88,12 @@
         </span>
         <span
           class="absolute inset-0 flex h-full w-full items-center justify-center  transition-opacity"
-          class:opacity-0={!$form[name]}
-          class:ease-out={!$form[name]}
-          class:duration-100={!$form[name]}
-          class:opacity-100={!!$form[name]}
-          class:ease-in={!!$form[name]}
-          class:duration-200={!!$form[name]}
+          class:opacity-0={!value}
+          class:ease-out={!value}
+          class:duration-100={!value}
+          class:opacity-100={!!value}
+          class:ease-in={!!value}
+          class:duration-200={!!value}
           aria-hidden="true"
         >
           <svg class="h-3 w-3 text-{color}-600" fill="currentColor" viewBox="0 0 12 12">
@@ -100,15 +107,15 @@
 
     <slot />
 
-    {#if $errors[name]}
+    {#if error}
       <div class="inset-y-0 right-0 flex items-center">
         <ExclamationCircleIcon class="text-red-500" />
       </div>
     {/if}
   </div>
-  {#if $errors[name] && $touched[name]}
+  {#if error && isTouched}
     <p class="mt-2 text-xs text-red-600" id="{label}-error">
-      {$errors[name]}
+      {error}
     </p>
   {/if}
 </div>
