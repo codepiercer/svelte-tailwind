@@ -30,7 +30,7 @@
   import * as yup from 'yup'
   import { createMutation } from '@tanstack/svelte-query'
   import fakeFetch from '$lib/utils/fakeFetch'
-  import { successToast } from '$lib/utils/toast'
+  import { successToast } from '../../utils/toast'
 
   let dialog
   let formDialog

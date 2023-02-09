@@ -15,7 +15,9 @@
   })
 </script>
 
-<Toaster />
+{#if browser}
+  <Toaster />
+{/if}
 
 <QueryClientProvider client={queryClient}>
   <slot />

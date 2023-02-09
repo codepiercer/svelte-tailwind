@@ -1,13 +1,15 @@
 <script>
   import { tick } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
+
   import Button from './Button.svelte'
   import ClipboardDocumentIcon from '../icons/ClipboardDocumentIcon.svelte'
-
-  import { successToast } from '../utils/toast'
 
   export let text
 
   let textarea
+
+  const dispatch = createEventDispatcher()
 
   async function copy() {
     // Select the text field
@@ -19,7 +21,7 @@
 
     await tick()
     textarea.blur()
-    successToast('Copied to clipboard')
+    dispatch('copied')
   }
 </script>
 
