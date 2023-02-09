@@ -1,9 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { Toaster } from 'svelte-french-toast'
 
   import Button from './Button.svelte'
-
   import ErrorAlert from './ErrorAlert.svelte'
   import Dialog from './Dialog.svelte'
 
@@ -24,7 +22,6 @@
   <h2 slot="header" class="text-xl font-semibold text-gray-900">{title}</h2>
 
   <form slot="content" id={uniqueId} on:submit|preventDefault>
-    <Toaster />
     <slot />
   </form>
 
