@@ -28,22 +28,23 @@
   }
 
   const dispatch = createEventDispatcher()
+  let scrollY
 
   // expose methods to open and close the dialog
   onMount(() => {
     dialog.show = () => {
       dialog.showModal()
       dialog.addEventListener('keydown', trapFocus)
+      scrollY = document.documentElement.scrollTop // save the current scroll position
+      console.log(scrollY)
       document.body.style.position = 'fixed'
       isOpen = true
     }
     dialog.hide = () => {
       dialog.removeEventListener('keydown', trapFocus)
       dialog.close()
-      const scrollY = document.body.style.top
       document.body.style.position = ''
-      document.body.style.top = ''
-      window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      document.documentElement.scrollTop = scrollY // scroll to the previous position
       isOpen = false
     }
   })
