@@ -13,7 +13,7 @@
   const { class: extraClasses, ...restProps } = $$restProps
 
   let classes =
-    'inline-flex items-center justify-center h-fit rounded-md border border-transparent font-medium transition focus:outline-none focus:scale-95'
+    'inline-flex items-center justify-center h-fit rounded-md border border-transparent font-medium transition focus:outline-none'
 
   if (style === `primary`) {
     classes = twMerge(classes, `text-white bg-${color}-600 hover:bg-${color}-700`)
@@ -22,7 +22,10 @@
   } else if (style === `outline`) {
     classes = twMerge(classes, `text-${color}-700 hover:bg-${color}-50`)
   } else if (style === `ghost`) {
-    classes = twMerge(classes, `text-${color}-700 hover:bg-${color}-100 focus:bg-${color}-100`)
+    classes = twMerge(
+      classes,
+      `text-${color}-700 hover:bg-${color}-100 focus:bg-${color}-100 focus:ring-${color}-500 focus:ring-1 focus:ring-offset-1`
+    )
   }
   if (style !== `ghost`) {
     classes = twMerge(

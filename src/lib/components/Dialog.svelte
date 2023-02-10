@@ -34,11 +34,16 @@
     dialog.show = () => {
       dialog.showModal()
       dialog.addEventListener('keydown', trapFocus)
+      document.body.style.position = 'fixed'
       isOpen = true
     }
     dialog.hide = () => {
       dialog.removeEventListener('keydown', trapFocus)
       dialog.close()
+      const scrollY = document.body.style.top
+      document.body.style.position = ''
+      document.body.style.top = ''
+      window.scrollTo(0, parseInt(scrollY || '0') * -1)
       isOpen = false
     }
   })
@@ -131,8 +136,6 @@
   dialog[open] {
     -webkit-animation: show 500ms ease normal;
     animation: show 500ms ease normal;
-    position: absolute;
-    top: -50%;
   }
   @-webkit-keyframes show {
     from {
