@@ -1,6 +1,7 @@
 <script>
   import { twMerge } from 'tailwind-merge'
   import { stopTyping } from '$lib/utils/stopTyping.js'
+  import { imask } from '@imask/svelte'
 
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
   import EyeIcon from '$lib/icons/EyeIcon.svelte'
@@ -17,6 +18,7 @@
   export let isTouched = false
   export let error = ''
   export let value = ''
+  export let mask = null
 
   let classes = 'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1 w-full'
   if (!error) {
@@ -52,6 +54,7 @@
   </label>
   <div class="relative flex items-center justify-between">
     <input
+      use:imask={mask ? { mask } : null}
       use:stopTyping
       on:stopTyping
       use:typeAction

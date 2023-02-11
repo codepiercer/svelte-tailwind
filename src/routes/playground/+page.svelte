@@ -111,12 +111,14 @@
     <ErrorAlert>Error alert text...</ErrorAlert>
     <TextInput
       name="fullName"
+      label="CC Number"
       isTouched={$touched['fullName']}
       value={$form['fullName']}
       error={$errors['fullName']}
       on:change={handleChange}
       on:keyup={handleChange}
       class="max-w-fit"
+      mask="0000-0000-0000-0000"
     />
     <DateInput
       name="dob"

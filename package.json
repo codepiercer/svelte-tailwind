@@ -1,6 +1,6 @@
 {
   "name": "@codepiercer/svelte-tailwind",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "scripts": {
     "dev": "vite dev",
     "build": "npm run lint && svelte-package",
@@ -28,6 +28,7 @@
     "@sveltejs/kit": "1.5.3",
     "@tailwindcss/forms": "0.5.3",
     "@tailwindcss/typography": "0.5.9",
+    "@imask/svelte": "6.4.3",
     "autoprefixer": "10.4.13",
     "eslint": "8.33.0",
     "eslint-config-prettier": "8.6.0",
