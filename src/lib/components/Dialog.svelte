@@ -36,7 +36,6 @@
       dialog.showModal()
       dialog.addEventListener('keydown', trapFocus)
       scrollY = document.documentElement.scrollTop // save the current scroll position
-      console.log(scrollY)
       document.body.style.position = 'fixed'
       isOpen = true
     }
