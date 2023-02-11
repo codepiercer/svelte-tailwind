@@ -8,7 +8,14 @@
       <ExclamationIcon class="text-red-500" />
     </div>
     <div class="ml-3">
-      <p class="text-sm font-medium text-red-800"><slot /></p>
+      <h3 class="text-sm font-medium text-red-800">
+        <slot>Error.</slot>
+      </h3>
+      {#if $$slots.details}
+        <div class="mt-2 text-sm text-red-700">
+          <slot name="details" />
+        </div>
+      {/if}
     </div>
   </div>
 </div>
