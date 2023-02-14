@@ -19,11 +19,14 @@ export function stopTyping(node) {
 
   // (4) add a generic keyup event
   document.addEventListener('keyup', handleKeyup, true)
+  // also handle where user copies and pastes
+  document.addEventListener('paste', handleKeyup, true)
 
   return {
     destroy() {
       // (5) cleanup on destroy
       document.removeEventListener('keyup', handleKeyup, true)
+      document.removeEventListener('paste', handleKeyup, true)
     }
   }
 }

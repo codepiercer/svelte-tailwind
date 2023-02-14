@@ -52,8 +52,6 @@
       on:keyup|trusted
       bind:value
       class="block w-full border-0 p-0 text-sm text-gray-900 focus:ring-0"
-      aria-invalid="true"
-      aria-describedby="{label}-error"
       {placeholder}
     />
 

@@ -113,6 +113,7 @@
       'aria-haspopup': 'true'
     }}
     {onOpen}
+    {onClose}
   />
 
   <!-- Dropdown menu -->

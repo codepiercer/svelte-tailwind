@@ -66,8 +66,6 @@
       on:keyup|trusted
       bind:value
       class="block w-full border-0 p-0 text-sm text-gray-900 focus:ring-0"
-      aria-invalid="true"
-      aria-describedby="{label}-error"
       {placeholder}
     />
 
@@ -91,7 +89,7 @@
     <slot />
 
     {#if error}
-      <div class="inset-y-0 right-0 flex items-center">
+      <div id="error" class="inset-y-0 right-0 flex items-center">
         <ExclamationCircleIcon class="text-red-500" />
       </div>
     {/if}
