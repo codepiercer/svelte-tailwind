@@ -36,7 +36,7 @@
       </ErrorAlert>
     {/if}
     <div class="flex justify-end gap-4">
-      <Button on:click={onClose} style="outline" isDisabled={$mutation.isLoading}>Cancel</Button>
+      <Button on:click={onClose} variant="outlined" isDisabled={$mutation.isLoading}>Cancel</Button>
       <Button form={uniqueId} isLoading={$mutation.isLoading} color="red" on:click={onConfirm}
         >Confirm</Button
       >

@@ -1,13 +1,24 @@
 <script>
-  import { cubicOut } from 'svelte/easing'
-
-  import { twMerge } from 'tailwind-merge'
-
-  import clickOutside from '$lib/utils/clickOutside'
-
   export let isOpen = false
   export let color = 'blue' // blue, red, green, yellow, gray
   export let placement = 'bottom-left' // top-left, top-center, top-right, bottom-left, bottom-center, bottom-right
+
+  import { cubicOut } from 'svelte/easing'
+  import { twMerge } from 'tailwind-merge'
+
+  import clickOutside from '$lib/utils/clickOutside'
+  import trapUpDownFocus from '$lib/utils/trapUpDownFocus'
+  import colors from '$lib/utils/colors'
+
+  let colorObject = colors[color]
+  let style = Object.entries({
+    '--text-color': colorObject['900'],
+    '--hover-bg-color': colorObject['100'],
+    '--normal-ring-focus': `0 0 0 2px ${colorObject['500']}`
+  })
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(';')
+
   const uniqueId = `dropdown-${Math.random()}`
 
   const onOpen = () => {
@@ -21,44 +32,15 @@
   const onKeyDown = async (e) => {
     // ignore if menu is not open
     if (!isOpen) return
-    // close the menu if the user presses the escape key or tabs out
-    if (e.key === 'Escape' || e.key === 'Tab') {
-      // re-focus the trigger button
+    trapUpDownFocus(e, '[role="menuitem"]', () => {
+      e.preventDefault()
       document.getElementById(uniqueId).focus()
       onClose()
-    }
-    // we're only interested in handling up & down arrow keys
-    if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return
-    // prevent the default behavior of scrolling the page
-    e.preventDefault()
-    // currently focused element (if any)
-    const current = document.activeElement
-    // get our collection of list elements and turn it into an actual array
-    const items = [...document.querySelectorAll('[role="menuitem"]')]
-    // attempt to match the currently focused element to an index in our array of list elements
-    const currentIndex = items.indexOf(current)
-    // index of the list element to be newly focused
-    let newIndex
-    // if the currently focused element was NOT a list item, then default to focusing the first item in the list (index 0)
-    if (currentIndex === -1) {
-      newIndex = 0
-      // otherwise, the currently focused element is an item in our list
-    } else {
-      if (e.key === 'ArrowUp') {
-        newIndex = (currentIndex + items.length - 1) % items.length
-      } else if (e.key === 'ArrowDown') {
-        newIndex = (currentIndex + 1) % items.length
-      }
-    }
-    if (items[newIndex]) {
-      // blur (= unfocus) the currently focused element (whether it's a list element or not)
-      current.blur()
-      // focus the list element at the computed index
-      items[newIndex]?.focus()
-    }
+    })
   }
 
-  let classes = `absolute z-20 w-fit rounded-md shadow-lg ring-1 ring-${color}-500 ring-opacity-5 backdrop-blur-sm focus:outline-none`
+  let classes =
+    'absolute z-20 w-full rounded-md shadow-lg ring-1 ring-opacity-5 backdrop-blur-sm focus:outline-none bg-white min-w-[12rem]'
 
   if (placement === 'bottom-left') {
     classes = twMerge(classes, 'top-0 right-0 mt-10')
@@ -93,7 +75,6 @@
 
   function slideFade(node, params) {
     const existingTransform = getComputedStyle(node).transform.replace('none', '')
-
     return {
       delay: params.delay || 0,
       duration: params.duration || 400,
@@ -124,6 +105,7 @@
       on:clickOutside={onClose}
       transition:slideFade
       class={classes}
+      {style}
       role="menu"
       aria-orientation="vertical"
       aria-labelledby={uniqueId}
@@ -131,7 +113,7 @@
       <slot
         name="content"
         menuItemProps={{
-          class: `block rounded-md px-4 py-3 mt-1 text-sm text-${color}-700 hover:bg-${color}-100 focus:outline-none focus:ring-2 focus:ring-${color}-500 focus:ring-offset-${color}-100 active:bg-gray-100`,
+          class: `menu-item block rounded-md px-4 py-3 m-1 text-sm focus:outline-none focus:ring-2 active:bg-gray-100`,
           tabindex: '-1',
           role: 'menuitem'
         }}
@@ -140,3 +122,17 @@
     </div>
   {/if}
 </div>
+
+<style>
+  :global(.menu-item) {
+    color: var(--text-color);
+  }
+
+  :global(.menu-item:hover) {
+    background-color: var(--hover-bg-color);
+  }
+
+  :global(.menu-item:focus) {
+    box-shadow: var(--normal-ring-focus);
+  }
+</style>

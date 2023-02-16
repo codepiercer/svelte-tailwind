@@ -41,7 +41,7 @@ npx degit git@github.com:codepiercer/sveltekit-template.git newProject
   import { Button } from '@codepiercer/svelte-tailwind'
 </script>
 
-<Button color="yellow" style="secondary">Click Me</Button>
+<Button color="yellow" variant="secondary">Click Me</Button>
 ```
 
 <p>

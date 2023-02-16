@@ -1,14 +1,4 @@
 <script>
-  import { twMerge } from 'tailwind-merge'
-  import { stopTyping } from '$lib/utils/stopTyping.js'
-  import { imask } from '@imask/svelte'
-
-  import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
-  import EyeIcon from '$lib/icons/EyeIcon.svelte'
-  import EyeSlashIcon from '$lib/icons/EyeSlashIcon.svelte'
-
-  const uniqueId = `fieldName-${Math.random()}`
-  let inputRef
   export let type = 'text' // text, email, password, number, tel, url
   export let color = 'blue' // blue, red, green, yellow, gray
   export let name = 'fieldName'
@@ -20,34 +10,45 @@
   export let value = ''
   export let mask = null
 
-  let classes = 'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1 w-full'
-  if (!error) {
-    classes = twMerge(classes, `border-${color}-300`)
-  }
-  classes = twMerge(classes, $$props.class)
+  import { twMerge } from 'tailwind-merge'
+  import { stopTyping } from '$lib/utils/stopTyping.js'
+  import { imask } from '@imask/svelte'
+
+  import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
+  import EyeIcon from '$lib/icons/EyeIcon.svelte'
+  import EyeSlashIcon from '$lib/icons/EyeSlashIcon.svelte'
+  import colors from '$lib/utils/colors'
+
+  const uniqueId = `fieldName-${Math.random()}`
+  let inputRef
+
+  let colorObject = colors[color]
+  let style = Object.entries({
+    '--border-color': colorObject['300'],
+    '--error-border-color': colors['red']['500'],
+    '--normal-ring-focus': `0 0 0 2px ${colorObject['600']}`,
+    '--error-ring-focus': `0 0 0 2px ${colors['red']['600']}`,
+    '--text-color': colorObject['900'],
+    '--error-text-color': colors['red']['600'],
+    '--button-color': colorObject['500']
+  })
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(';')
+
+  let classes = twMerge(
+    'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1 w-auto container',
+    $$props.class
+  )
 
   function typeAction(node) {
     node.type = type
   }
 </script>
 
-<div
-  class={classes}
-  class:focus-within:border-blue-600={color === 'blue' && !error}
-  class:focus-within:ring-blue-600={color === 'blue' && !error}
-  class:focus-within:border-red-600={(color === 'red' && !error) || error}
-  class:focus-within:ring-red-600={(color === 'red' && !error) || error}
-  class:focus-within:border-green-600={color === 'green' && !error}
-  class:focus-within:ring-green-600={color === 'green' && !error}
-  class:focus-within:border-yellow-600={color === 'yellow' && !error}
-  class:focus-within:ring-yellow-600={color === 'yellow' && !error}
-  class:focus-within:border-gray-600={color === 'gray' && !error}
-  class:focus-within:ring-gray-600={color === 'gray' && !error}
-  class:border-red-300={error}
->
+<div {style} class={classes} class:error>
   <label
     for={uniqueId}
-    class={`absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
+    class="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
     class:isRequired
   >
     <slot name="label">{label}</slot>
@@ -79,9 +80,9 @@
         }}
       >
         {#if inputRef && inputRef.type === 'text'}
-          <EyeSlashIcon class={`text-${color}-500`} />
+          <EyeSlashIcon />
         {:else}
-          <EyeIcon class={`text-${color}-500`} />
+          <EyeIcon />
         {/if}
       </button>
     {/if}
@@ -102,9 +103,35 @@
 </div>
 
 <style>
-  .isRequired:after {
+  .container {
+    border: 1px solid var(--border-color);
+  }
+
+  .container:focus-within {
+    border-color: transparent;
+    box-shadow: var(--normal-ring-focus);
+  }
+
+  .container.error {
+    border: 1px solid var(--error-border-color);
+  }
+
+  .container.error:focus-within {
+    border-color: transparent;
+    box-shadow: var(--error-ring-focus);
+  }
+
+  label {
+    color: var(--text-color);
+  }
+
+  label.isRequired:after {
     color: #e32;
     content: ' *';
-    display: inline;
+    display: isInline;
+  }
+
+  button {
+    color: var(--button-color);
   }
 </style>

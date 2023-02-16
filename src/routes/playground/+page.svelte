@@ -88,23 +88,22 @@
 </script>
 
 <div class="h-screen px-4">
-  <Button href="/" size="sm" style="outline" class="mt-2 max-w-fit">
+  <Button href="/" size="sm" variant="outlined" class="mt-2 max-w-full">
     <span class="mr-1" aria-hidden="true">&larr;</span>
     <span class="">Home</span>
   </Button>
 
   <div class="mt-4 flex flex-wrap gap-8">
     <Button>blue primary Button</Button>
-    <Button color="yellow" style="secondary" isLoading class="max-w-fit"
-      >yellow secondary loading Button</Button
-    >
-    <Button color="green" style="outline">green outline Button</Button>
-    <Button color="green" style="ghost">green ghost Button</Button>
+    <Button color="yellow" variant="secondary" isLoading class="">yellow secondary loading</Button>
+    <Button color="green" variant="outlined">green outline Button</Button>
+    <Button color="gray" variant="outlined">gray outline Button</Button>
+
+    <Button color="green" variant="ghost">green ghost Button</Button>
 
     <Button color="red" size="lg">red primary Button large</Button>
-    <Button color="blue" size="sm" style="secondary">blue secondary Button small</Button>
-    <Button color="gray" style="outline">gray outline Button</Button>
-    <Button href="#" style="outline">blue Link Button</Button>
+    <Button color="blue" size="sm" variant="secondary">blue secondary Button small</Button>
+    <Button href="#" variant="outlined">blue Link Button</Button>
     <Button color="red" isDisabled>red disabled Button</Button>
     <Button color="green" href="#" isDisabled>green disabled Link</Button>
     <LoadingAlert>Loading alert text...</LoadingAlert>
@@ -117,7 +116,7 @@
       error={$errors['fullName']}
       on:change={handleChange}
       on:keyup={handleChange}
-      class="max-w-fit"
+      class="max-w-full"
       mask="0000-0000-0000-0000"
     />
     <DateInput
@@ -127,7 +126,6 @@
       value={$form['dob']}
       error={$errors['dob']}
       on:change={handleChange}
-      class="max-w-fit"
     />
     <Button
       on:click={() => {
@@ -145,7 +143,7 @@
       on:keyup={handleChange}
       color="green"
       placeholder="red"
-      class="max-w-fit"
+      class="max-w-full"
     >
       <span slot="label">Full Name</span>
       <DropdownMenu
@@ -158,10 +156,10 @@
         <Button
           slot="trigger"
           on:click={onOpen}
-          {...triggerProps}
           color="green"
-          style="outline"
+          variant="outlined"
           class="p-0"
+          {...triggerProps}
         >
           <ChevronDownIcon />
         </Button>
@@ -204,9 +202,9 @@
           slot="trigger"
           on:click={onOpen}
           {...triggerProps}
-          color="green"
-          style="outline"
-          class="ml-2 p-0"
+          color="red"
+          variant="outlined"
+          class="!ml-2 !p-0"
         >
           <ChevronDownIcon />
         </Button>
@@ -239,17 +237,17 @@
     />
     <Button on:click={dialog.show}>open dialog</Button>
     <Button on:click={formDialog.show}>open form dialog</Button>
-    <Button on:click={confirmationDialog.show} color="red" style="outline"
+    <Button on:click={confirmationDialog.show} color="red" variant="outlined"
       >delete confirm dialog</Button
     >
 
     <SelectMenu
       value={$form['selectValue']}
       error={$errors['selectValue']}
-      on:select={(option) => {
+      on:select={({ detail: option }) => {
         $form['selectValue'] = option.value
       }}
-      class="max-w-fit py-0"
+      class="max-w-full py-0"
       name="selectValue"
       color="yellow"
       isRequired
@@ -272,7 +270,7 @@
       error={$errors['selectValue']}
       isLoading={$sampleMutation.isLoading}
       on:submit={handleSubmit}
-      class="max-w-fit"
+      class="max-w-full"
       name="selectValue"
       color="yellow"
       isRequired
@@ -306,7 +304,7 @@
       bind:dialog={editDialog}
     />
     <TextEditDialog
-      inline
+      isInline
       color="green"
       name="editableText"
       value={$form['editableText']}
@@ -354,11 +352,11 @@
       on:keyup={handleChange}
       isLoading={$sampleMutation.isLoading}
       on:submit={handleSubmit}
-      label="Editable text area"
+      label="Editable toggle"
       bind:dialog={editToggleDialog}
     />
     <ToggleEditDialog
-      inline
+      isInline
       class="max-w-xs"
       name="toggle"
       value={$form['toggle']}
@@ -380,7 +378,7 @@
         placement="top-center"
         class="mb-12"
       >
-        <Button slot="trigger" on:click={onOpen} {...triggerProps} color="green" style="outline">
+        <Button slot="trigger" on:click={onOpen} {...triggerProps} color="green" variant="outlined">
           <span>Open Menu</span>
           <ChevronDownIcon class="ml-2 -mr-1" aria-hidden="true" />
         </Button>
@@ -403,7 +401,7 @@
           on:click={onOpen}
           {...triggerProps}
           color="green"
-          style="outline"
+          variant="outlined"
           class="p-0"
         >
           <ChevronDownIcon />
@@ -416,19 +414,22 @@
         </div>
       </DropdownMenu>
     </div>
-    <Button class="" color="green" size="sm" style="outline"><PencilSquareIcon /></Button>
-    <Tooltip tip="view on github">
-      <Button class="max-w-fit" color="red" size="sm" style="primary"><TrashIcon /></Button>
+    <Button class="" color="green" size="sm" variant="outlined"><PencilSquareIcon /></Button>
+    <Tooltip>
+      <Button slot="tooltip-slot" class="max-w-full" color="red" size="sm" variant="primary"
+        ><TrashIcon /></Button
+      >
+      <p>View on Github</p>
     </Tooltip>
-    <Button class="max-w-fit" color="blue" size="sm" style="outline"><PlusIcon /></Button>
-    <Button class="max-w-fit" color="yellow" size="sm" style="outline"
+    <Button class="max-w-full" color="blue" size="sm" variant="outlined"><PlusIcon /></Button>
+    <Button class="max-w-full" color="yellow" size="sm" variant="outlined"
       ><ClipboardDocumentIcon /></Button
     >
     <TextInput
       name="password"
       type="password"
       placeholder="password"
-      class="max-w-fit"
+      class="max-w-full"
       isTouched={$touched['password']}
       value={$form['password']}
       error={$errors['password']}
@@ -465,7 +466,7 @@
   </div>
 
   <div slot="footer" class="flex justify-end gap-4">
-    <Button on:click={dialog.hide} style="outline">close</Button>
+    <Button on:click={dialog.hide} variant="outlined">close</Button>
     <Button>blue primary Button</Button>
   </div>
 </Dialog>

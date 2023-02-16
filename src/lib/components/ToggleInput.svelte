@@ -1,10 +1,4 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-
-  import { twMerge } from 'tailwind-merge'
-
-  import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
-
   export let color = 'blue' // blue, red, green, yellow, gray
   export let name = 'fieldName'
   export let label = name // use name if label is not provided
@@ -13,11 +7,29 @@
   export let error = ''
   export let value = ''
 
-  let classes = 'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1'
-  if (!error) {
-    classes = twMerge(classes, `border-${color}-300`)
-  }
-  classes = twMerge(classes, $$props.class)
+  import { createEventDispatcher } from 'svelte'
+  import { twMerge } from 'tailwind-merge'
+
+  import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
+  import colors from '$lib/utils/colors'
+
+  let colorObject = colors[color]
+  let style = Object.entries({
+    '--border-color': colorObject['300'],
+    '--error-border-color': colors['red']['500'],
+    '--normal-ring-focus': `0 0 0 2px ${colorObject['600']}`,
+    '--error-ring-focus': `0 0 0 2px ${colors['red']['600']}`,
+    '--text-color': colorObject['900'],
+    '--error-text-color': colors['red']['600'],
+    '--button-color': colorObject['500']
+  })
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(';')
+
+  let classes = twMerge(
+    'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1 w-auto container',
+    $$props.class
+  )
 
   const dispatch = createEventDispatcher()
 
@@ -27,29 +39,16 @@
   }
 </script>
 
-<div
-  class={classes}
-  class:focus-within:border-blue-600={color === 'blue' && !error}
-  class:focus-within:ring-blue-600={color === 'blue' && !error}
-  class:focus-within:border-red-600={(color === 'red' && !error) || error}
-  class:focus-within:ring-red-600={(color === 'red' && !error) || error}
-  class:focus-within:border-green-600={color === 'green' && !error}
-  class:focus-within:ring-green-600={color === 'green' && !error}
-  class:focus-within:border-yellow-600={color === 'yellow' && !error}
-  class:focus-within:ring-yellow-600={color === 'yellow' && !error}
-  class:focus-within:border-gray-600={color === 'gray' && !error}
-  class:focus-within:ring-gray-600={color === 'gray' && !error}
-  class:border-red-300={error}
->
+<div {style} class={classes} class:error>
   <span
-    class={`absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
+    class="label absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
     class:isRequired><slot name="label">{label}</slot></span
   >
   <div class="relative flex items-center justify-between">
     <button
       {name}
       type="button"
-      class={`relative mx-auto inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none`}
+      class="relative mx-auto inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none"
       class:bg-gray-200={!value}
       class:bg-blue-600={!!value && color === 'blue'}
       class:bg-red-600={!!value && color === 'red'}
@@ -121,9 +120,31 @@
 </div>
 
 <style>
-  .isRequired:after {
+  .container {
+    border: 1px solid var(--border-color);
+  }
+
+  .container:focus-within {
+    border-color: transparent;
+    box-shadow: var(--normal-ring-focus);
+  }
+
+  .container.error {
+    border: 1px solid var(--error-border-color);
+  }
+
+  .container.error:focus-within {
+    border-color: transparent;
+    box-shadow: var(--error-ring-focus);
+  }
+
+  .label {
+    color: var(--text-color);
+  }
+
+  .label.isRequired:after {
     color: #e32;
     content: ' *';
-    display: inline;
+    display: isInline;
   }
 </style>

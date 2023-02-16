@@ -1,13 +1,6 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-  import { twMerge } from 'tailwind-merge'
-
-  import { SelectMenu, FormDialog, Button } from '$lib'
-  import PencilSquareIcon from '$lib/icons/PencilSquareIcon.svelte'
-
   export let dialog
-
-  export let inline = false // if true, will not show border and label
+  export let isInline = false // if true, will not show border and label
   export let color = 'blue' // blue, red, green, yellow, gray
   export let name = 'fieldName'
   export let label = name // use name if label is not provided
@@ -22,11 +15,24 @@
   export let error = ''
   export let value = ''
 
+  import { createEventDispatcher } from 'svelte'
+  import { twMerge } from 'tailwind-merge'
+
+  import { SelectMenu, FormDialog, Button } from '$lib'
+  import PencilSquareIcon from '$lib/icons/PencilSquareIcon.svelte'
+  import colors from '$lib/utils/colors'
+
+  let colorObject = colors[color]
+  let style = Object.entries({
+    '--text-color': colorObject['900']
+  })
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(';')
+
   let classes = 'relative flex h-fit items-center justify-between gap-2 rounded-md'
-  if (!inline) {
+  if (!isInline) {
     classes = twMerge(classes, 'border ring-1 shadow-sm px-3 py-3')
   }
-
   classes = twMerge(classes, $$props.class)
 
   const dispatch = createEventDispatcher()
@@ -38,9 +44,10 @@
 </script>
 
 <div class={classes}>
-  {#if !inline}
+  {#if !isInline}
     <span
-      class={`absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
+      {style}
+      class="label absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
       class:isRequired>{label}</span
     >
   {/if}
@@ -48,7 +55,7 @@
     {options.find((option) => option.value === value)?.label || 'select option'}
   </span>
 
-  <Button size="small" style="outline" on:click={dialog.show} {color} {isDisabled}
+  <Button size="small" variant="outlined" on:click={dialog.show} {color} {isDisabled}
     ><PencilSquareIcon />
     <span class="sr-only">Edit</span>
   </Button>
@@ -67,3 +74,15 @@
     <SelectMenu {isLoading} {error} {value} {name} {color} {isRequired} {label} {options} />
   </div>
 </FormDialog>
+
+<style>
+  .label {
+    color: var(--text-color);
+  }
+
+  .label.isRequired:after {
+    color: #e32;
+    content: ' *';
+    display: isInline;
+  }
+</style>

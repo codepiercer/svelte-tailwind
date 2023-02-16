@@ -22,7 +22,7 @@
       >
     </h2>
 
-    <Button href="/playground" style="outline">
+    <Button href="/playground" variant="outlined">
       <span class="text-base font-semibold leading-7">Playground</span>
       <span class="ml-1 text-base " aria-hidden="true">&rarr;</span>
     </Button>
@@ -63,7 +63,7 @@
     <Button
       href="https://github.com/codepiercer/svelte-tailwind"
       color="gray"
-      style="outline"
+      variant="outlined"
       size="sm"
       target="_blank"
       rel="noreferrer"

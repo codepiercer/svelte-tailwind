@@ -1,13 +1,13 @@
 <script>
-  import { onMount } from 'svelte'
-  import { createEventDispatcher } from 'svelte'
-
-  import { twMerge } from 'tailwind-merge'
-
   export let dialog
   export let size = 'md'
   export let closeOnOverlayClick = false
   export let closeOnEscape = true
+
+  import { onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
+
+  import { twMerge } from 'tailwind-merge'
 
   let isOpen = false
 

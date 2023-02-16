@@ -25,7 +25,7 @@
   }
 </script>
 
-<Button class="max-w-fit" on:click={copy} color="yellow" size="sm" style="outline"
+<Button on:click={copy} color="yellow" size="sm" variant="outlined"
   ><ClipboardDocumentIcon /></Button
 >
 <textarea

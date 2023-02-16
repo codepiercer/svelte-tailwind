@@ -32,7 +32,7 @@
       </ErrorAlert>
     {/if}
     <div class="flex justify-end gap-4">
-      <Button on:click={onClose} style="outline" isDisabled={isLoading}>Close</Button>
+      <Button on:click={onClose} variant="outlined" isDisabled={isLoading}>Close</Button>
       <Button form={uniqueId} {isLoading} type="submit">Submit</Button>
     </div>
   </div>

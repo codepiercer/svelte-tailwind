@@ -1,4 +1,18 @@
 <script>
+  export let color = 'blue' // blue, red, green, yellow, gray
+  export let name = 'fieldName'
+  export let placeholder = ''
+  export let isRequired = false
+  export let label = 'Select menu'
+  export let isLoading = false
+  export let error = ''
+  export let value = 'apple'
+  export let options = [
+    { label: 'Apple', value: 'apple' },
+    { label: 'Banana', value: 'banana' },
+    { label: 'Orange', value: 'orange' }
+  ]
+
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
   import clickOutside from '$lib/utils/clickOutside'
@@ -7,22 +21,27 @@
   import ChevronUpDownIcon from '$lib/icons/ChevronUpDownIcon.svelte'
   import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
   import LoadingSpinnerIcon from '$lib/icons/LoadingSpinnerIcon.svelte'
+  import colors from '$lib/utils/colors'
+
+  let colorObject = colors[color]
+  let style = Object.entries({
+    '--border-color': colorObject['300'],
+    '--error-border-color': colors['red']['500'],
+    '--normal-ring-focus': `0 0 0 2px ${colorObject['600']}`,
+    '--error-ring-focus': `0 0 0 2px ${colors['red']['600']}`,
+    '--text-color': colorObject['900'],
+    '--error-text-color': colors['red']['600'],
+    '--button-color': colorObject['500']
+  })
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(';')
+
+  let classes = twMerge(
+    'container relative h-fit w-auto rounded-md border p-1 shadow-sm focus-within:ring-1',
+    $$props.class
+  )
 
   const uniqueId = `fieldName-${Math.random()}`
-  export let color = 'blue' // blue, red, green, yellow, gray
-  export let name = 'fieldName'
-  export let placeholder = ''
-  export let isRequired = false
-  export let label = 'Select menu'
-  export let options = [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Orange', value: 'orange' }
-  ]
-  export let isLoading = false
-  export let error = ''
-  export let value = ''
-
   let inputRef = null
   let searchValue = options.find((option) => option.value === value)?.label || ''
   let isOptionsOpen = false
@@ -42,10 +61,10 @@
 
   const onSelect = (option) => {
     value = option.value
-    onClose()
     searchValue = option.value ? option.label : ''
     inputRef.focus()
     dispatch('select', option)
+    onClose()
   }
 
   const onClose = () => {
@@ -97,29 +116,12 @@
     onClose()
   }}
   on:keydown={onKeyDown}
-  class={twMerge(
-    'relative h-fit w-full rounded-md border p-1 shadow-sm focus-within:ring-1',
-    $$props.class
-  )}
-  class:focus-within:border-blue-600={!error && color === 'blue'}
-  class:focus-within:ring-blue-600={!error && color === 'blue'}
-  class:border-blue-300={!error && color === 'blue'}
-  class:focus-within:border-green-600={!error && color === 'green'}
-  class:focus-within:ring-green-600={!error && color === 'green'}
-  class:border-green-300={!error && color === 'green'}
-  class:focus-within:border-yellow-600={!error && color === 'yellow'}
-  class:focus-within:ring-yellow-600={!error && color === 'yellow'}
-  class:border-yellow-300={!error && color === 'yellow'}
-  class:focus-within:border-gray-600={!error && color === 'gray'}
-  class:focus-within:ring-gray-600={!error && color === 'gray'}
-  class:border-gray-300={!error && color === 'gray'}
-  class:focus-within:border-red-600={error || color === 'red'}
-  class:focus-within:ring-red-600={error || color === 'red'}
-  class:border-red-300={error || color === 'red'}
+  {style}
+  class={classes}
 >
   <label
     for={uniqueId}
-    class={`absolute -top-2 left-2 z-10 -mt-px inline-block bg-white px-1 text-xs font-medium text-${color}-900`}
+    class="absolute -top-2 left-2 z-10 -mt-px inline-block bg-white px-1 text-xs font-medium"
     class:isRequired><slot name="label">{label}</slot></label
   >
   <div class="relative">
@@ -145,7 +147,7 @@
         }}
         {placeholder}
         type="text"
-        class="w-fit rounded-md border-none bg-white py-2 text-sm outline-none focus:ring-0"
+        class="w-full rounded-md border-none bg-white py-2 text-sm outline-none focus:ring-0"
         role="combobox"
         aria-controls="options"
         aria-expanded="false"
@@ -249,9 +251,35 @@
 </div>
 
 <style>
+  .container {
+    border: 1px solid var(--border-color);
+  }
+
+  .container:focus-within {
+    border-color: transparent;
+    box-shadow: var(--normal-ring-focus);
+  }
+
+  .container.error {
+    border: 1px solid var(--error-border-color);
+  }
+
+  .container.error:focus-within {
+    border-color: transparent;
+    box-shadow: var(--error-ring-focus);
+  }
+
+  label {
+    color: var(--text-color);
+  }
+
   .isRequired:after {
     color: #e32;
     content: ' *';
-    display: inline;
+    display: isInline;
+  }
+
+  button {
+    color: var(--button-color);
   }
 </style>
