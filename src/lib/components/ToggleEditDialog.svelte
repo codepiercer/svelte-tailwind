@@ -1,7 +1,7 @@
 <script>
   export let dialog
   export let isInline = false // if true, will not show border and label
-  export let color = 'red' // blue, red, green, yellow, gray
+  export let color = 'blue' // blue, red, green, yellow, gray
   export let name = 'fieldName'
   export let label = name // use name if label is not provided
   export let isDisabled = false
