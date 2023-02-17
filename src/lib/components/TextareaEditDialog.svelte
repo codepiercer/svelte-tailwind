@@ -11,6 +11,7 @@
   export let isTouched = false
   export let error = ''
   export let value = ''
+  export let inputClass = ''
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
@@ -58,7 +59,17 @@
 
 <FormDialog bind:dialog title={`Update ${label}`} {error} {isLoading} on:submit on:close={onClose}>
   <div class="flex flex-col gap-8">
-    <TextareaInput {color} {label} {name} {isTouched} {error} {value} {isRequired} {placeholder} />
+    <TextareaInput
+      {color}
+      {label}
+      {name}
+      {isTouched}
+      {error}
+      {value}
+      {isRequired}
+      {placeholder}
+      {inputClass}
+    />
   </div>
 </FormDialog>
 

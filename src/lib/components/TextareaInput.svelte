@@ -7,6 +7,7 @@
   export let isTouched = false
   export let error = ''
   export let value = ''
+  export let inputClass = ''
 
   import { twMerge } from 'tailwind-merge'
   import { stopTyping } from '$lib/utils/stopTyping.js'
@@ -52,7 +53,7 @@
       on:change
       on:keyup|trusted
       bind:value
-      class="block w-full border-0 p-0 text-sm text-gray-900"
+      class={twMerge('block w-full border-0 p-0 text-sm text-gray-900', inputClass)}
       {placeholder}
     />
 

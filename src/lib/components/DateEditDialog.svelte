@@ -12,6 +12,7 @@
   export let error = ''
   export let value = ''
   export let isLoading = false
+  export let inputClass = ''
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
@@ -83,6 +84,7 @@
         enableTime: type === 'datetime' || type === 'time',
         noCalendar: type === 'time'
       }}
+      {inputClass}
     />
   </div>
 </FormDialog>

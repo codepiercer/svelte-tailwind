@@ -12,6 +12,7 @@
     { label: 'Banana', value: 'banana' },
     { label: 'Orange', value: 'orange' }
   ]
+  export let inputClass = ''
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
@@ -148,7 +149,10 @@
         }}
         {placeholder}
         type="text"
-        class="w-full rounded-md border-none bg-white py-2 text-sm outline-none"
+        class={twMerge(
+          'w-full rounded-md border-none bg-white py-2 text-sm outline-none',
+          inputClass
+        )}
         role="combobox"
         aria-controls="options"
         aria-expanded="false"

@@ -12,6 +12,7 @@
   export let isTouched = false
   export let error = ''
   export let value = ''
+  export let inputClass = ''
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
@@ -79,6 +80,7 @@
       {isTouched}
       {isRequired}
       {placeholder}
+      {inputClass}
     />
   </div>
 </FormDialog>

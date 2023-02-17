@@ -9,6 +9,7 @@
   export let value = ''
   export let options = {}
   export let isInline = false
+  export let inputClass = ''
 
   import { onMount } from 'svelte'
   import { createEventDispatcher } from 'svelte'
@@ -78,7 +79,7 @@
       {name}
       bind:this={inputRef}
       type="text"
-      class="w-full border-0 p-0 text-sm text-gray-900"
+      class={twMerge('w-full border-0 p-0 text-sm text-gray-900', inputClass)}
       class:text-center={isInline}
       {placeholder}
       on:change

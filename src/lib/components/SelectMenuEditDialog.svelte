@@ -14,6 +14,7 @@
   export let isLoading = false
   export let error = ''
   export let value = ''
+  export let inputClass = ''
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
@@ -71,7 +72,17 @@
   class="min-h-[18rem]"
 >
   <div class="flex flex-col gap-8">
-    <SelectMenu {isLoading} {error} {value} {name} {color} {isRequired} {label} {options} />
+    <SelectMenu
+      {isLoading}
+      {error}
+      {value}
+      {name}
+      {color}
+      {isRequired}
+      {label}
+      {options}
+      {inputClass}
+    />
   </div>
 </FormDialog>
 
