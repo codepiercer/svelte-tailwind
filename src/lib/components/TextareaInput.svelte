@@ -30,7 +30,7 @@
     .join(';')
 
   let classes = twMerge(
-    'relative rounded-md border px-4 py-3 shadow-sm h-fit focus-within:ring-1 w-auto container',
+    'relative rounded-md border px-4 py-3 shadow-sm h-fit w-auto wrapper',
     $$props.class
   )
 </script>
@@ -70,20 +70,20 @@
 </div>
 
 <style>
-  .container {
+  .wrapper {
     border: 1px solid var(--border-color);
   }
 
-  .container:focus-within {
+  .wrapper:focus-within {
     border-color: transparent;
     box-shadow: var(--normal-ring-focus);
   }
 
-  .container.error {
+  .wrapper.error {
     border: 1px solid var(--error-border-color);
   }
 
-  .container.error:focus-within {
+  .wrapper.error:focus-within {
     border-color: transparent;
     box-shadow: var(--error-ring-focus);
   }

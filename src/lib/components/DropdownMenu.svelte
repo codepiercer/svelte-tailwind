@@ -14,6 +14,7 @@
   let style = Object.entries({
     '--text-color': colorObject['900'],
     '--hover-bg-color': colorObject['100'],
+    '--normal-ring': `0 0 0 1px ${colorObject['300']}`,
     '--normal-ring-focus': `0 0 0 2px ${colorObject['500']}`
   })
     .map(([key, value]) => `${key}: ${value}`)
@@ -40,7 +41,7 @@
   }
 
   let classes =
-    'absolute z-20 w-full rounded-md shadow-lg ring-1 ring-opacity-5 backdrop-blur-sm focus:outline-none bg-white min-w-[12rem]'
+    'menu absolute z-20 w-full rounded-md shadow-lg backdrop-blur-sm focus:outline-none bg-white min-w-[12rem]'
 
   if (placement === 'bottom-left') {
     classes = twMerge(classes, 'top-0 right-0 mt-10')
@@ -124,6 +125,10 @@
 </div>
 
 <style>
+  .menu {
+    box-shadow: var(--normal-ring);
+  }
+
   :global(.menu-item) {
     color: var(--text-color);
   }

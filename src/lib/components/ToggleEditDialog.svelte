@@ -1,7 +1,7 @@
 <script>
   export let dialog
   export let isInline = false // if true, will not show border and label
-  export let color = 'blue' // blue, red, green, yellow, gray
+  export let color = 'red' // blue, red, green, yellow, gray
   export let name = 'fieldName'
   export let label = name // use name if label is not provided
   export let isDisabled = false
@@ -21,15 +21,15 @@
   let colorObject = colors[color]
   let style = Object.entries({
     '--text-color': colorObject['900'],
+    '--normal-ring': `0 0 0 1px ${colorObject['600']}`,
     '--label-length': !isInline ? label.length + 1 + (isRequired ? 1 : 0) + 'ch' : 'auto'
   })
     .map(([key, value]) => `${key}: ${value}`)
     .join(';')
 
-  let classes =
-    'container relative flex h-fit items-center justify-between gap-2 rounded-md min-w-fit'
+  let classes = 'relative flex h-fit p-1 items-center justify-between gap-2 rounded-md'
   if (!isInline) {
-    classes = twMerge(classes, 'border ring-1 shadow-sm px-3 py-3')
+    classes = twMerge(classes, 'wrapper shadow-sm px-3 py-3')
   }
   classes = twMerge(classes, $$props.class)
 
@@ -62,7 +62,8 @@
 </FormDialog>
 
 <style>
-  .container {
+  .wrapper {
+    box-shadow: var(--normal-ring);
     width: var(--label-length);
   }
 

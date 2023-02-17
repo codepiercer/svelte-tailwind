@@ -27,6 +27,7 @@
   let style = Object.entries({
     '--border-color': colorObject['300'],
     '--error-border-color': colors['red']['500'],
+    '--normal-ring': `0 0 0 1px ${colorObject['300']}`,
     '--normal-ring-focus': `0 0 0 2px ${colorObject['600']}`,
     '--error-ring-focus': `0 0 0 2px ${colors['red']['600']}`,
     '--text-color': colorObject['900'],
@@ -37,7 +38,7 @@
     .join(';')
 
   let classes = twMerge(
-    'container relative h-fit w-auto rounded-md border p-1 shadow-sm focus-within:ring-1',
+    'wrapper relative h-fit w-auto rounded-md border p-1 shadow-sm',
     $$props.class
   )
 
@@ -175,7 +176,7 @@
 
     {#if isOptionsOpen}
       <ul
-        class="absolute z-10 mt-2 max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        class="options absolute z-10 mt-2 max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
         id="options"
         role="listbox"
       >
@@ -251,20 +252,20 @@
 </div>
 
 <style>
-  .container {
+  .wrapper {
     border: 1px solid var(--border-color);
   }
 
-  .container:focus-within {
+  .wrapper:focus-within {
     border-color: transparent;
     box-shadow: var(--normal-ring-focus);
   }
 
-  .container.error {
+  .wrapper.error {
     border: 1px solid var(--error-border-color);
   }
 
-  .container.error:focus-within {
+  .wrapper.error:focus-within {
     border-color: transparent;
     box-shadow: var(--error-ring-focus);
   }
@@ -281,5 +282,9 @@
 
   button {
     color: var(--button-color);
+  }
+
+  .options {
+    box-shadow: var(--normal-ring);
   }
 </style>

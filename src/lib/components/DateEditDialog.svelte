@@ -22,14 +22,15 @@
 
   let colorObject = colors[color]
   let style = Object.entries({
-    '--text-color': colorObject['900']
+    '--text-color': colorObject['900'],
+    '--normal-ring': `0 0 0 1px ${colorObject['300']}`
   })
     .map(([key, value]) => `${key}: ${value}`)
     .join(';')
 
   let classes = 'relative flex h-fit items-center justify-between gap-2 rounded-md'
   if (!isInline) {
-    classes = twMerge(classes, 'border ring-1 shadow-sm px-3 py-3')
+    classes = twMerge(classes, 'wrapper border shadow-sm px-3 py-3')
   }
   classes = twMerge(classes, $$props.class)
 
@@ -41,10 +42,9 @@
   }
 </script>
 
-<div class={classes}>
+<div {style} class={classes}>
   {#if !isInline}
     <span
-      {style}
       class="label absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
       class:isRequired>{label}</span
     >
@@ -88,6 +88,10 @@
 </FormDialog>
 
 <style>
+  .wrapper {
+    box-shadow: var(--normal-ring);
+  }
+
   .label {
     color: var(--text-color);
   }
