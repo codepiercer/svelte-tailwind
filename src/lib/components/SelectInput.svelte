@@ -66,7 +66,7 @@
     value = option.value
     searchValue = option.value ? option.label : ''
     inputRef.focus()
-    dispatch('select', option)
+    dispatch('select', { name, option })
     onClose()
   }
 

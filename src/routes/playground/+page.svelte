@@ -244,8 +244,8 @@
     <SelectInput
       value={$form['selectValue']}
       error={$errors['selectValue']}
-      on:select={({ detail: option }) => {
-        $form['selectValue'] = option.value
+      on:select={({ detail }) => {
+        $form[detail.name] = detail.option.value
       }}
       class="max-w-full p-2"
       inputClass="text-xs"
