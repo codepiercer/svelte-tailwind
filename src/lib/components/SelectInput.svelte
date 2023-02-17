@@ -13,6 +13,7 @@
     { label: 'Orange', value: 'orange' }
   ]
   export let inputClass = ''
+  export let hideIcon = false
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
@@ -165,14 +166,16 @@
           <ExclamationCircleIcon class="text-red-500" />
         </div>
       {/if}
-      <button
-        type="button"
-        on:click={() => (isOptionsOpen = !isOptionsOpen)}
-        class="flex items-center rounded-r-md px-2 focus:outline-none"
-        tabindex="-1"
-      >
-        <ChevronUpDownIcon class="text-{color}-400" />
-      </button>
+      {#if !hideIcon}
+        <button
+          type="button"
+          on:click={() => (isOptionsOpen = !isOptionsOpen)}
+          class="flex items-center rounded-r-md px-2 focus:outline-none"
+          tabindex="-1"
+        >
+          <ChevronUpDownIcon class="text-{color}-400" />
+        </button>
+      {/if}
     </div>
     {#if error}
       <p class="ml-3 text-xs text-red-600" id="{label}-error">

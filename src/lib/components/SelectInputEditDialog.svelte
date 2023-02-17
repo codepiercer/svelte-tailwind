@@ -15,6 +15,7 @@
   export let error = ''
   export let value = ''
   export let inputClass = ''
+  export let hideIcon = false
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
@@ -82,6 +83,7 @@
       {label}
       {options}
       {inputClass}
+      {hideIcon}
     />
   </div>
 </FormDialog>
