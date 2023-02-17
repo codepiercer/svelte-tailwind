@@ -19,7 +19,7 @@
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
 
-  import { SelectMenu, FormDialog, Button } from '$lib'
+  import { SelectInput, FormDialog, Button } from '$lib'
   import PencilSquareIcon from '$lib/icons/PencilSquareIcon.svelte'
   import colors from '$lib/utils/colors'
 
@@ -72,7 +72,7 @@
   class="min-h-[18rem]"
 >
   <div class="flex flex-col gap-8">
-    <SelectMenu
+    <SelectInput
       {isLoading}
       {error}
       {value}

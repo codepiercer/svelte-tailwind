@@ -9,8 +9,8 @@
     LoadingAlert,
     ErrorAlert,
     FormDialog,
-    SelectMenu,
-    SelectMenuEditDialog,
+    SelectInput,
+    SelectInputEditDialog,
     DropdownMenu,
     TextEditDialog,
     DateEditDialog,
@@ -241,13 +241,14 @@
       >delete confirm dialog</Button
     >
 
-    <SelectMenu
+    <SelectInput
       value={$form['selectValue']}
       error={$errors['selectValue']}
       on:select={({ detail: option }) => {
         $form['selectValue'] = option.value
       }}
-      class="max-w-full py-0"
+      class="max-w-full p-2"
+      inputClass="text-xs"
       name="selectValue"
       color="yellow"
       isRequired
@@ -265,7 +266,7 @@
       ]}
     />
 
-    <SelectMenuEditDialog
+    <SelectInputEditDialog
       value={$form['selectValue']}
       error={$errors['selectValue']}
       isLoading={$sampleMutation.isLoading}

@@ -150,13 +150,15 @@
         {placeholder}
         type="text"
         class={twMerge(
-          'w-full rounded-md border-none bg-white py-2 text-sm outline-none',
+          'w-full rounded-md border-none bg-white p-0 text-sm outline-none',
           inputClass
         )}
         role="combobox"
         aria-controls="options"
         aria-expanded="false"
       />
+
+      <slot />
 
       {#if error}
         <div class="inset-y-0 right-0 flex items-center">
