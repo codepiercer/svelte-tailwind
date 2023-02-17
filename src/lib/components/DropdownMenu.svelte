@@ -27,6 +27,7 @@
   }
 
   const onClose = () => {
+    document.getElementById(uniqueId).focus()
     isOpen = false
   }
 
@@ -35,7 +36,6 @@
     if (!isOpen) return
     trapUpDownFocus(e, '[role="menuitem"]', () => {
       e.preventDefault()
-      document.getElementById(uniqueId).focus()
       onClose()
     })
   }
