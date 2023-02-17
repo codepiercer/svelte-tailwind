@@ -52,7 +52,7 @@
       on:change
       on:keyup|trusted
       bind:value
-      class="block w-full border-0 p-0 text-sm text-gray-900 focus:ring-0"
+      class="block w-full border-0 p-0 text-sm text-gray-900"
       {placeholder}
     />
 
@@ -96,5 +96,9 @@
     color: #e32;
     content: ' *';
     display: isInline;
+  }
+
+  textarea:focus {
+    box-shadow: none;
   }
 </style>

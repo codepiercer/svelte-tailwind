@@ -114,7 +114,7 @@
       <slot
         name="content"
         menuItemProps={{
-          class: `menu-item block rounded-md px-4 py-3 m-1 text-sm focus:outline-none focus:ring-2 active:bg-gray-100`,
+          class: `menu-item block rounded-md px-4 py-3 m-1 text-sm focus:outline-none active:bg-gray-100`,
           tabindex: '-1',
           role: 'menuitem'
         }}

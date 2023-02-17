@@ -78,7 +78,7 @@
       {name}
       bind:this={inputRef}
       type="text"
-      class="w-full border-0 p-0 text-sm text-gray-900 focus:ring-0"
+      class="w-full border-0 p-0 text-sm text-gray-900"
       class:text-center={isInline}
       {placeholder}
       on:change
@@ -133,5 +133,9 @@
     color: #e32;
     content: ' *';
     display: isInline;
+  }
+
+  input:focus {
+    box-shadow: none;
   }
 </style>

@@ -148,7 +148,7 @@
         }}
         {placeholder}
         type="text"
-        class="w-full rounded-md border-none bg-white py-2 text-sm outline-none focus:ring-0"
+        class="w-full rounded-md border-none bg-white py-2 text-sm outline-none"
         role="combobox"
         aria-controls="options"
         aria-expanded="false"
@@ -286,5 +286,9 @@
 
   .options {
     box-shadow: var(--normal-ring);
+  }
+
+  input:focus {
+    box-shadow: none;
   }
 </style>

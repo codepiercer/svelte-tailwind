@@ -66,7 +66,7 @@
       on:change
       on:keyup|trusted
       bind:value
-      class="block w-full border-0 p-0 text-sm text-gray-900 focus:ring-0"
+      class="block w-full border-0 p-0 text-sm text-gray-900"
       {placeholder}
     />
 
@@ -133,5 +133,9 @@
 
   button {
     color: var(--button-color);
+  }
+
+  input:focus {
+    box-shadow: none;
   }
 </style>

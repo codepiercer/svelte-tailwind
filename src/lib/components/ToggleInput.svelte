@@ -61,7 +61,7 @@
     >
       <span class="sr-only">Use setting</span>
       <span
-        class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+        class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow transition duration-200 ease-in-out"
         class:translate-x-0={!value}
         class:translate-x-5={!!value}
       >
