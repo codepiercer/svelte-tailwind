@@ -35,6 +35,8 @@
   }
   classes = twMerge(classes, $$props.class)
 
+  let isVisible = !isInline
+
   const dispatch = createEventDispatcher()
 
   const onClose = () => {
@@ -43,28 +45,29 @@
   }
 </script>
 
-<div {style} class={classes}>
+<div
+  {style}
+  class={classes}
+  on:mouseenter={() => (isInline ? (isVisible = true) : null)}
+  on:mouseleave={() => (isInline ? (isVisible = false) : null)}
+>
   {#if !isInline}
     <span
       class="label absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
       class:isRequired>{label}</span
     >
   {/if}
+
   <span class="px-1 text-sm">
-    {#if type === 'date'}
-      {new Date(value).toISOString().slice(0, 10)}
-    {:else if type === 'datetime-local'}
-      {new Date(value).toISOString().slice(0, 10)},
-      {new Date(value).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
-    {:else}
-      {value}
-    {/if}
+    {value}
   </span>
 
-  <Button size="small" variant="outlined" on:click={dialog.show} {color} {isDisabled}
-    ><PencilSquareIcon />
-    <span class="sr-only">Edit</span>
-  </Button>
+  {#if isVisible}
+    <Button size="small" variant="outlined" on:click={dialog.show} {color} {isDisabled}
+      ><PencilSquareIcon />
+      <span class="sr-only">Edit</span>
+    </Button>
+  {/if}
 </div>
 
 <FormDialog bind:dialog title={`Update ${label}`} {error} {isLoading} on:submit on:close={onClose}>

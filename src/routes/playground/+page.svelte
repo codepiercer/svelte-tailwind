@@ -292,6 +292,7 @@
     />
 
     <TextEditDialog
+      isInline
       name="editableText"
       color="green"
       value={$form['editableText']}
