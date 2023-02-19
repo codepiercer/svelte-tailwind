@@ -17,7 +17,6 @@
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
-  import clickOutside from '$lib/utils/clickOutside'
 
   import CheckOutlineIcon from '$lib/icons/CheckOutlineIcon.svelte'
   import ChevronUpDownIcon from '$lib/icons/ChevronUpDownIcon.svelte'
@@ -113,15 +112,7 @@
   }
 </script>
 
-<div
-  use:clickOutside
-  on:clickOutside={() => {
-    onClose()
-  }}
-  on:keydown={onKeyDown}
-  {style}
-  class={classes}
->
+<div {style} class={classes} on:keydown={onKeyDown}>
   <label
     for={uniqueId}
     class="absolute -top-2 left-2 z-10 -mt-px inline-block bg-white px-1 text-xs font-medium"
@@ -169,7 +160,10 @@
       {#if !hideIcon}
         <button
           type="button"
-          on:click={() => (isOptionsOpen = !isOptionsOpen)}
+          on:click={() => {
+            isOptionsOpen = true
+            searchValue = ''
+          }}
           class="flex items-center rounded-r-md px-2 focus:outline-none"
           tabindex="-1"
         >
@@ -184,6 +178,8 @@
     {/if}
 
     {#if isOptionsOpen}
+      <div class="fixed inset-0 h-full w-full" on:click={onClose} on:keydown={onClose} />
+
       <ul
         class="options absolute z-10 mt-2 max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
         id="options"

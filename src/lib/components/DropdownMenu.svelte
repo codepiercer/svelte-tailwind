@@ -6,7 +6,6 @@
   import { cubicOut } from 'svelte/easing'
   import { twMerge } from 'tailwind-merge'
 
-  import clickOutside from '$lib/utils/clickOutside'
   import trapUpDownFocus from '$lib/utils/trapUpDownFocus'
   import colors from '$lib/utils/colors'
 
@@ -100,10 +99,9 @@
 
   <!-- Dropdown menu -->
   {#if isOpen}
+    <div class="fixed inset-0 h-full w-full" on:click={onClose} on:keydown={onClose} />
     <div
       id="menu"
-      use:clickOutside
-      on:clickOutside={onClose}
       transition:slideFade
       class={classes}
       {style}

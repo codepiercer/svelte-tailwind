@@ -29,13 +29,16 @@
 
   const dispatch = createEventDispatcher()
   let scrollY
+  let scrollX
 
   // expose methods to open and close the dialog
   onMount(() => {
     dialog.show = () => {
       dialog.showModal()
       dialog.addEventListener('keydown', trapFocus)
-      scrollY = document.documentElement.scrollTop // save the current scroll position
+      // save the current scroll position
+      scrollY = document.documentElement.scrollTop
+      scrollX = document.documentElement.scrollLeft
       document.body.style.position = 'fixed'
       isOpen = true
     }
@@ -43,7 +46,9 @@
       dialog.removeEventListener('keydown', trapFocus)
       dialog.close()
       document.body.style.position = ''
-      document.documentElement.scrollTop = scrollY // scroll to the previous position
+      // scroll to the previous position
+      document.documentElement.scrollTop = scrollY
+      document.documentElement.scrollLeft = scrollX
       isOpen = false
     }
   })

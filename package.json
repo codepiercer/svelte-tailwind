@@ -1,6 +1,6 @@
 {
   "name": "@codepiercer/svelte-tailwind",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "scripts": {
     "dev": "vite dev",
     "build": "npm run lint && svelte-package",
@@ -13,10 +13,10 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "2.0.0",
-    "@sveltejs/package": "1.0.2",
+    "@sveltejs/package": "2.0.1",
     "@typescript-eslint/eslint-plugin": "5.52.0",
     "@typescript-eslint/parser": "5.52.0",
-    "@tanstack/svelte-query": "4.24.6",
+    "@tanstack/svelte-query": "4.24.9",
     "svelte-french-toast": "1.0.3",
     "svelte-check": "3.0.3",
     "svelte-forms-lib": "2.0.1",
@@ -25,7 +25,7 @@
     "typescript": "4.9.5"
   },
   "peerDependencies": {
-    "@sveltejs/kit": "1.7.0",
+    "@sveltejs/kit": "1.7.2",
     "@tailwindcss/forms": "0.5.3",
     "@tailwindcss/typography": "0.5.9",
     "@imask/svelte": "6.4.3",
@@ -40,9 +40,9 @@
     "prettier-plugin-svelte": "2.9.0",
     "prettier-plugin-tailwindcss": "0.2.3",
     "svelte": "3.55.1",
-    "tailwindcss": "3.2.6",
+    "tailwindcss": "3.2.7",
     "tailwind-merge": "1.9.1",
-    "vite": "4.1.1"
+    "vite": "4.1.2"
   },
   "type": "module"
 }
