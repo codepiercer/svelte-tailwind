@@ -17,6 +17,7 @@
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
+  import clickOutside from '$lib/utils/clickOutside'
 
   import CheckOutlineIcon from '$lib/icons/CheckOutlineIcon.svelte'
   import ChevronUpDownIcon from '$lib/icons/ChevronUpDownIcon.svelte'
@@ -116,7 +117,7 @@
   <button class="fixed inset-0 z-50 h-full w-full cursor-default" on:click={onClose} />
 {/if}
 
-<div {style} class={classes} on:keydown={onKeyDown}>
+<div use:clickOutside on:clickOutside={onClose} {style} class={classes} on:keydown={onKeyDown}>
   <label
     for={uniqueId}
     class="absolute -top-2 left-2 z-10 -mt-px inline-block bg-white px-1 text-xs font-medium"
