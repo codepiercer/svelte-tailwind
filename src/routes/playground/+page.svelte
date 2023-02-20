@@ -63,7 +63,8 @@
         .required()
         .min(3)
         .oneOf([yup.ref('password'), null], 'Passwords must match'),
-      selectValue: yup.string().required()
+      selectValue: yup.string().required(),
+      editableText: yup.string().required().min(3)
     }),
     initialValues: {
       dob: new Date(),

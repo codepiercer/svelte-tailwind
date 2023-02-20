@@ -13,6 +13,7 @@
   export let isRequired = false
   export let isLoading = false
   export let error = ''
+  export let serverError = ''
   export let value = ''
   export let inputClass = ''
   export let displayClass = ''
@@ -79,7 +80,7 @@
 <FormDialog
   bind:dialog
   title={`Update ${label}`}
-  {error}
+  error={serverError}
   {isLoading}
   on:submit
   on:close={onClose}

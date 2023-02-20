@@ -10,6 +10,7 @@
   export let isLoading = false
   export let isTouched = false
   export let error = ''
+  export let serverError = ''
   export let value = ''
   export let inputClass = ''
   export let displayClass = ''
@@ -71,7 +72,14 @@
   {/if}
 </div>
 
-<FormDialog bind:dialog title={`Update ${label}`} {error} {isLoading} on:submit on:close={onClose}>
+<FormDialog
+  bind:dialog
+  title={`Update ${label}`}
+  error={serverError}
+  {isLoading}
+  on:submit
+  on:close={onClose}
+>
   <div class="flex flex-col gap-8">
     <TextareaInput
       on:stopTyping

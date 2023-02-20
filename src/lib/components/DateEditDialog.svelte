@@ -10,6 +10,7 @@
   export let isRequired = false
   export let isTouched = false
   export let error = ''
+  export let serverError = ''
   export let value = ''
   export let isLoading = false
   export let inputClass = ''
@@ -79,7 +80,14 @@
   {/if}
 </div>
 
-<FormDialog bind:dialog title={`Update ${label}`} {error} {isLoading} on:close={onClose} on:submit>
+<FormDialog
+  bind:dialog
+  title={`Update ${label}`}
+  error={serverError}
+  {isLoading}
+  on:close={onClose}
+  on:submit
+>
   <div class="flex flex-col gap-8">
     <DateInput
       isInline
