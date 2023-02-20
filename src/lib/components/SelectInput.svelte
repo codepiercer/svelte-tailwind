@@ -72,7 +72,8 @@
 
   const onClose = () => {
     isOptionsOpen = false
-    if (value !== null && isRequired) {
+    // reset search value if no value is selected
+    if (value !== null) {
       searchValue = options.find((option) => option.value === value)?.label || ''
     }
   }
