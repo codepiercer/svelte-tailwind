@@ -113,10 +113,6 @@
   }
 </script>
 
-{#if isOptionsOpen}
-  <button class="fixed inset-0 z-50 h-full w-full cursor-default" on:click={onClose} />
-{/if}
-
 <div use:clickOutside on:clickOutside={onClose} {style} class={classes} on:keydown={onKeyDown}>
   <label
     for={uniqueId}
