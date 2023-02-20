@@ -26,6 +26,8 @@
   import PlusIcon from '$lib/icons/PlusIcon.svelte'
   import ClipboardDocumentIcon from '$lib/icons/ClipboardDocumentIcon.svelte'
 
+  import SelectInputFetchData from './components/SelectInputFetchData.svelte'
+
   import { createForm } from 'svelte-forms-lib'
   import * as yup from 'yup'
   import { createMutation } from '@tanstack/svelte-query'
@@ -498,25 +500,14 @@
   on:close={onClose}
 >
   <div class="flex min-h-[26rem] flex-col gap-8">
-    <TextInput
-      type="password"
-      label="Password"
-      name="password"
-      isTouched={$touched['password']}
-      value={$form['password']}
-      error={$errors['password']}
-      on:change={handleChange}
-      on:keyup={handleChange}
+    <SelectInputFetchData
+      name="selectValue"
+      label="Assigned To"
       isRequired
-      placeholder="required field"
-    />
-    <DateInput
-      name="dob"
-      label="Date of Birth"
-      isTouched={$touched['dob']}
-      value={$form['dob']}
-      error={$errors['dob']}
-      on:change={handleChange}
+      value={$form['selectValue'] || ''}
+      on:select={({ detail }) => {
+        $form['selectValue'] = detail.option.value
+      }}
     />
     <SelectInput
       value={$form['selectValue']}
@@ -542,6 +533,27 @@
         { label: 'Dog', value: 'dog' }
       ]}
     />
+    <TextInput
+      type="password"
+      label="Password"
+      name="password"
+      isTouched={$touched['password']}
+      value={$form['password']}
+      error={$errors['password']}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      isRequired
+      placeholder="required field"
+    />
+    <DateInput
+      name="dob"
+      label="Date of Birth"
+      isTouched={$touched['dob']}
+      value={$form['dob']}
+      error={$errors['dob']}
+      on:change={handleChange}
+    />
+
     <TextInput
       type="password"
       label="Confirm Password"

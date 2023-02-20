@@ -46,9 +46,10 @@
 
   const uniqueId = `fieldName-${Math.random()}`
   let inputRef = null
-  let searchValue = options.find((option) => option.value === value)?.label || ''
   let isOptionsOpen = false
   let isActive = null
+
+  $: searchValue = options.find((option) => option.value === value)?.label || ''
 
   // add a clear option to the list
   $: if (value) {
@@ -181,7 +182,7 @@
 
     {#if isOptionsOpen}
       <ul
-        class="options absolute z-10 mt-2 max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
+        class="options absolute z-20 mt-2 max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
         id="options"
         role="listbox"
       >
