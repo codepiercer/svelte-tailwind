@@ -83,6 +83,8 @@
   <div class="flex flex-col gap-8">
     <DateInput
       isInline
+      on:change
+      on:keyup
       {color}
       {type}
       {label}

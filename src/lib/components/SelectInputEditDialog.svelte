@@ -87,6 +87,7 @@
 >
   <div class="flex flex-col gap-8">
     <SelectInput
+      on:select
       {isLoading}
       {error}
       {value}

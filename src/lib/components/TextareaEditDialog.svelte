@@ -74,6 +74,9 @@
 <FormDialog bind:dialog title={`Update ${label}`} {error} {isLoading} on:submit on:close={onClose}>
   <div class="flex flex-col gap-8">
     <TextareaInput
+      on:stopTyping
+      on:change
+      on:keyup
       {color}
       {label}
       {name}
