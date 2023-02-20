@@ -61,7 +61,9 @@
   {/if}
 
   <slot>
-    <span class={twMerge('px-1 text-sm', displayClass)}>{value}</span>
+    <span class={twMerge('px-1 text-sm', displayClass)}>
+      {value || '-'}
+    </span>
   </slot>
 
   {#if isVisible}

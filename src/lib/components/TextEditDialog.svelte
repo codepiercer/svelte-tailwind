@@ -62,7 +62,7 @@
 
   <slot>
     <span class={twMerge('px-1 text-sm', displayClass)}>
-      {value}
+      {value || '-'}
     </span>
   </slot>
 
