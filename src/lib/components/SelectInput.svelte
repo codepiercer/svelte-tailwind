@@ -67,7 +67,7 @@
     searchValue = option.value ? option.label : ''
     inputRef.focus()
     dispatch('select', { name, option })
-    onClose()
+    isOptionsOpen = false
   }
 
   const onClose = () => {
@@ -179,8 +179,6 @@
     {/if}
 
     {#if isOptionsOpen}
-      <div class="fixed inset-0 h-full w-full" on:click={onClose} on:keydown={onClose} />
-
       <ul
         class="options absolute z-10 mt-2 max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
         id="options"
@@ -246,8 +244,8 @@
               class="relative cursor-default select-none rounded-md py-2 pl-3 pr-9 focus:outline-none"
             >
               <div class="flex items-center gap-1">
-                <ExclamationCircleIcon class="text-{color}-500" />
-                No items found
+                <ExclamationCircleIcon class="text-red-500" />
+                No options found
               </div>
             </li>
           {/each}

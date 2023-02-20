@@ -497,7 +497,7 @@
   isLoading={$sampleMutation.isLoading}
   on:close={onClose}
 >
-  <div class="flex flex-col gap-8">
+  <div class="flex min-h-[26rem] flex-col gap-8">
     <TextInput
       type="password"
       label="Password"
@@ -517,6 +517,30 @@
       value={$form['dob']}
       error={$errors['dob']}
       on:change={handleChange}
+    />
+    <SelectInput
+      value={$form['selectValue']}
+      error={$errors['selectValue']}
+      on:select={({ detail }) => {
+        $form[detail.name] = detail.option.value
+      }}
+      class="max-w-full p-2"
+      inputClass="text-xs"
+      name="selectValue"
+      color="yellow"
+      isRequired
+      label="Select menu"
+      options={[
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' },
+        { label: 'Orange', value: 'orange' },
+        { label: 'Pineapple', value: 'pineapple' },
+        { label: 'Strawberry', value: 'strawberry' },
+        { label: 'Watermelon', value: 'watermelon' },
+        { label: 'Monkey', value: 'monkey' },
+        { label: 'Money', value: 'money' },
+        { label: 'Dog', value: 'dog' }
+      ]}
     />
     <TextInput
       type="password"

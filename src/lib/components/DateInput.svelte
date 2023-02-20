@@ -46,7 +46,7 @@
     flatpickr(inputRef, {
       defaultDate: value,
       inline: !!isInline,
-      static: true,
+      static: !isInline,
       ...options
     })
   })
@@ -139,5 +139,9 @@
 
   input:focus {
     box-shadow: none;
+  }
+
+  :global(.flatpickr-wrapper) {
+    width: 100%;
   }
 </style>

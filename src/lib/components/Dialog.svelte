@@ -99,7 +99,7 @@
   bind:this={dialog}
   on:click={onDialogClick}
   on:close
-  class="max-h-[80%] min-h-[8rem] w-[96%] rounded-lg border-none p-0 shadow-lg"
+  class="w-[96%] rounded-lg border-none p-0 shadow-lg"
   class:max-w-xs={size === 'xs'}
   class:max-w-sm={size === 'sm'}
   class:max-w-md={size === 'md'}
@@ -121,7 +121,7 @@
       </div>
     {/if}
     <!-- main content of dialog -->
-    <div class={twMerge('flex flex-col overflow-y-auto p-4', $$props.class)}>
+    <div class={twMerge('flex flex-1 flex-col overflow-y-auto p-4', $$props.class)}>
       <slot name="content" />
     </div>
     {#if $$slots.footer}
@@ -141,6 +141,9 @@
   dialog[open] {
     -webkit-animation: show 500ms ease normal;
     animation: show 500ms ease normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   @-webkit-keyframes show {
     from {
