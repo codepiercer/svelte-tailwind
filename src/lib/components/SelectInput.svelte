@@ -112,6 +112,10 @@
   }
 </script>
 
+{#if isOptionsOpen}
+  <button class="fixed inset-0 h-full w-full cursor-default" on:click={onClose} />
+{/if}
+
 <div {style} class={classes} on:keydown={onKeyDown}>
   <label
     for={uniqueId}

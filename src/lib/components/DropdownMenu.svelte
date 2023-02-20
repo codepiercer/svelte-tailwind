@@ -85,6 +85,10 @@
   }
 </script>
 
+{#if isOpen}
+  <button class="fixed inset-0 h-full w-full cursor-default" on:click={onClose} />
+{/if}
+
 <div class="relative inline-flex items-center justify-center" on:keydown={onKeyDown}>
   <slot
     name="trigger"
@@ -99,7 +103,6 @@
 
   <!-- Dropdown menu -->
   {#if isOpen}
-    <div class="fixed inset-0 h-full w-full" on:click={onClose} on:keydown={onClose} />
     <div
       id="menu"
       transition:slideFade
