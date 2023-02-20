@@ -139,26 +139,9 @@
     backdrop-filter: blur(0.2rem);
   }
   dialog[open] {
-    -webkit-animation: show 500ms ease normal;
-    animation: show 500ms ease normal;
+    opacity: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  @-webkit-keyframes show {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  @keyframes show {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
 </style>
