@@ -45,8 +45,9 @@
   onMount(() => {
     flatpickr(inputRef, {
       defaultDate: value,
-      ...options,
-      inline: !!isInline
+      inline: !!isInline,
+      static: true,
+      ...options
     })
   })
 

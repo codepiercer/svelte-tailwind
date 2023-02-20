@@ -510,6 +510,14 @@
       isRequired
       placeholder="required field"
     />
+    <DateInput
+      name="dob"
+      label="Date of Birth"
+      isTouched={$touched['dob']}
+      value={$form['dob']}
+      error={$errors['dob']}
+      on:change={handleChange}
+    />
     <TextInput
       type="password"
       label="Confirm Password"
