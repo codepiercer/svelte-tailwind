@@ -15,6 +15,7 @@
   export let error = ''
   export let value = ''
   export let inputClass = ''
+  export let displayClass = ''
   export let hideIcon = false
 
   import { createEventDispatcher } from 'svelte'
@@ -61,9 +62,11 @@
     >
   {/if}
 
-  <span class="px-1 text-sm">
-    {options.find((option) => option.value === value)?.label || 'select option'}
-  </span>
+  <slot>
+    <span class={twMerge('px-1 text-sm', displayClass)}>
+      {options.find((option) => option.value === value)?.label || 'select option'}
+    </span>
+  </slot>
 
   {#if isVisible}
     <Button size="small" variant="outlined" on:click={dialog.show} {color} {isDisabled}

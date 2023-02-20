@@ -12,6 +12,7 @@
   export let error = ''
   export let value = ''
   export let inputClass = ''
+  export let displayClass = ''
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
@@ -58,7 +59,9 @@
     >
   {/if}
 
-  <span class="px-1 text-sm">{value}</span>
+  <slot>
+    <span class={twMerge('px-1 text-sm', displayClass)}>{value}</span>
+  </slot>
 
   {#if isVisible}
     <Button size="small" variant="outlined" on:click={dialog.show} {color} {isDisabled}

@@ -13,6 +13,7 @@
   export let value = ''
   export let isLoading = false
   export let inputClass = ''
+  export let displayClass = ''
 
   import { createEventDispatcher } from 'svelte'
   import { twMerge } from 'tailwind-merge'
@@ -57,16 +58,18 @@
       class:isRequired>{label}</span
     >
   {/if}
-  <span class="px-1 text-sm">
-    {#if type === 'date'}
-      {new Date(value).toISOString().slice(0, 10)}
-    {:else if type === 'datetime'}
-      {new Date(value).toISOString().slice(0, 10)},
-      {new Date(value).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
-    {:else}
-      {new Date(value).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
-    {/if}
-  </span>
+  <slot>
+    <span class={twMerge('px-1 text-sm', displayClass)}>
+      {#if type === 'date'}
+        {new Date(value).toISOString().slice(0, 10)}
+      {:else if type === 'datetime'}
+        {new Date(value).toISOString().slice(0, 10)},
+        {new Date(value).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
+      {:else}
+        {new Date(value).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
+      {/if}
+    </span>
+  </slot>
 
   {#if isVisible}
     <Button size="small" variant="outlined" on:click={dialog.show} {color} {isDisabled}
