@@ -113,7 +113,7 @@
 </script>
 
 {#if isOptionsOpen}
-  <button class="fixed inset-0 h-full w-full cursor-default" on:click={onClose} />
+  <button class="fixed inset-0 z-50 h-full w-full cursor-default" on:click={onClose} />
 {/if}
 
 <div {style} class={classes} on:keydown={onKeyDown}>

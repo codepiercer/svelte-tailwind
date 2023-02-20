@@ -86,7 +86,7 @@
 </script>
 
 {#if isOpen}
-  <button class="fixed inset-0 h-full w-full cursor-default" on:click={onClose} />
+  <button class="fixed inset-0 z-50 h-full w-full cursor-default" on:click={onClose} />
 {/if}
 
 <div class="relative inline-flex items-center justify-center" on:keydown={onKeyDown}>
