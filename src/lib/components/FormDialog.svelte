@@ -10,6 +10,7 @@
   export let title = 'Form Dialog'
   export let error = ''
   export let isLoading = false
+  export let isDisabled = false
 
   const dispatch = createEventDispatcher()
 
@@ -33,7 +34,7 @@
     {/if}
     <div class="flex justify-end gap-4">
       <Button on:click={onClose} variant="outlined" isDisabled={isLoading}>Close</Button>
-      <Button form={uniqueId} {isLoading} type="submit">Submit</Button>
+      <Button form={uniqueId} {isLoading} {isDisabled} type="submit">Submit</Button>
     </div>
   </div>
 </Dialog>

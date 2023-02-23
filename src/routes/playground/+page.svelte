@@ -498,6 +498,7 @@
   error={$sampleMutation?.error?.message}
   isLoading={$sampleMutation.isLoading}
   on:close={onClose}
+  isDisabled
 >
   <div class="flex min-h-[26rem] flex-col gap-8">
     <SelectInputFetchData
