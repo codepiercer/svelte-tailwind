@@ -22,8 +22,8 @@
   import PencilSquareIcon from '$lib/icons/PencilSquareIcon.svelte'
   import colors from '$lib/utils/colors'
 
-  let colorObject = colors[color]
-  let style = Object.entries({
+  const colorObject = colors[color]
+  const style = Object.entries({
     '--text-color': colorObject['900'],
     '--normal-ring': `0 0 0 1px ${colorObject['300']}`
   })

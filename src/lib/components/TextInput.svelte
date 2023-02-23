@@ -23,8 +23,8 @@
   const uniqueId = `fieldName-${Math.random()}`
   let inputRef
 
-  let colorObject = colors[color]
-  let style = Object.entries({
+  const colorObject = colors[color]
+  const style = Object.entries({
     '--border-color': colorObject['300'],
     '--error-border-color': colors['red']['500'],
     '--normal-ring-focus': `0 0 0 2px ${colorObject['600']}`,
@@ -36,7 +36,7 @@
     .map(([key, value]) => `${key}: ${value}`)
     .join(';')
 
-  let classes = twMerge(
+  const classes = twMerge(
     'relative rounded-md border px-4 py-3 shadow-sm h-fit w-auto wrapper',
     $$props.class
   )

@@ -25,8 +25,8 @@
   import LoadingSpinnerIcon from '$lib/icons/LoadingSpinnerIcon.svelte'
   import colors from '$lib/utils/colors'
 
-  let colorObject = colors[color]
-  let style = Object.entries({
+  const colorObject = colors[color]
+  const style = Object.entries({
     '--border-color': colorObject['300'],
     '--error-border-color': colors['red']['500'],
     '--normal-ring': `0 0 0 1px ${colorObject['300']}`,
@@ -39,7 +39,7 @@
     .map(([key, value]) => `${key}: ${value}`)
     .join(';')
 
-  let classes = twMerge(
+  const classes = twMerge(
     'wrapper relative h-fit w-auto rounded-md border p-1 shadow-sm',
     $$props.class
   )

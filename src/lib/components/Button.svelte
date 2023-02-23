@@ -10,8 +10,8 @@
   import LoadingSpinnerIcon from '$lib/icons/LoadingSpinnerIcon.svelte'
   import { twMerge } from 'tailwind-merge'
 
-  let colorObject = colors[color]
-  let style = Object.entries({
+  const colorObject = colors[color]
+  const style = Object.entries({
     '--primary-bg-color': colorObject['600'],
     '--primary-bg-color-hover': colorObject['700'],
     '--secondary-bg-color': colorObject['100'],
