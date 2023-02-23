@@ -10,8 +10,8 @@
   import trapUpDownFocus from '$lib/utils/trapUpDownFocus'
   import colors from '$lib/utils/colors'
 
-  let colorObject = colors[color]
-  let style = Object.entries({
+  const colorObject = colors[color]
+  const style = Object.entries({
     '--text-color': colorObject['900'],
     '--hover-bg-color': colorObject['100'],
     '--normal-ring': `0 0 0 1px ${colorObject['300']}`,
@@ -85,10 +85,6 @@
     }
   }
 </script>
-
-{#if isOpen}
-  <button class="fixed inset-0 z-50 h-full w-full cursor-default" on:click={onClose} />
-{/if}
 
 <div class="relative inline-flex items-center justify-center" on:keydown={onKeyDown}>
   <slot
