@@ -81,9 +81,9 @@
         }}
       >
         {#if inputRef && inputRef.type === 'text'}
-          <EyeSlashIcon />
-        {:else}
           <EyeIcon />
+        {:else}
+          <EyeSlashIcon />
         {/if}
       </button>
     {/if}
