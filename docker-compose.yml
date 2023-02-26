@@ -7,7 +7,7 @@ services:
     command: bash
     tty: true
     stdin_open: true
-    environment:
-      - PORT=4000
+    env_file:
+      - .env
     ports:
       - 4000:4000
