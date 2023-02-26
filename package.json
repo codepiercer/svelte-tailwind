@@ -3,7 +3,7 @@
   "version": "0.4.0",
   "scripts": {
     "dev": "vite dev --host",
-    "build": "npm run lint && svelte-package",
+    "build": "npm run lint && svelte-package -o package",
     "publish": "npm run build && npm publish ./package --access public",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -14,13 +14,13 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "2.0.0",
     "@sveltejs/package": "2.0.2",
-    "@typescript-eslint/eslint-plugin": "5.52.0",
-    "@typescript-eslint/parser": "5.52.0",
-    "@tanstack/svelte-query": "4.24.9",
+    "@typescript-eslint/eslint-plugin": "5.53.0",
+    "@typescript-eslint/parser": "5.53.0",
+    "@tanstack/svelte-query": "4.24.10",
     "svelte-french-toast": "1.0.3",
-    "svelte-check": "3.0.3",
+    "svelte-check": "3.0.4",
     "svelte-forms-lib": "2.0.1",
-    "yup": "1.0.0",
+    "yup": "1.0.1",
     "tslib": "2.5.0",
     "typescript": "4.9.5"
   },
@@ -30,7 +30,7 @@
     "@tailwindcss/typography": "0.5.9",
     "@imask/svelte": "6.4.3",
     "autoprefixer": "10.4.13",
-    "eslint": "8.34.0",
+    "eslint": "8.35.0",
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-svelte3": "4.0.0",
     "flatpickr": "4.6.13",
@@ -41,8 +41,358 @@
     "prettier-plugin-tailwindcss": "0.2.3",
     "svelte": "3.55.1",
     "tailwindcss": "3.2.7",
-    "tailwind-merge": "1.9.1",
+    "tailwind-merge": "1.10.0",
     "vite": "4.1.2"
   },
-  "type": "module"
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    "./components/Button.svelte": {
+      "types": "./package/components/Button.svelte.d.ts",
+      "svelte": "./package/components/Button.svelte",
+      "default": "./package/components/Button.svelte"
+    },
+    "./components/Clipboard.svelte": {
+      "types": "./package/components/Clipboard.svelte.d.ts",
+      "svelte": "./package/components/Clipboard.svelte",
+      "default": "./package/components/Clipboard.svelte"
+    },
+    "./components/ConfirmationDialog.svelte": {
+      "types": "./package/components/ConfirmationDialog.svelte.d.ts",
+      "svelte": "./package/components/ConfirmationDialog.svelte",
+      "default": "./package/components/ConfirmationDialog.svelte"
+    },
+    "./components/DateEditDialog.svelte": {
+      "types": "./package/components/DateEditDialog.svelte.d.ts",
+      "svelte": "./package/components/DateEditDialog.svelte",
+      "default": "./package/components/DateEditDialog.svelte"
+    },
+    "./components/DateInput.svelte": {
+      "types": "./package/components/DateInput.svelte.d.ts",
+      "svelte": "./package/components/DateInput.svelte",
+      "default": "./package/components/DateInput.svelte"
+    },
+    "./components/DateInputInline.svelte": {
+      "types": "./package/components/DateInputInline.svelte.d.ts",
+      "svelte": "./package/components/DateInputInline.svelte",
+      "default": "./package/components/DateInputInline.svelte"
+    },
+    "./components/Dialog.svelte": {
+      "types": "./package/components/Dialog.svelte.d.ts",
+      "svelte": "./package/components/Dialog.svelte",
+      "default": "./package/components/Dialog.svelte"
+    },
+    "./components/DropdownMenu.svelte": {
+      "types": "./package/components/DropdownMenu.svelte.d.ts",
+      "svelte": "./package/components/DropdownMenu.svelte",
+      "default": "./package/components/DropdownMenu.svelte"
+    },
+    "./components/ErrorAlert.svelte": {
+      "types": "./package/components/ErrorAlert.svelte.d.ts",
+      "svelte": "./package/components/ErrorAlert.svelte",
+      "default": "./package/components/ErrorAlert.svelte"
+    },
+    "./components/FormDialog.svelte": {
+      "types": "./package/components/FormDialog.svelte.d.ts",
+      "svelte": "./package/components/FormDialog.svelte",
+      "default": "./package/components/FormDialog.svelte"
+    },
+    "./components/LoadingAlert.svelte": {
+      "types": "./package/components/LoadingAlert.svelte.d.ts",
+      "svelte": "./package/components/LoadingAlert.svelte",
+      "default": "./package/components/LoadingAlert.svelte"
+    },
+    "./components/SelectInput.svelte": {
+      "types": "./package/components/SelectInput.svelte.d.ts",
+      "svelte": "./package/components/SelectInput.svelte",
+      "default": "./package/components/SelectInput.svelte"
+    },
+    "./components/SelectInputEditDialog.svelte": {
+      "types": "./package/components/SelectInputEditDialog.svelte.d.ts",
+      "svelte": "./package/components/SelectInputEditDialog.svelte",
+      "default": "./package/components/SelectInputEditDialog.svelte"
+    },
+    "./components/SuccessAlert.svelte": {
+      "types": "./package/components/SuccessAlert.svelte.d.ts",
+      "svelte": "./package/components/SuccessAlert.svelte",
+      "default": "./package/components/SuccessAlert.svelte"
+    },
+    "./components/TextEditDialog.svelte": {
+      "types": "./package/components/TextEditDialog.svelte.d.ts",
+      "svelte": "./package/components/TextEditDialog.svelte",
+      "default": "./package/components/TextEditDialog.svelte"
+    },
+    "./components/TextInput.svelte": {
+      "types": "./package/components/TextInput.svelte.d.ts",
+      "svelte": "./package/components/TextInput.svelte",
+      "default": "./package/components/TextInput.svelte"
+    },
+    "./components/TextareaEditDialog.svelte": {
+      "types": "./package/components/TextareaEditDialog.svelte.d.ts",
+      "svelte": "./package/components/TextareaEditDialog.svelte",
+      "default": "./package/components/TextareaEditDialog.svelte"
+    },
+    "./components/TextareaInput.svelte": {
+      "types": "./package/components/TextareaInput.svelte.d.ts",
+      "svelte": "./package/components/TextareaInput.svelte",
+      "default": "./package/components/TextareaInput.svelte"
+    },
+    "./components/ToggleEditDialog.svelte": {
+      "types": "./package/components/ToggleEditDialog.svelte.d.ts",
+      "svelte": "./package/components/ToggleEditDialog.svelte",
+      "default": "./package/components/ToggleEditDialog.svelte"
+    },
+    "./components/ToggleInput.svelte": {
+      "types": "./package/components/ToggleInput.svelte.d.ts",
+      "svelte": "./package/components/ToggleInput.svelte",
+      "default": "./package/components/ToggleInput.svelte"
+    },
+    "./components/ToggleInputReadonly.svelte": {
+      "types": "./package/components/ToggleInputReadonly.svelte.d.ts",
+      "svelte": "./package/components/ToggleInputReadonly.svelte",
+      "default": "./package/components/ToggleInputReadonly.svelte"
+    },
+    "./components/Tooltip.svelte": {
+      "types": "./package/components/Tooltip.svelte.d.ts",
+      "svelte": "./package/components/Tooltip.svelte",
+      "default": "./package/components/Tooltip.svelte"
+    },
+    "./config.cjs": "./package/config.cjs",
+    "./icons/CalendarIcon.svelte": {
+      "types": "./package/icons/CalendarIcon.svelte.d.ts",
+      "svelte": "./package/icons/CalendarIcon.svelte",
+      "default": "./package/icons/CalendarIcon.svelte"
+    },
+    "./icons/CheckOutlineIcon.svelte": {
+      "types": "./package/icons/CheckOutlineIcon.svelte.d.ts",
+      "svelte": "./package/icons/CheckOutlineIcon.svelte",
+      "default": "./package/icons/CheckOutlineIcon.svelte"
+    },
+    "./icons/ChevronDownIcon.svelte": {
+      "types": "./package/icons/ChevronDownIcon.svelte.d.ts",
+      "svelte": "./package/icons/ChevronDownIcon.svelte",
+      "default": "./package/icons/ChevronDownIcon.svelte"
+    },
+    "./icons/ChevronUpDownIcon.svelte": {
+      "types": "./package/icons/ChevronUpDownIcon.svelte.d.ts",
+      "svelte": "./package/icons/ChevronUpDownIcon.svelte",
+      "default": "./package/icons/ChevronUpDownIcon.svelte"
+    },
+    "./icons/ClipboardDocumentIcon.svelte": {
+      "types": "./package/icons/ClipboardDocumentIcon.svelte.d.ts",
+      "svelte": "./package/icons/ClipboardDocumentIcon.svelte",
+      "default": "./package/icons/ClipboardDocumentIcon.svelte"
+    },
+    "./icons/ExclamationCircleIcon.svelte": {
+      "types": "./package/icons/ExclamationCircleIcon.svelte.d.ts",
+      "svelte": "./package/icons/ExclamationCircleIcon.svelte",
+      "default": "./package/icons/ExclamationCircleIcon.svelte"
+    },
+    "./icons/EyeIcon.svelte": {
+      "types": "./package/icons/EyeIcon.svelte.d.ts",
+      "svelte": "./package/icons/EyeIcon.svelte",
+      "default": "./package/icons/EyeIcon.svelte"
+    },
+    "./icons/EyeSlashIcon.svelte": {
+      "types": "./package/icons/EyeSlashIcon.svelte.d.ts",
+      "svelte": "./package/icons/EyeSlashIcon.svelte",
+      "default": "./package/icons/EyeSlashIcon.svelte"
+    },
+    "./icons/InfoIcon.svelte": {
+      "types": "./package/icons/InfoIcon.svelte.d.ts",
+      "svelte": "./package/icons/InfoIcon.svelte",
+      "default": "./package/icons/InfoIcon.svelte"
+    },
+    "./icons/LoadingSpinnerIcon.svelte": {
+      "types": "./package/icons/LoadingSpinnerIcon.svelte.d.ts",
+      "svelte": "./package/icons/LoadingSpinnerIcon.svelte",
+      "default": "./package/icons/LoadingSpinnerIcon.svelte"
+    },
+    "./icons/PencilSquareIcon.svelte": {
+      "types": "./package/icons/PencilSquareIcon.svelte.d.ts",
+      "svelte": "./package/icons/PencilSquareIcon.svelte",
+      "default": "./package/icons/PencilSquareIcon.svelte"
+    },
+    "./icons/PlusIcon.svelte": {
+      "types": "./package/icons/PlusIcon.svelte.d.ts",
+      "svelte": "./package/icons/PlusIcon.svelte",
+      "default": "./package/icons/PlusIcon.svelte"
+    },
+    "./icons/TrashIcon.svelte": {
+      "types": "./package/icons/TrashIcon.svelte.d.ts",
+      "svelte": "./package/icons/TrashIcon.svelte",
+      "default": "./package/icons/TrashIcon.svelte"
+    },
+    "./icons/XMarkIcon.svelte": {
+      "types": "./package/icons/XMarkIcon.svelte.d.ts",
+      "svelte": "./package/icons/XMarkIcon.svelte",
+      "default": "./package/icons/XMarkIcon.svelte"
+    },
+    ".": {
+      "types": "./package/index.d.ts",
+      "svelte": "./package/index.js",
+      "default": "./package/index.js"
+    },
+    "./utils/clickOutside": {
+      "types": "./package/utils/clickOutside.d.ts",
+      "default": "./package/utils/clickOutside.js"
+    },
+    "./utils/colors": {
+      "types": "./package/utils/colors.d.ts",
+      "default": "./package/utils/colors.js"
+    },
+    "./utils/fakeFetch": {
+      "types": "./package/utils/fakeFetch.d.ts",
+      "default": "./package/utils/fakeFetch.js"
+    },
+    "./utils/stopTyping": {
+      "types": "./package/utils/stopTyping.d.ts",
+      "default": "./package/utils/stopTyping.js"
+    },
+    "./utils/trapFocus": {
+      "types": "./package/utils/trapFocus.d.ts",
+      "default": "./package/utils/trapFocus.js"
+    },
+    "./utils/trapUpDownFocus": {
+      "types": "./package/utils/trapUpDownFocus.d.ts",
+      "default": "./package/utils/trapUpDownFocus.js"
+    }
+  },
+  "files": [
+    "package"
+  ],
+  "svelte": "./package/index.js",
+  "typesVersions": {
+    ">4.0": {
+      "components/Button.svelte": [
+        "./package/components/Button.svelte.d.ts"
+      ],
+      "components/Clipboard.svelte": [
+        "./package/components/Clipboard.svelte.d.ts"
+      ],
+      "components/ConfirmationDialog.svelte": [
+        "./package/components/ConfirmationDialog.svelte.d.ts"
+      ],
+      "components/DateEditDialog.svelte": [
+        "./package/components/DateEditDialog.svelte.d.ts"
+      ],
+      "components/DateInput.svelte": [
+        "./package/components/DateInput.svelte.d.ts"
+      ],
+      "components/DateInputInline.svelte": [
+        "./package/components/DateInputInline.svelte.d.ts"
+      ],
+      "components/Dialog.svelte": [
+        "./package/components/Dialog.svelte.d.ts"
+      ],
+      "components/DropdownMenu.svelte": [
+        "./package/components/DropdownMenu.svelte.d.ts"
+      ],
+      "components/ErrorAlert.svelte": [
+        "./package/components/ErrorAlert.svelte.d.ts"
+      ],
+      "components/FormDialog.svelte": [
+        "./package/components/FormDialog.svelte.d.ts"
+      ],
+      "components/LoadingAlert.svelte": [
+        "./package/components/LoadingAlert.svelte.d.ts"
+      ],
+      "components/SelectInput.svelte": [
+        "./package/components/SelectInput.svelte.d.ts"
+      ],
+      "components/SelectInputEditDialog.svelte": [
+        "./package/components/SelectInputEditDialog.svelte.d.ts"
+      ],
+      "components/SuccessAlert.svelte": [
+        "./package/components/SuccessAlert.svelte.d.ts"
+      ],
+      "components/TextEditDialog.svelte": [
+        "./package/components/TextEditDialog.svelte.d.ts"
+      ],
+      "components/TextInput.svelte": [
+        "./package/components/TextInput.svelte.d.ts"
+      ],
+      "components/TextareaEditDialog.svelte": [
+        "./package/components/TextareaEditDialog.svelte.d.ts"
+      ],
+      "components/TextareaInput.svelte": [
+        "./package/components/TextareaInput.svelte.d.ts"
+      ],
+      "components/ToggleEditDialog.svelte": [
+        "./package/components/ToggleEditDialog.svelte.d.ts"
+      ],
+      "components/ToggleInput.svelte": [
+        "./package/components/ToggleInput.svelte.d.ts"
+      ],
+      "components/ToggleInputReadonly.svelte": [
+        "./package/components/ToggleInputReadonly.svelte.d.ts"
+      ],
+      "components/Tooltip.svelte": [
+        "./package/components/Tooltip.svelte.d.ts"
+      ],
+      "icons/CalendarIcon.svelte": [
+        "./package/icons/CalendarIcon.svelte.d.ts"
+      ],
+      "icons/CheckOutlineIcon.svelte": [
+        "./package/icons/CheckOutlineIcon.svelte.d.ts"
+      ],
+      "icons/ChevronDownIcon.svelte": [
+        "./package/icons/ChevronDownIcon.svelte.d.ts"
+      ],
+      "icons/ChevronUpDownIcon.svelte": [
+        "./package/icons/ChevronUpDownIcon.svelte.d.ts"
+      ],
+      "icons/ClipboardDocumentIcon.svelte": [
+        "./package/icons/ClipboardDocumentIcon.svelte.d.ts"
+      ],
+      "icons/ExclamationCircleIcon.svelte": [
+        "./package/icons/ExclamationCircleIcon.svelte.d.ts"
+      ],
+      "icons/EyeIcon.svelte": [
+        "./package/icons/EyeIcon.svelte.d.ts"
+      ],
+      "icons/EyeSlashIcon.svelte": [
+        "./package/icons/EyeSlashIcon.svelte.d.ts"
+      ],
+      "icons/InfoIcon.svelte": [
+        "./package/icons/InfoIcon.svelte.d.ts"
+      ],
+      "icons/LoadingSpinnerIcon.svelte": [
+        "./package/icons/LoadingSpinnerIcon.svelte.d.ts"
+      ],
+      "icons/PencilSquareIcon.svelte": [
+        "./package/icons/PencilSquareIcon.svelte.d.ts"
+      ],
+      "icons/PlusIcon.svelte": [
+        "./package/icons/PlusIcon.svelte.d.ts"
+      ],
+      "icons/TrashIcon.svelte": [
+        "./package/icons/TrashIcon.svelte.d.ts"
+      ],
+      "icons/XMarkIcon.svelte": [
+        "./package/icons/XMarkIcon.svelte.d.ts"
+      ],
+      "index": [
+        "./package/index.d.ts"
+      ],
+      "utils/clickOutside": [
+        "./package/utils/clickOutside.d.ts"
+      ],
+      "utils/colors": [
+        "./package/utils/colors.d.ts"
+      ],
+      "utils/fakeFetch": [
+        "./package/utils/fakeFetch.d.ts"
+      ],
+      "utils/stopTyping": [
+        "./package/utils/stopTyping.d.ts"
+      ],
+      "utils/trapFocus": [
+        "./package/utils/trapFocus.d.ts"
+      ],
+      "utils/trapUpDownFocus": [
+        "./package/utils/trapUpDownFocus.d.ts"
+      ]
+    }
+  }
 }
