@@ -6,8 +6,8 @@
   export let isLoading = false
   export let href = `` // if href is provided, the button will be rendered as an anchor tag
 
-  import colors from "$lib/utils/colors"
-  import LoadingSpinnerIcon from "$lib/icons/LoadingSpinnerIcon.svelte"
+  import colors from "../utils/colors"
+  import LoadingSpinnerIcon from "../icons/LoadingSpinnerIcon.svelte"
   import { twMerge } from "tailwind-merge"
 
   const colorObject = colors[color]

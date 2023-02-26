@@ -12,13 +12,13 @@
   export let inputClass = ``
 
   import { twMerge } from "tailwind-merge"
-  import { stopTyping } from "$lib/utils/stopTyping.js"
+  import { stopTyping } from "../utils/stopTyping.js"
   import { imask } from "@imask/svelte"
 
-  import ExclamationCircleIcon from "$lib/icons/ExclamationCircleIcon.svelte"
-  import EyeIcon from "$lib/icons/EyeIcon.svelte"
-  import EyeSlashIcon from "$lib/icons/EyeSlashIcon.svelte"
-  import colors from "$lib/utils/colors"
+  import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
+  import EyeIcon from "../icons/EyeIcon.svelte"
+  import EyeSlashIcon from "../icons/EyeSlashIcon.svelte"
+  import colors from "../utils/colors"
 
   const uniqueId = `fieldName-${Math.random()}`
   let inputRef

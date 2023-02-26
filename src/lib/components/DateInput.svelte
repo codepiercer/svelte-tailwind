@@ -14,10 +14,11 @@
   import flatpickr from "flatpickr"
   import { twMerge } from "tailwind-merge"
 
-  import { Button, Dialog } from "$lib"
-  import ExclamationCircleIcon from "$lib/icons/ExclamationCircleIcon.svelte"
-  import XMarkIcon from "$lib/icons/XMarkIcon.svelte"
-  import colors from "$lib/utils/colors"
+  import Button from "./Button.svelte"
+  import Dialog from "./Dialog.svelte"
+  import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
+  import XMarkIcon from "../icons/XMarkIcon.svelte"
+  import colors from "../utils/colors"
 
   const uniqueId = `fieldName-${Math.random()}`
   let inputRef

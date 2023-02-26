@@ -6,9 +6,9 @@
   import { cubicOut } from "svelte/easing"
   import { twMerge } from "tailwind-merge"
 
-  import clickOutside from "$lib/utils/clickOutside"
-  import trapUpDownFocus from "$lib/utils/trapUpDownFocus"
-  import colors from "$lib/utils/colors"
+  import clickOutside from "../utils/clickOutside"
+  import trapUpDownFocus from "../utils/trapUpDownFocus"
+  import colors from "../utils/colors"
 
   const colorObject = colors[color]
   const style = Object.entries({

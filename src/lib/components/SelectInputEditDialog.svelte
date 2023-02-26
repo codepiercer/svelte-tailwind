@@ -22,9 +22,11 @@
   import { createEventDispatcher } from "svelte"
   import { twMerge } from "tailwind-merge"
 
-  import { SelectInput, FormDialog, Button } from "$lib"
-  import PencilSquareIcon from "$lib/icons/PencilSquareIcon.svelte"
-  import colors from "$lib/utils/colors"
+  import SelectInput from "./SelectInput.svelte"
+  import FormDialog from "./FormDialog.svelte"
+  import Button from "./Button.svelte"
+  import PencilSquareIcon from "../icons/PencilSquareIcon.svelte"
+  import colors from "../utils/colors"
 
   const colorObject = colors[color]
   const style = Object.entries({

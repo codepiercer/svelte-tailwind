@@ -1,5 +1,5 @@
 <script>
-  import ExclamationIcon from "$lib/icons/ExclamationCircleIcon.svelte"
+  import ExclamationIcon from "../icons/ExclamationCircleIcon.svelte"
 </script>
 
 <div class="rounded-md bg-red-50 p-4">

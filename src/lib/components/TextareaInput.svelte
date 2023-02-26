@@ -10,10 +10,10 @@
   export let inputClass = ``
 
   import { twMerge } from "tailwind-merge"
-  import { stopTyping } from "$lib/utils/stopTyping.js"
+  import { stopTyping } from "../utils/stopTyping.js"
 
-  import ExclamationCircleIcon from "$lib/icons/ExclamationCircleIcon.svelte"
-  import colors from "$lib/utils/colors"
+  import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
+  import colors from "../utils/colors"
 
   const uniqueId = `dropdown-${Math.random()}`
 

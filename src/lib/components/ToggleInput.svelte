@@ -10,8 +10,8 @@
   import { createEventDispatcher } from "svelte"
   import { twMerge } from "tailwind-merge"
 
-  import ExclamationCircleIcon from "$lib/icons/ExclamationCircleIcon.svelte"
-  import colors from "$lib/utils/colors"
+  import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
+  import colors from "../utils/colors"
 
   const colorObject = colors[color]
   const style = Object.entries({

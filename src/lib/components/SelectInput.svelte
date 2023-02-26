@@ -17,13 +17,13 @@
 
   import { createEventDispatcher } from "svelte"
   import { twMerge } from "tailwind-merge"
-  import clickOutside from "$lib/utils/clickOutside"
+  import clickOutside from "../utils/clickOutside"
 
-  import CheckOutlineIcon from "$lib/icons/CheckOutlineIcon.svelte"
-  import ChevronUpDownIcon from "$lib/icons/ChevronUpDownIcon.svelte"
-  import ExclamationCircleIcon from "$lib/icons/ExclamationCircleIcon.svelte"
-  import LoadingSpinnerIcon from "$lib/icons/LoadingSpinnerIcon.svelte"
-  import colors from "$lib/utils/colors"
+  import CheckOutlineIcon from "../icons/CheckOutlineIcon.svelte"
+  import ChevronUpDownIcon from "../icons/ChevronUpDownIcon.svelte"
+  import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
+  import LoadingSpinnerIcon from "../icons/LoadingSpinnerIcon.svelte"
+  import colors from "../utils/colors"
 
   const colorObject = colors[color]
   const style = Object.entries({
