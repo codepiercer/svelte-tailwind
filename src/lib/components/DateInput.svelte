@@ -77,7 +77,7 @@
     class:isRequired><slot name="label">{label}</slot></label
   >
   <div class="relative flex items-center justify-between gap-2">
-    <Button variant="ghost" on:click={onOpen} class="my-[0.2rem] w-full text-left">
+    <Button variant="ghost" on:click={onOpen} class="my-[0.2rem] w-full justify-start">
       {#if value}
         {#if type === `date`}
           {new Date(value).toISOString().slice(0, 10)}

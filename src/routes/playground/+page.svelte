@@ -132,6 +132,7 @@
       value={$form[`dob`]}
       error={$errors[`dob`]}
       on:change={handleChange}
+      class="min-w-[16rem]"
     >
       <DropdownMenu
         let:menuItemProps
