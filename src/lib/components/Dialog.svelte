@@ -3,6 +3,7 @@
   export let size = `md`
   export let closeOnOverlayClick = false
   export let closeOnEscape = true
+  export let initialFocusID = null
 
   import { onMount } from "svelte"
   import { createEventDispatcher } from "svelte"
@@ -41,6 +42,11 @@
       scrollX = document.documentElement.scrollLeft
       document.body.style.overflow = `hidden`
       isOpen = true
+      initialFocusID &&
+        setTimeout(() => {
+          const el = document.getElementById(initialFocusID)
+          el && el.focus()
+        }, 1)
     }
     dialog.hide = () => {
       dialog.removeEventListener(`keydown`, trapFocus)

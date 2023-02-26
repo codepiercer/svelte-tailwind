@@ -14,6 +14,7 @@
   ]
   export let inputClass = ``
   export let hideIcon = false
+  export let id = `${name}-${Math.random()}`
 
   import { createEventDispatcher } from "svelte"
   import { twMerge } from "tailwind-merge"
@@ -44,7 +45,6 @@
     $$props.class
   )
 
-  const uniqueId = `fieldName-${Math.random()}`
   let inputRef = null
   let isOptionsOpen = false
   let isActive = null
@@ -117,14 +117,14 @@
 
 <div use:clickOutside on:clickOutside={onClose} {style} class={classes} on:keydown={onKeyDown}>
   <label
-    for={uniqueId}
+    for={id}
     class="absolute -top-2 left-2 z-10 -mt-px inline-block bg-white px-1 text-xs font-medium"
     class:isRequired><slot name="label">{label}</slot></label
   >
   <div class="relative">
     <div class="flex items-center justify-between">
       <input
-        id={uniqueId}
+        {id}
         {name}
         bind:this={inputRef}
         required={isRequired}

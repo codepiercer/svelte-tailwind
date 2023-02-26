@@ -20,14 +20,14 @@
     .map(([key, value]) => `${key}: ${value}`)
     .join(`;`)
 
-  const uniqueId = `dropdown-${Math.random()}`
+  const id = `dropdown-${Math.random()}`
 
   const onOpen = () => {
     isOpen = true
   }
 
   const onClose = () => {
-    document.getElementById(uniqueId).focus()
+    document.getElementById(id).focus()
     isOpen = false
   }
 
@@ -89,7 +89,7 @@
   <slot
     name="trigger"
     triggerProps={{
-      id: uniqueId,
+      id,
       "aria-expanded": isOpen,
       "aria-haspopup": `true`
     }}
@@ -108,7 +108,7 @@
       {style}
       role="menu"
       aria-orientation="vertical"
-      aria-labelledby={uniqueId}
+      aria-labelledby={id}
     >
       <slot
         name="content"

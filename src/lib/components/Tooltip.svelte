@@ -4,7 +4,7 @@
   </span>
   {#if $$slots.default}
     <div
-      class="tooltip top absolute left-1/2 -mt-2 inline-block -translate-x-1/2 -translate-y-[100%] whitespace-nowrap opacity-0 transition-all"
+      class="tooltip top absolute  left-0 -mt-2 inline-block -translate-x-[50%] -translate-y-[100%] whitespace-nowrap opacity-0 transition-all"
     >
       <div class="z-10 inline-block rounded-md bg-gray-700 p-2 text-xs text-white"><slot /></div>
     </div>

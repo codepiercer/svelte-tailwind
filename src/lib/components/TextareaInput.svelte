@@ -8,14 +8,13 @@
   export let error = ``
   export let value = ``
   export let inputClass = ``
+  export let id = `${name}-${Math.random()}`
 
   import { twMerge } from "tailwind-merge"
   import { stopTyping } from "../utils/stopTyping.js"
 
   import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
   import colors from "../utils/colors"
-
-  const uniqueId = `dropdown-${Math.random()}`
 
   const colorObject = colors[color]
   const style = Object.entries({
@@ -38,13 +37,13 @@
 
 <div {style} class={classes} class:error>
   <label
-    for={uniqueId}
+    for={id}
     class="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
     class:isRequired><slot name="label">{label}</slot></label
   >
   <div class="relative flex items-center justify-between">
     <textarea
-      id={uniqueId}
+      {id}
       use:stopTyping
       on:stopTyping
       rows="4"

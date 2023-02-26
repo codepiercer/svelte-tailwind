@@ -6,7 +6,6 @@
   import ErrorAlert from "./ErrorAlert.svelte"
   import Dialog from "./Dialog.svelte"
 
-  const uniqueId = `dropdown-${Math.random()}`
   export let dialog
   export let title = `Form Dialog`
   export let mutation
@@ -37,9 +36,7 @@
     {/if}
     <div class="flex justify-end gap-4">
       <Button on:click={onClose} variant="outlined" isDisabled={$mutation.isLoading}>Cancel</Button>
-      <Button form={uniqueId} isLoading={$mutation.isLoading} color="red" on:click={onConfirm}
-        >Confirm</Button
-      >
+      <Button isLoading={$mutation.isLoading} color="red" on:click={onConfirm}>Confirm</Button>
     </div>
   </div>
 </Dialog>

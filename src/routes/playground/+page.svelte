@@ -42,6 +42,8 @@
   let editToggleDialog
   let confirmationDialog
 
+  let initialFocusRef
+
   const sampleMutation = createMutation(fakeFetch, {
     onSuccess: () => {
       successToast(`Successfully edited something`)
@@ -528,6 +530,7 @@
   isLoading={$sampleMutation.isLoading}
   on:close={onClose}
   isDisabled
+  initialFocusID="passwordInput"
 >
   <div class="flex min-h-[26rem] flex-col gap-8">
     <SelectInputFetchData
@@ -564,6 +567,7 @@
       ]}
     />
     <TextInput
+      id="passwordInput"
       type="password"
       label="Password"
       name="password"

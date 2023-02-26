@@ -5,12 +5,13 @@
   import ErrorAlert from "./ErrorAlert.svelte"
   import Dialog from "./Dialog.svelte"
 
-  const uniqueId = `dropdown-${Math.random()}`
+  const id = `${Math.random()}`
   export let dialog
   export let title = `Form Dialog`
   export let error = ``
   export let isLoading = false
   export let isDisabled = false
+  export let initialFocusID = null
 
   const dispatch = createEventDispatcher()
 
@@ -19,10 +20,10 @@
   }
 </script>
 
-<Dialog bind:dialog closeOnEscape={false} class={$$props.class}>
+<Dialog bind:dialog closeOnEscape={false} class={$$props.class} {initialFocusID}>
   <h2 slot="header" class="text-xl font-semibold text-gray-900">{title}</h2>
 
-  <form slot="content" id={uniqueId} on:submit|preventDefault>
+  <form slot="content" {id} on:submit|preventDefault>
     <slot />
   </form>
 
@@ -34,7 +35,7 @@
     {/if}
     <div class="flex justify-end gap-4">
       <Button on:click={onClose} variant="outlined" isDisabled={isLoading}>Close</Button>
-      <Button form={uniqueId} {isLoading} {isDisabled} type="submit">Submit</Button>
+      <Button form={id} {isLoading} {isDisabled} type="submit">Submit</Button>
     </div>
   </div>
 </Dialog>

@@ -10,17 +10,18 @@
   export let value = ``
   export let mask = null
   export let inputClass = ``
+  export let id = `${name}-${Math.random()}`
 
   import { twMerge } from "tailwind-merge"
   import { stopTyping } from "../utils/stopTyping.js"
   import { imask } from "@imask/svelte"
 
+  import Tooltip from "./Tooltip.svelte"
   import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
   import EyeIcon from "../icons/EyeIcon.svelte"
   import EyeSlashIcon from "../icons/EyeSlashIcon.svelte"
   import colors from "../utils/colors"
 
-  const uniqueId = `fieldName-${Math.random()}`
   let inputRef
 
   const colorObject = colors[color]
@@ -48,7 +49,7 @@
 
 <div {style} class={classes} class:error>
   <label
-    for={uniqueId}
+    for={id}
     class="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
     class:isRequired
   >
@@ -61,7 +62,7 @@
       on:stopTyping
       use:typeAction
       bind:this={inputRef}
-      id={uniqueId}
+      {id}
       required={isRequired}
       {name}
       on:change
@@ -81,9 +82,15 @@
         }}
       >
         {#if inputRef && inputRef.type === `text`}
-          <EyeIcon />
+          <Tooltip>
+            <EyeSlashIcon slot="tooltip-slot" />
+            <span>Hide password</span>
+          </Tooltip>
         {:else}
-          <EyeSlashIcon />
+          <Tooltip>
+            <EyeIcon slot="tooltip-slot" />
+            <span>Show password</span>
+          </Tooltip>
         {/if}
       </button>
     {/if}
