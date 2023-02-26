@@ -42,8 +42,6 @@
   let editToggleDialog
   let confirmationDialog
 
-  let initialFocusRef
-
   const sampleMutation = createMutation(fakeFetch, {
     onSuccess: () => {
       successToast(`Successfully edited something`)
