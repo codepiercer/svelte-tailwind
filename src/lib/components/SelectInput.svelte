@@ -15,6 +15,7 @@
   export let inputClass = ``
   export let hideIcon = false
   export let id = `${name}-${Math.random()}`
+  export let direction = `bottom` // top, bottom
 
   import { createEventDispatcher } from "svelte"
   import { twMerge } from "tailwind-merge"
@@ -182,7 +183,9 @@
 
     {#if isOptionsOpen}
       <ul
-        class="options absolute z-20 mt-2 max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
+        class="options absolute z-20  max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
+        class:bottom-0={direction === `top`}
+        class:top-0={direction === `bottom`}
         id="options"
         role="listbox"
       >

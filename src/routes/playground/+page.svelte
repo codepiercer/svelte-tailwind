@@ -276,6 +276,7 @@
     >
 
     <SelectInput
+      direction="top"
       value={$form[`selectValue`]}
       error={$errors[`selectValue`]}
       on:select={({ detail }) => {
