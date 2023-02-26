@@ -11,6 +11,8 @@
   export let options = {}
   export let inputClass = ``
 
+  import { createEventDispatcher } from "svelte"
+
   import flatpickr from "flatpickr"
   import { twMerge } from "tailwind-merge"
 
@@ -37,7 +39,7 @@
     .join(`;`)
 
   const classes = twMerge(
-    `relative rounded-md border px-1 py-[0.1rem] shadow-sm h-fit w-auto wrapper min-w-[10rem]`,
+    `relative rounded-md border px-1 py-[0.7rem] shadow-sm h-fit w-auto wrapper min-w-[10rem]`,
     $$props.class
   )
 
@@ -55,9 +57,12 @@
     })
   }
 
+  const dispatch = createEventDispatcher()
+
   const onClear = () => {
     value = null
     inputRef._flatpickr.setDate(null)
+    dispatch(`clear`)
   }
 
   const goToToday = () => {
@@ -77,7 +82,7 @@
     class:isRequired><slot name="label">{label}</slot></label
   >
   <div class="relative flex items-center justify-between gap-2">
-    <Button variant="ghost" on:click={onOpen} class="my-[0.2rem] w-full justify-start">
+    <Button variant="ghost" {color} on:click={onOpen} class="w-full justify-start p-0 px-1">
       {#if value}
         {#if type === `date`}
           {new Date(value).toISOString().slice(0, 10)}
