@@ -22,7 +22,6 @@
   import XMarkIcon from "../icons/XMarkIcon.svelte"
   import colors from "../utils/colors"
 
-  const uniqueId = `fieldName-${Math.random()}`
   let inputRef
   let dialog
 
@@ -76,13 +75,14 @@
 </svelte:head>
 
 <div {style} class={classes} class:error class:pr-4={$$slots.default}>
-  <label
-    for={uniqueId}
-    class="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
-    class:isRequired><slot name="label">{label}</slot></label
+  <div
+    class="label absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
+    class:isRequired
   >
+    <slot name="label">{label}</slot>
+  </div>
   <div class="relative flex items-center justify-between gap-2">
-    <Button variant="ghost" {color} on:click={onOpen} class="w-full justify-start p-0 px-1">
+    <Button variant="ghost" color="gray" on:click={onOpen} class="w-full justify-start p-0 px-1">
       {#if value}
         {#if type === `date`}
           {new Date(value).toISOString().slice(0, 10)}
@@ -135,7 +135,6 @@
 
   <div slot="content" class="-mt-4 -mb-2 flex flex-col items-center justify-center gap-4">
     <input
-      id={uniqueId}
       {name}
       bind:this={inputRef}
       type="text"
@@ -170,11 +169,11 @@
     box-shadow: var(--error-ring-focus);
   }
 
-  label {
+  .label {
     color: var(--text-color);
   }
 
-  label.isRequired:after {
+  .label.isRequired:after {
     color: #e32;
     content: " *";
     display: inline;
