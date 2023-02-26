@@ -1,5 +1,5 @@
 <script>
-  import CheckOutlineIcon from '$lib/icons/CheckOutlineIcon.svelte'
+  import CheckOutlineIcon from "$lib/icons/CheckOutlineIcon.svelte"
 </script>
 
 <div class="rounded-md bg-green-50 p-4">

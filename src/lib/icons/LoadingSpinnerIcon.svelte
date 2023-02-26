@@ -1,16 +1,16 @@
 <script>
-  import { twMerge } from 'tailwind-merge'
+  import { twMerge } from "tailwind-merge"
 
-  export let color = 'blue' // blue, red, green, yellow, gray
+  export let color = `blue` // blue, red, green, yellow, gray
 </script>
 
 <svg
   class={twMerge(`h-5 w-5 animate-spin`, $$props.class)}
-  class:text-blue-500={color === 'blue'}
-  class:text-red-500={color === 'red'}
-  class:text-green-500={color === 'green'}
-  class:text-yellow-500={color === 'yellow'}
-  class:text-gray-500={color === 'gray'}
+  class:text-blue-500={color === `blue`}
+  class:text-red-500={color === `red`}
+  class:text-green-500={color === `green`}
+  class:text-yellow-500={color === `yellow`}
+  class:text-gray-500={color === `gray`}
   xmlns="http://www.w3.org/2000/svg"
   fill="none"
   viewBox="0 0 24 24"

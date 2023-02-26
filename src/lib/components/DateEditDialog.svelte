@@ -1,39 +1,40 @@
 <script>
   export let dialog
   export let isInline = false // if true, will not show border and label
-  export let type = 'datetime' // date, datetime, time
-  export let color = 'blue' // blue, red, green, yellow, gray
-  export let name = 'fieldName'
+  export let type = `datetime` // date, datetime, time
+  export let color = `blue` // blue, red, green, yellow, gray
+  export let name = `fieldName`
   export let label = name // use name if label is not provided
-  export let placeholder = ''
+  export let placeholder = ``
   export let isDisabled = false
   export let isRequired = false
   export let isTouched = false
-  export let error = ''
-  export let serverError = ''
-  export let value = ''
+  export let error = ``
+  export let serverError = ``
+  export let value = ``
   export let isLoading = false
-  export let inputClass = ''
-  export let displayClass = ''
+  export let inputClass = ``
+  export let displayClass = ``
 
-  import { createEventDispatcher } from 'svelte'
-  import { twMerge } from 'tailwind-merge'
+  import { createEventDispatcher } from "svelte"
+  import { twMerge } from "tailwind-merge"
 
-  import { DateInput, FormDialog, Button } from '$lib'
-  import PencilSquareIcon from '$lib/icons/PencilSquareIcon.svelte'
-  import colors from '$lib/utils/colors'
+  import { FormDialog, Button } from "$lib"
+  import DateInputInline from "./DateInputInline.svelte"
+  import PencilSquareIcon from "$lib/icons/PencilSquareIcon.svelte"
+  import colors from "$lib/utils/colors"
 
   const colorObject = colors[color]
   const style = Object.entries({
-    '--text-color': colorObject['900'],
-    '--normal-ring': `0 0 0 1px ${colorObject['300']}`
+    "--text-color": colorObject[`900`],
+    "--normal-ring": `0 0 0 1px ${colorObject[`300`]}`
   })
     .map(([key, value]) => `${key}: ${value}`)
-    .join(';')
+    .join(`;`)
 
-  let classes = 'relative flex h-fit items-center justify-between gap-2 rounded-md'
+  let classes = `relative flex h-fit items-center justify-between gap-2 rounded-md`
   if (!isInline) {
-    classes = twMerge(classes, 'wrapper border shadow-sm px-3 py-3')
+    classes = twMerge(classes, `wrapper border shadow-sm px-3 py-3`)
   }
   classes = twMerge(classes, $$props.class)
 
@@ -42,7 +43,7 @@
   const dispatch = createEventDispatcher()
 
   const onClose = () => {
-    dispatch('close')
+    dispatch(`close`)
     dialog.hide()
   }
 </script>
@@ -60,15 +61,15 @@
     >
   {/if}
   <slot>
-    <span class={twMerge('px-1 text-sm', displayClass)}>
+    <span class={twMerge(`px-1 text-sm`, displayClass)}>
       {#if value}
-        {#if type === 'date'}
+        {#if type === `date`}
           {new Date(value).toISOString().slice(0, 10)}
-        {:else if type === 'datetime'}
+        {:else if type === `datetime`}
           {new Date(value).toISOString().slice(0, 10)},
-          {new Date(value).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
+          {new Date(value).toLocaleTimeString(`en-US`, { hour: `numeric`, minute: `numeric` })}
         {:else}
-          {new Date(value).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}
+          {new Date(value).toLocaleTimeString(`en-US`, { hour: `numeric`, minute: `numeric` })}
         {/if}
       {:else}
         -
@@ -93,7 +94,7 @@
   on:submit
 >
   <div class="flex flex-col gap-8">
-    <DateInput
+    <DateInputInline
       isInline
       on:change
       on:keyup
@@ -107,8 +108,8 @@
       {isRequired}
       {placeholder}
       options={{
-        enableTime: type === 'datetime' || type === 'time',
-        noCalendar: type === 'time'
+        enableTime: type === `datetime` || type === `time`,
+        noCalendar: type === `time`
       }}
       {inputClass}
     />
@@ -126,7 +127,7 @@
 
   .label.isRequired:after {
     color: #e32;
-    content: ' *';
+    content: " *";
     display: isInline;
   }
 </style>

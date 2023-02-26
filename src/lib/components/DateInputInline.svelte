@@ -1,5 +1,4 @@
 <script>
-  export let type = `text` // text, email, password, number, tel, url
   export let color = `blue` // blue, red, green, yellow, gray
   export let name = `fieldName`
   export let label = name // use name if label is not provided
@@ -8,16 +7,19 @@
   export let isTouched = false
   export let error = ``
   export let value = ``
-  export let mask = null
+  export let options = {}
+  export let isInline = false
   export let inputClass = ``
 
-  import { twMerge } from "tailwind-merge"
-  import { stopTyping } from "$lib/utils/stopTyping.js"
-  import { imask } from "@imask/svelte"
+  import { onMount } from "svelte"
+  import { createEventDispatcher } from "svelte"
 
+  import flatpickr from "flatpickr"
+  import { twMerge } from "tailwind-merge"
+
+  import { Button } from "$lib"
+  import XMarkIcon from "$lib/icons/XMarkIcon.svelte"
   import ExclamationCircleIcon from "$lib/icons/ExclamationCircleIcon.svelte"
-  import EyeIcon from "$lib/icons/EyeIcon.svelte"
-  import EyeSlashIcon from "$lib/icons/EyeSlashIcon.svelte"
   import colors from "$lib/utils/colors"
 
   const uniqueId = `fieldName-${Math.random()}`
@@ -30,8 +32,7 @@
     "--normal-ring-focus": `0 0 0 2px ${colorObject[`600`]}`,
     "--error-ring-focus": `0 0 0 2px ${colors[`red`][`600`]}`,
     "--text-color": colorObject[`900`],
-    "--error-text-color": colors[`red`][`600`],
-    "--button-color": colorObject[`500`]
+    "--error-text-color": colors[`red`][`600`]
   })
     .map(([key, value]) => `${key}: ${value}`)
     .join(`;`)
@@ -41,63 +42,67 @@
     $$props.class
   )
 
-  function typeAction(node) {
-    node.type = type
+  onMount(() => {
+    flatpickr(inputRef, {
+      defaultDate: value,
+      inline: !!isInline,
+      static: !isInline,
+      ...options
+    })
+  })
+
+  $: if (value !== undefined && value !== null && inputRef) {
+    inputRef._flatpickr.setDate(value)
+  }
+
+  const dispatch = createEventDispatcher()
+
+  const onClear = () => {
+    value = null
+    inputRef._flatpickr.setDate(null)
+    dispatch(`clear`)
   }
 </script>
 
-<div {style} class={classes} class:error>
+<svelte:head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+</svelte:head>
+
+<div {style} class={classes} class:error class:w-full={isInline}>
   <label
     for={uniqueId}
     class="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
-    class:isRequired
+    class:isRequired><slot name="label">{label}</slot></label
   >
-    <slot name="label">{label}</slot>
-  </label>
-  <div class="relative flex items-center justify-between">
+  <div class="relative flex items-center justify-between gap-2" class:flex-col={isInline}>
     <input
-      use:imask={mask ? { mask } : null}
-      use:stopTyping
-      on:stopTyping
-      use:typeAction
-      bind:this={inputRef}
       id={uniqueId}
-      required={isRequired}
       {name}
+      bind:this={inputRef}
+      type="text"
+      class={twMerge(`w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
+      class:text-center={isInline}
+      {placeholder}
       on:change
       on:keyup|trusted
-      bind:value
-      class={twMerge(`block w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
-      {placeholder}
     />
 
-    {#if type === `password`}
-      <button
-        tabindex="-1"
-        type="button"
-        class="mr-1 block text-sm font-medium text-gray-700"
-        on:click={() => {
-          inputRef.type = inputRef.type === `password` ? `text` : `password`
-        }}
-      >
-        {#if inputRef && inputRef.type === `text`}
-          <EyeIcon />
-        {:else}
-          <EyeSlashIcon />
-        {/if}
-      </button>
+    {#if inputRef?.value}
+      <Button {color} variant="ghost" on:click={onClear} class={!isInline ? `p-0` : ``}>
+        <XMarkIcon />
+        <span class:sr-only={!isInline}>Clear</span>
+      </Button>
     {/if}
 
     <slot />
 
     {#if error}
-      <div id="error" class="inset-y-0 right-0 flex items-center">
-        <ExclamationCircleIcon class="text-red-500" />
-      </div>
+      <ExclamationCircleIcon class="text-red-500" />
     {/if}
   </div>
+
   {#if error && isTouched}
-    <p class="mt-2 text-xs text-red-600" id="{label}-error">
+    <p class="mt-2 text-xs text-red-600">
       {error}
     </p>
   {/if}
@@ -129,14 +134,18 @@
   label.isRequired:after {
     color: #e32;
     content: " *";
-    display: isInline;
-  }
-
-  button {
-    color: var(--button-color);
+    display: inline;
   }
 
   input:focus {
     box-shadow: none;
+  }
+
+  :global(.flatpickr-wrapper) {
+    width: 100%;
+  }
+
+  :global(.flatpickr-calendar) {
+    box-shadow: none !important;
   }
 </style>

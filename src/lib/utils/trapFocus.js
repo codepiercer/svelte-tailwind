@@ -1,6 +1,6 @@
 let trapFocusList = []
 
-if (typeof window !== 'undefined') {
+if (typeof window !== `undefined`) {
   const isNext = (event) => event.keyCode === 9 && !event.shiftKey
   const isPrevious = (event) => event.keyCode === 9 && event.shiftKey
   const trapFocusListener = (event) => {
@@ -16,7 +16,7 @@ if (typeof window !== 'undefined') {
     }
 
     const focusable = parentNode.querySelectorAll(
-      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]'
+      `a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]`
     )
     const first = focusable[0]
     const last = focusable[focusable.length - 1]
@@ -29,7 +29,7 @@ if (typeof window !== 'undefined') {
     }
   }
 
-  document.addEventListener('keydown', trapFocusListener)
+  document.addEventListener(`keydown`, trapFocusListener)
 }
 
 export default function trapFocus(node) {

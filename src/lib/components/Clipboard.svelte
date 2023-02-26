@@ -1,9 +1,9 @@
 <script>
-  import { tick } from 'svelte'
-  import { createEventDispatcher } from 'svelte'
+  import { tick } from "svelte"
+  import { createEventDispatcher } from "svelte"
 
-  import Button from './Button.svelte'
-  import ClipboardDocumentIcon from '../icons/ClipboardDocumentIcon.svelte'
+  import Button from "./Button.svelte"
+  import ClipboardDocumentIcon from "../icons/ClipboardDocumentIcon.svelte"
 
   export let text
 
@@ -21,7 +21,7 @@
 
     await tick()
     textarea.blur()
-    dispatch('copied')
+    dispatch(`copied`)
   }
 </script>
 

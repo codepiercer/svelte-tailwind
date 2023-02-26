@@ -1,13 +1,13 @@
 <script>
   export let dialog
-  export let size = 'md'
+  export let size = `md`
   export let closeOnOverlayClick = false
   export let closeOnEscape = true
 
-  import { onMount } from 'svelte'
-  import { createEventDispatcher } from 'svelte'
+  import { onMount } from "svelte"
+  import { createEventDispatcher } from "svelte"
 
-  import { twMerge } from 'tailwind-merge'
+  import { twMerge } from "tailwind-merge"
 
   let isOpen = false
 
@@ -17,9 +17,9 @@
       // focus the first tabbable element
       const keyboardfocusableElements = [
         ...dialog.querySelectorAll(
-          'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+          `a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])`
         )
-      ].filter((el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'))
+      ].filter((el) => !el.hasAttribute(`disabled`) && !el.getAttribute(`aria-hidden`))
       const firstElement = keyboardfocusableElements.at(0)
       if (firstElement) {
         firstElement.focus()
@@ -35,16 +35,16 @@
     let scrollX
     dialog.show = () => {
       dialog.showModal()
-      dialog.addEventListener('keydown', trapFocus)
+      dialog.addEventListener(`keydown`, trapFocus)
       // save the current scroll position
       scrollY = document.documentElement.scrollTop
       scrollX = document.documentElement.scrollLeft
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = `hidden`
       isOpen = true
     }
     dialog.hide = () => {
-      dialog.removeEventListener('keydown', trapFocus)
-      document.body.style.overflow = 'auto'
+      dialog.removeEventListener(`keydown`, trapFocus)
+      document.body.style.overflow = `auto`
       // scroll to the previous position
       if (scrollY) document.documentElement.scrollTop = scrollY
       if (scrollX) document.documentElement.scrollLeft = scrollX
@@ -57,7 +57,7 @@
   const onDialogClick = (e) => {
     if (closeOnOverlayClick && e.target === e.currentTarget) {
       dialog.hide()
-      dispatch('closeOnOverlay')
+      dispatch(`closeOnOverlay`)
     }
   }
 
@@ -65,14 +65,14 @@
   const trapFocus = (e) => {
     const keyboardfocusableElements = [
       ...dialog.querySelectorAll(
-        'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+        `a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])`
       )
-    ].filter((el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'))
+    ].filter((el) => !el.hasAttribute(`disabled`) && !el.getAttribute(`aria-hidden`))
 
     const firstElement = keyboardfocusableElements.at(0)
     const lastElement = keyboardfocusableElements.at(-1)
 
-    if (e.key === 'Tab') {
+    if (e.key === `Tab`) {
       const tabForwards = !e.shiftKey && document.activeElement === lastElement
       const tabBackwards = e.shiftKey && document.activeElement === firstElement
 
@@ -88,7 +88,7 @@
       }
     }
     // check closeOnEscape prop
-    if (!closeOnEscape && e.key === 'Escape') {
+    if (!closeOnEscape && e.key === `Escape`) {
       e.preventDefault()
     }
   }
@@ -100,18 +100,18 @@
   on:click={onDialogClick}
   on:close
   class="w-[96%] rounded-lg border-none p-0 shadow-lg"
-  class:max-w-xs={size === 'xs'}
-  class:max-w-sm={size === 'sm'}
-  class:max-w-md={size === 'md'}
-  class:max-w-lg={size === 'lg'}
-  class:max-w-xl={size === 'xl'}
-  class:max-w-2xl={size === '2xl'}
-  class:max-w-3xl={size === '3xl'}
-  class:max-w-4xl={size === '4xl'}
-  class:max-w-5xl={size === '5xl'}
-  class:max-w-6xl={size === '6xl'}
-  class:max-w-7xl={size === '7xl'}
-  class:max-w-[90%]={size === 'full'}
+  class:max-w-xs={size === `xs`}
+  class:max-w-sm={size === `sm`}
+  class:max-w-md={size === `md`}
+  class:max-w-lg={size === `lg`}
+  class:max-w-xl={size === `xl`}
+  class:max-w-2xl={size === `2xl`}
+  class:max-w-3xl={size === `3xl`}
+  class:max-w-4xl={size === `4xl`}
+  class:max-w-5xl={size === `5xl`}
+  class:max-w-6xl={size === `6xl`}
+  class:max-w-7xl={size === `7xl`}
+  class:max-w-[90%]={size === `full`}
 >
   {#if isOpen}
     {#if $$slots.header}
@@ -121,7 +121,7 @@
       </div>
     {/if}
     <!-- main content of dialog -->
-    <div class={twMerge('flex flex-1 flex-col overflow-y-auto p-4', $$props.class)}>
+    <div class={twMerge(`flex flex-1 flex-col overflow-y-auto p-4`, $$props.class)}>
       <slot name="content" />
     </div>
     {#if $$slots.footer}

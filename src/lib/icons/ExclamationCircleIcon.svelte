@@ -1,10 +1,10 @@
 <script>
-  import { twMerge } from 'tailwind-merge'
+  import { twMerge } from "tailwind-merge"
 </script>
 
 <!-- Heroicon name: mini/exclamation-circle -->
 <svg
-  class={twMerge('h-5 w-5', $$props.class)}
+  class={twMerge(`h-5 w-5`, $$props.class)}
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 20 20"
   fill="currentColor"

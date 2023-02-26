@@ -1,37 +1,37 @@
 <script>
-  export let color = 'blue' // blue, red, green, yellow, gray
-  export let name = 'fieldName'
+  export let color = `blue` // blue, red, green, yellow, gray
+  export let name = `fieldName`
   export let label = name // use name if label is not provided
-  export let placeholder = ''
+  export let placeholder = ``
   export let isRequired = false
   export let isTouched = false
-  export let error = ''
-  export let value = ''
-  export let inputClass = ''
+  export let error = ``
+  export let value = ``
+  export let inputClass = ``
 
-  import { twMerge } from 'tailwind-merge'
-  import { stopTyping } from '$lib/utils/stopTyping.js'
+  import { twMerge } from "tailwind-merge"
+  import { stopTyping } from "$lib/utils/stopTyping.js"
 
-  import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
-  import colors from '$lib/utils/colors'
+  import ExclamationCircleIcon from "$lib/icons/ExclamationCircleIcon.svelte"
+  import colors from "$lib/utils/colors"
 
   const uniqueId = `dropdown-${Math.random()}`
 
   const colorObject = colors[color]
   const style = Object.entries({
-    '--border-color': colorObject['300'],
-    '--error-border-color': colors['red']['500'],
-    '--normal-ring-focus': `0 0 0 2px ${colorObject['600']}`,
-    '--error-ring-focus': `0 0 0 2px ${colors['red']['600']}`,
-    '--text-color': colorObject['900'],
-    '--error-text-color': colors['red']['600'],
-    '--button-color': colorObject['500']
+    "--border-color": colorObject[`300`],
+    "--error-border-color": colors[`red`][`500`],
+    "--normal-ring-focus": `0 0 0 2px ${colorObject[`600`]}`,
+    "--error-ring-focus": `0 0 0 2px ${colors[`red`][`600`]}`,
+    "--text-color": colorObject[`900`],
+    "--error-text-color": colors[`red`][`600`],
+    "--button-color": colorObject[`500`]
   })
     .map(([key, value]) => `${key}: ${value}`)
-    .join(';')
+    .join(`;`)
 
   const classes = twMerge(
-    'relative rounded-md border px-4 py-3 shadow-sm h-fit w-auto wrapper',
+    `relative rounded-md border px-4 py-3 shadow-sm h-fit w-auto wrapper`,
     $$props.class
   )
 </script>
@@ -53,7 +53,7 @@
       on:change
       on:keyup|trusted
       bind:value
-      class={twMerge('block w-full border-0 p-0 text-sm text-gray-900', inputClass)}
+      class={twMerge(`block w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
       {placeholder}
     />
 
@@ -95,7 +95,7 @@
 
   label.isRequired:after {
     color: #e32;
-    content: ' *';
+    content: " *";
     display: isInline;
   }
 

@@ -19,20 +19,20 @@
     Tooltip,
     ToggleEditDialog,
     ConfirmationDialog
-  } from '$lib'
-  import ChevronDownIcon from '$lib/icons/ChevronDownIcon.svelte'
-  import PencilSquareIcon from '$lib/icons/PencilSquareIcon.svelte'
-  import TrashIcon from '$lib/icons/TrashIcon.svelte'
-  import PlusIcon from '$lib/icons/PlusIcon.svelte'
-  import ClipboardDocumentIcon from '$lib/icons/ClipboardDocumentIcon.svelte'
+  } from "$lib"
+  import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte"
+  import PencilSquareIcon from "$lib/icons/PencilSquareIcon.svelte"
+  import TrashIcon from "$lib/icons/TrashIcon.svelte"
+  import PlusIcon from "$lib/icons/PlusIcon.svelte"
+  import ClipboardDocumentIcon from "$lib/icons/ClipboardDocumentIcon.svelte"
 
-  import SelectInputFetchData from './components/SelectInputFetchData.svelte'
+  import SelectInputFetchData from "./components/SelectInputFetchData.svelte"
 
-  import { createForm } from 'svelte-forms-lib'
-  import * as yup from 'yup'
-  import { createMutation } from '@tanstack/svelte-query'
-  import fakeFetch from '$lib/utils/fakeFetch'
-  import { successToast } from '../../utils/toast'
+  import { createForm } from "svelte-forms-lib"
+  import * as yup from "yup"
+  import { createMutation } from "@tanstack/svelte-query"
+  import fakeFetch from "$lib/utils/fakeFetch"
+  import { successToast } from "../../utils/toast"
 
   let dialog
   let formDialog
@@ -44,7 +44,7 @@
 
   const sampleMutation = createMutation(fakeFetch, {
     onSuccess: () => {
-      successToast('Successfully edited something')
+      successToast(`Successfully edited something`)
       setTimeout(() => {
         onClose()
       })
@@ -54,9 +54,9 @@
   const { form, errors, touched, handleChange, handleReset, handleSubmit } = createForm({
     validationSchema: yup.object().shape({
       fullName: yup.string().required().min(3),
-      age: yup.number().typeError('Age must be a number').required().min(18),
-      dob: yup.date().typeError('dob must be a date').required(),
-      createdAt: yup.date().typeError('createdAt must be a date').required(),
+      age: yup.number().typeError(`Age must be a number`).required().min(18),
+      dob: yup.date().typeError(`dob must be a date`).required(),
+      createdAt: yup.date().typeError(`createdAt must be a date`).required(),
       toggle: yup.boolean().required(),
       notes: yup.string().min(3),
       password: yup.string().required().min(3),
@@ -64,15 +64,15 @@
         .string()
         .required()
         .min(3)
-        .oneOf([yup.ref('password'), null], 'Passwords must match'),
+        .oneOf([yup.ref(`password`), null], `Passwords must match`),
       selectValue: yup.string().required(),
       editableText: yup.string().required().min(3)
     }),
     initialValues: {
       dob: new Date(),
       createdAt: new Date(),
-      selectValue: 'apple',
-      editableText: 'Editable text'
+      selectValue: `apple`,
+      editableText: `Editable text`
     },
     onSubmit: () => {
       $sampleMutation.mutate()
@@ -114,25 +114,53 @@
     <TextInput
       name="fullName"
       label="CC Number"
-      isTouched={$touched['fullName']}
-      value={$form['fullName']}
-      error={$errors['fullName']}
+      isTouched={$touched[`fullName`]}
+      value={$form[`fullName`]}
+      error={$errors[`fullName`]}
       on:change={handleChange}
       on:keyup={handleChange}
       class="max-w-full"
       mask="0000-0000-0000-0000"
     />
     <DateInput
+      isInline
+      isRequired
       name="dob"
+      type="date"
       label="Date of Birth"
-      isTouched={$touched['dob']}
-      value={$form['dob']}
-      error={$errors['dob']}
+      isTouched={$touched[`dob`]}
+      value={$form[`dob`]}
+      error={$errors[`dob`]}
       on:change={handleChange}
-    />
+    >
+      <DropdownMenu
+        let:menuItemProps
+        let:triggerProps
+        color="green"
+        let:onOpen
+        placement="bottom-left"
+      >
+        <Button
+          slot="trigger"
+          on:click={onOpen}
+          color="green"
+          variant="outlined"
+          class="p-0"
+          {...triggerProps}
+        >
+          <ChevronDownIcon />
+        </Button>
+        <div slot="content" class="min-w-[12rem]">
+          <div class="mb-1 divide-y divide-gray-100" role="none">
+            <a {...menuItemProps} href="/">Home</a>
+            <a href="/playground" {...menuItemProps}>Playground</a>
+          </div>
+        </div>
+      </DropdownMenu>
+    </DateInput>
     <Button
       on:click={() => {
-        $form['dob'] = ''
+        $form[`dob`] = ``
       }}
     >
       today date
@@ -140,9 +168,9 @@
 
     <TextInput
       name="fullName"
-      isTouched={$touched['fullName']}
-      value={$form['fullName']}
-      error={$errors['fullName']}
+      isTouched={$touched[`fullName`]}
+      value={$form[`fullName`]}
+      error={$errors[`fullName`]}
       on:keyup={handleChange}
       color="green"
       placeholder="red"
@@ -178,18 +206,18 @@
     <Clipboard text="Your Text Need to Copy" />
     <ToggleInput
       name="toggle"
-      isTouched={$touched['toggle']}
-      value={$form['toggle']}
-      error={$errors['toggle']}
+      isTouched={$touched[`toggle`]}
+      value={$form[`toggle`]}
+      error={$errors[`toggle`]}
       on:change={handleChange}
       on:keyup={handleChange}
       color="yellow"
     />
     <ToggleInput
       name="toggle"
-      isTouched={$touched['toggle']}
-      value={$form['toggle']}
-      error={$errors['toggle']}
+      isTouched={$touched[`toggle`]}
+      value={$form[`toggle`]}
+      error={$errors[`toggle`]}
       on:change={handleChange}
       on:keyup={handleChange}
       color="green"
@@ -222,9 +250,9 @@
 
     <TextInput
       name="fullName"
-      isTouched={$touched['fullName']}
-      value={$form['fullName']}
-      error={$errors['fullName']}
+      isTouched={$touched[`fullName`]}
+      value={$form[`fullName`]}
+      error={$errors[`fullName`]}
       on:change={handleChange}
       on:keyup={handleChange}
       isRequired
@@ -232,9 +260,9 @@
     />
     <TextInput
       name="fullName"
-      isTouched={$touched['fullName']}
-      value={$form['fullName']}
-      error={$errors['fullName']}
+      isTouched={$touched[`fullName`]}
+      value={$form[`fullName`]}
+      error={$errors[`fullName`]}
       on:change={handleChange}
       on:keyup={handleChange}
     />
@@ -245,8 +273,8 @@
     >
 
     <SelectInput
-      value={$form['selectValue']}
-      error={$errors['selectValue']}
+      value={$form[`selectValue`]}
+      error={$errors[`selectValue`]}
       on:select={({ detail }) => {
         $form[detail.name] = detail.option.value
       }}
@@ -257,21 +285,21 @@
       isRequired
       label="Select menu"
       options={[
-        { label: 'Apple', value: 'apple' },
-        { label: 'Banana', value: 'banana' },
-        { label: 'Orange', value: 'orange' },
-        { label: 'Pineapple', value: 'pineapple' },
-        { label: 'Strawberry', value: 'strawberry' },
-        { label: 'Watermelon', value: 'watermelon' },
-        { label: 'Monkey', value: 'monkey' },
-        { label: 'Money', value: 'money' },
-        { label: 'Dog', value: 'dog' }
+        { label: `Apple`, value: `apple` },
+        { label: `Banana`, value: `banana` },
+        { label: `Orange`, value: `orange` },
+        { label: `Pineapple`, value: `pineapple` },
+        { label: `Strawberry`, value: `strawberry` },
+        { label: `Watermelon`, value: `watermelon` },
+        { label: `Monkey`, value: `monkey` },
+        { label: `Money`, value: `money` },
+        { label: `Dog`, value: `dog` }
       ]}
     />
 
     <SelectInputEditDialog
-      value={$form['selectValue']}
-      error={$errors['selectValue']}
+      value={$form[`selectValue`]}
+      error={$errors[`selectValue`]}
       isLoading={$sampleMutation.isLoading}
       on:submit={handleSubmit}
       class="max-w-full"
@@ -280,15 +308,15 @@
       isRequired
       label="Select menu"
       options={[
-        { label: 'Apple', value: 'apple' },
-        { label: 'Banana', value: 'banana' },
-        { label: 'Orange', value: 'orange' },
-        { label: 'Pineapple', value: 'pineapple' },
-        { label: 'Strawberry', value: 'strawberry' },
-        { label: 'Watermelon', value: 'watermelon' },
-        { label: 'Monkey', value: 'monkey' },
-        { label: 'Money', value: 'money' },
-        { label: 'Dog', value: 'dog' }
+        { label: `Apple`, value: `apple` },
+        { label: `Banana`, value: `banana` },
+        { label: `Orange`, value: `orange` },
+        { label: `Pineapple`, value: `pineapple` },
+        { label: `Strawberry`, value: `strawberry` },
+        { label: `Watermelon`, value: `watermelon` },
+        { label: `Monkey`, value: `monkey` },
+        { label: `Money`, value: `money` },
+        { label: `Dog`, value: `dog` }
       ]}
       mutation={sampleMutation}
       bind:dialog={editMenuDialog}
@@ -298,9 +326,9 @@
       isInline
       name="editableText"
       color="green"
-      value={$form['editableText']}
-      error={$errors['editableText']}
-      isTouched={$touched['editableText']}
+      value={$form[`editableText`]}
+      error={$errors[`editableText`]}
+      isTouched={$touched[`editableText`]}
       on:change={handleChange}
       on:keyup={handleChange}
       isLoading={$sampleMutation.isLoading}
@@ -312,9 +340,9 @@
       isInline
       color="green"
       name="editableText"
-      value={$form['editableText']}
-      error={$errors['editableText']}
-      isTouched={$touched['editableText']}
+      value={$form[`editableText`]}
+      error={$errors[`editableText`]}
+      isTouched={$touched[`editableText`]}
       on:change={handleChange}
       on:keyup={handleChange}
       isLoading={$sampleMutation.isLoading}
@@ -325,9 +353,9 @@
     <DateEditDialog
       type="datetime"
       name="createdAt"
-      value={$form['createdAt']}
-      error={$errors['createdAt']}
-      isTouched={$touched['createdAt']}
+      value={$form[`createdAt`]}
+      error={$errors[`createdAt`]}
+      isTouched={$touched[`createdAt`]}
       on:change={handleChange}
       on:keyup={handleChange}
       isLoading={$sampleMutation.isLoading}
@@ -337,9 +365,9 @@
     />
     <TextareaEditDialog
       name="editableText"
-      value={$form['editableText']}
-      error={$errors['editableText']}
-      isTouched={$touched['editableText']}
+      value={$form[`editableText`]}
+      error={$errors[`editableText`]}
+      isTouched={$touched[`editableText`]}
       on:change={handleChange}
       on:keyup={handleChange}
       isLoading={$sampleMutation.isLoading}
@@ -350,9 +378,9 @@
     <ToggleEditDialog
       name="toggle"
       class="max-w-xs"
-      value={$form['toggle']}
-      error={$errors['toggle']}
-      isTouched={$touched['toggle']}
+      value={$form[`toggle`]}
+      error={$errors[`toggle`]}
+      isTouched={$touched[`toggle`]}
       on:change={handleChange}
       on:keyup={handleChange}
       isLoading={$sampleMutation.isLoading}
@@ -364,9 +392,9 @@
       isInline
       class="max-w-xs"
       name="toggle"
-      value={$form['toggle']}
-      error={$errors['toggle']}
-      isTouched={$touched['toggle']}
+      value={$form[`toggle`]}
+      error={$errors[`toggle`]}
+      isTouched={$touched[`toggle`]}
       on:change={handleChange}
       on:keyup={handleChange}
       isLoading={$sampleMutation.isLoading}
@@ -435,9 +463,9 @@
       type="password"
       placeholder="password"
       class="max-w-full"
-      isTouched={$touched['password']}
-      value={$form['password']}
-      error={$errors['password']}
+      isTouched={$touched[`password`]}
+      value={$form[`password`]}
+      error={$errors[`password`]}
       on:change={handleChange}
       on:keyup={handleChange}
     />
@@ -445,18 +473,18 @@
       name="age"
       type="number"
       placeholder="number"
-      isTouched={$touched['age']}
-      value={$form['age']}
-      error={$errors['age']}
+      isTouched={$touched[`age`]}
+      value={$form[`age`]}
+      error={$errors[`age`]}
       on:change={handleChange}
       on:keyup={handleChange}
     />
     <TextareaInput
       name="notes"
       placeholder="textarea"
-      isTouched={$touched['notes']}
-      value={$form['notes']}
-      error={$errors['notes']}
+      isTouched={$touched[`notes`]}
+      value={$form[`notes`]}
+      error={$errors[`notes`]}
       on:change={handleChange}
       on:keyup={handleChange}
     />
@@ -505,14 +533,14 @@
       name="selectValue"
       label="Assigned To"
       isRequired
-      value={$form['selectValue'] || ''}
+      value={$form[`selectValue`] || ``}
       on:select={({ detail }) => {
-        $form['selectValue'] = detail.option.value
+        $form[`selectValue`] = detail.option.value
       }}
     />
     <SelectInput
-      value={$form['selectValue']}
-      error={$errors['selectValue']}
+      value={$form[`selectValue`]}
+      error={$errors[`selectValue`]}
       on:select={({ detail }) => {
         $form[detail.name] = detail.option.value
       }}
@@ -523,24 +551,24 @@
       isRequired
       label="Select menu"
       options={[
-        { label: 'Apple', value: 'apple' },
-        { label: 'Banana', value: 'banana' },
-        { label: 'Orange', value: 'orange' },
-        { label: 'Pineapple', value: 'pineapple' },
-        { label: 'Strawberry', value: 'strawberry' },
-        { label: 'Watermelon', value: 'watermelon' },
-        { label: 'Monkey', value: 'monkey' },
-        { label: 'Money', value: 'money' },
-        { label: 'Dog', value: 'dog' }
+        { label: `Apple`, value: `apple` },
+        { label: `Banana`, value: `banana` },
+        { label: `Orange`, value: `orange` },
+        { label: `Pineapple`, value: `pineapple` },
+        { label: `Strawberry`, value: `strawberry` },
+        { label: `Watermelon`, value: `watermelon` },
+        { label: `Monkey`, value: `monkey` },
+        { label: `Money`, value: `money` },
+        { label: `Dog`, value: `dog` }
       ]}
     />
     <TextInput
       type="password"
       label="Password"
       name="password"
-      isTouched={$touched['password']}
-      value={$form['password']}
-      error={$errors['password']}
+      isTouched={$touched[`password`]}
+      value={$form[`password`]}
+      error={$errors[`password`]}
       on:change={handleChange}
       on:keyup={handleChange}
       isRequired
@@ -549,9 +577,9 @@
     <DateInput
       name="dob"
       label="Date of Birth"
-      isTouched={$touched['dob']}
-      value={$form['dob']}
-      error={$errors['dob']}
+      isTouched={$touched[`dob`]}
+      value={$form[`dob`]}
+      error={$errors[`dob`]}
       on:change={handleChange}
     />
 
@@ -559,9 +587,9 @@
       type="password"
       label="Confirm Password"
       name="confirmPassword"
-      isTouched={$touched['confirmPassword']}
-      value={$form['confirmPassword']}
-      error={$errors['confirmPassword']}
+      isTouched={$touched[`confirmPassword`]}
+      value={$form[`confirmPassword`]}
+      error={$errors[`confirmPassword`]}
       on:change={handleChange}
       on:keyup={handleChange}
       isRequired

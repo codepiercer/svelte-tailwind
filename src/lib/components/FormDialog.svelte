@@ -1,21 +1,21 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher } from "svelte"
 
-  import Button from './Button.svelte'
-  import ErrorAlert from './ErrorAlert.svelte'
-  import Dialog from './Dialog.svelte'
+  import Button from "./Button.svelte"
+  import ErrorAlert from "./ErrorAlert.svelte"
+  import Dialog from "./Dialog.svelte"
 
   const uniqueId = `dropdown-${Math.random()}`
   export let dialog
-  export let title = 'Form Dialog'
-  export let error = ''
+  export let title = `Form Dialog`
+  export let error = ``
   export let isLoading = false
   export let isDisabled = false
 
   const dispatch = createEventDispatcher()
 
   const onClose = () => {
-    dispatch('close')
+    dispatch(`close`)
   }
 </script>
 

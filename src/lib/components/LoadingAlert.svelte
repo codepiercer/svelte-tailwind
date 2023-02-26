@@ -1,5 +1,5 @@
 <script>
-  import LoadingSpinnerIcon from '$lib/icons/LoadingSpinnerIcon.svelte'
+  import LoadingSpinnerIcon from "$lib/icons/LoadingSpinnerIcon.svelte"
 </script>
 
 <div class="rounded-md bg-yellow-50 p-4">

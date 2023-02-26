@@ -1,11 +1,11 @@
 // cycle focus on li options with keyboard up or down
-export default function trapUpDownFocus(e, selector = '', onClose) {
+export default function trapUpDownFocus(e, selector = ``, onClose) {
   // close the menu if the user presses the escape key or tabs out
-  if (e.key === 'Escape' || e.key === 'Tab') {
+  if (e.key === `Escape` || e.key === `Tab`) {
     onClose()
   }
   // we're only interested in handling up & down arrow keys
-  if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return
+  if (e.key !== `ArrowUp` && e.key !== `ArrowDown`) return
   // prevent the default behavior of scrolling the page
   e.preventDefault()
   // currently focused element (if any)
@@ -21,9 +21,9 @@ export default function trapUpDownFocus(e, selector = '', onClose) {
     newIndex = 0
     // otherwise, the currently focused element is an item in our list
   } else {
-    if (e.key === 'ArrowUp') {
+    if (e.key === `ArrowUp`) {
       newIndex = (currentIndex + items.length - 1) % items.length
-    } else if (e.key === 'ArrowDown') {
+    } else if (e.key === `ArrowDown`) {
       newIndex = (currentIndex + 1) % items.length
     }
   }

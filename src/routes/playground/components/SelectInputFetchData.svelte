@@ -1,22 +1,22 @@
 <script>
   export let name
   export let value
-  export let label = 'Select User'
+  export let label = `Select User`
   export let isRequired = false
 
-  import { SelectInput } from '$lib'
+  import { SelectInput } from "$lib"
 
-  import { createQuery } from '@tanstack/svelte-query'
+  import { createQuery } from "@tanstack/svelte-query"
 
-  const queryResult = createQuery(['FETCH_DATA'], () => {
+  const queryResult = createQuery([`FETCH_DATA`], () => {
     return [
       {
-        id: 'apple',
-        fullName: 'Apple'
+        id: `apple`,
+        fullName: `Apple`
       },
       {
-        id: 'banana',
-        fullName: 'Banana'
+        id: `banana`,
+        fullName: `Banana`
       }
     ]
   })

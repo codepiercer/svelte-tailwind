@@ -1,7 +1,7 @@
 <script>
-  export let color = 'blue' // blue, red, green, yellow, gray
-  export let name = 'fieldName'
-  export let value = ''
+  export let color = `blue` // blue, red, green, yellow, gray
+  export let name = `fieldName`
+  export let value = ``
 </script>
 
 <div class="relative flex items-center bg-white">
@@ -11,11 +11,11 @@
     disabled
     class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-default rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out"
     class:bg-gray-200={!value}
-    class:bg-blue-600={!!value && color === 'blue'}
-    class:bg-red-600={!!value && color === 'red'}
-    class:bg-green-600={!!value && color === 'green'}
-    class:bg-yellow-600={!!value && color === 'yellow'}
-    class:bg-gray-600={!!value && color === 'gray'}
+    class:bg-blue-600={!!value && color === `blue`}
+    class:bg-red-600={!!value && color === `red`}
+    class:bg-green-600={!!value && color === `green`}
+    class:bg-yellow-600={!!value && color === `yellow`}
+    class:bg-gray-600={!!value && color === `gray`}
     role="switch"
     aria-checked={!!value}
   >

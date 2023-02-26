@@ -1,5 +1,5 @@
 <script>
-  import { Button } from '$lib'
+  import { Button } from "$lib"
 </script>
 
 <main class="grid h-screen place-items-center">

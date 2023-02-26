@@ -1,42 +1,42 @@
 <script>
   export let dialog
   export let isInline = false // if true, will not show border and label
-  export let color = 'blue' // blue, red, green, yellow, gray
-  export let name = 'fieldName'
+  export let color = `blue` // blue, red, green, yellow, gray
+  export let name = `fieldName`
   export let label = name // use name if label is not provided
   export let options = [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Orange', value: 'orange' }
+    { label: `Apple`, value: `apple` },
+    { label: `Banana`, value: `banana` },
+    { label: `Orange`, value: `orange` }
   ]
   export let isDisabled = false
   export let isRequired = false
   export let isLoading = false
-  export let error = ''
-  export let serverError = ''
-  export let value = ''
-  export let inputClass = ''
-  export let displayClass = ''
+  export let error = ``
+  export let serverError = ``
+  export let value = ``
+  export let inputClass = ``
+  export let displayClass = ``
   export let hideIcon = false
 
-  import { createEventDispatcher } from 'svelte'
-  import { twMerge } from 'tailwind-merge'
+  import { createEventDispatcher } from "svelte"
+  import { twMerge } from "tailwind-merge"
 
-  import { SelectInput, FormDialog, Button } from '$lib'
-  import PencilSquareIcon from '$lib/icons/PencilSquareIcon.svelte'
-  import colors from '$lib/utils/colors'
+  import { SelectInput, FormDialog, Button } from "$lib"
+  import PencilSquareIcon from "$lib/icons/PencilSquareIcon.svelte"
+  import colors from "$lib/utils/colors"
 
   const colorObject = colors[color]
   const style = Object.entries({
-    '--text-color': colorObject['900'],
-    '--normal-ring': `0 0 0 1px ${colorObject['300']}`
+    "--text-color": colorObject[`900`],
+    "--normal-ring": `0 0 0 1px ${colorObject[`300`]}`
   })
     .map(([key, value]) => `${key}: ${value}`)
-    .join(';')
+    .join(`;`)
 
-  let classes = 'relative flex h-fit items-center justify-between gap-2 rounded-md'
+  let classes = `relative flex h-fit items-center justify-between gap-2 rounded-md`
   if (!isInline) {
-    classes = twMerge(classes, 'wrapper shadow-sm px-3 py-3')
+    classes = twMerge(classes, `wrapper shadow-sm px-3 py-3`)
   }
   classes = twMerge(classes, $$props.class)
 
@@ -46,7 +46,7 @@
 
   const onClose = () => {
     dialog.hide()
-    dispatch('close')
+    dispatch(`close`)
   }
 </script>
 
@@ -64,8 +64,8 @@
   {/if}
 
   <slot>
-    <span class={twMerge('px-1 text-sm', displayClass)}>
-      {options.find((option) => option.value === value)?.label || 'select option'}
+    <span class={twMerge(`px-1 text-sm`, displayClass)}>
+      {options.find((option) => option.value === value)?.label || `select option`}
     </span>
   </slot>
 
@@ -114,7 +114,7 @@
 
   .label.isRequired:after {
     color: #e32;
-    content: ' *';
+    content: " *";
     display: isInline;
   }
 </style>

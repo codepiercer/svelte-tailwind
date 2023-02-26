@@ -1,46 +1,46 @@
 <script>
-  export let color = 'blue' // blue, red, green, yellow, gray
-  export let name = 'fieldName'
-  export let placeholder = ''
+  export let color = `blue` // blue, red, green, yellow, gray
+  export let name = `fieldName`
+  export let placeholder = ``
   export let isRequired = false
-  export let label = 'Select menu'
+  export let label = `Select menu`
   export let isLoading = false
-  export let error = ''
-  export let value = 'apple'
+  export let error = ``
+  export let value = `apple`
   export let options = [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Orange', value: 'orange' }
+    { label: `Apple`, value: `apple` },
+    { label: `Banana`, value: `banana` },
+    { label: `Orange`, value: `orange` }
   ]
-  export let inputClass = ''
+  export let inputClass = ``
   export let hideIcon = false
 
-  import { createEventDispatcher } from 'svelte'
-  import { twMerge } from 'tailwind-merge'
-  import clickOutside from '$lib/utils/clickOutside'
+  import { createEventDispatcher } from "svelte"
+  import { twMerge } from "tailwind-merge"
+  import clickOutside from "$lib/utils/clickOutside"
 
-  import CheckOutlineIcon from '$lib/icons/CheckOutlineIcon.svelte'
-  import ChevronUpDownIcon from '$lib/icons/ChevronUpDownIcon.svelte'
-  import ExclamationCircleIcon from '$lib/icons/ExclamationCircleIcon.svelte'
-  import LoadingSpinnerIcon from '$lib/icons/LoadingSpinnerIcon.svelte'
-  import colors from '$lib/utils/colors'
+  import CheckOutlineIcon from "$lib/icons/CheckOutlineIcon.svelte"
+  import ChevronUpDownIcon from "$lib/icons/ChevronUpDownIcon.svelte"
+  import ExclamationCircleIcon from "$lib/icons/ExclamationCircleIcon.svelte"
+  import LoadingSpinnerIcon from "$lib/icons/LoadingSpinnerIcon.svelte"
+  import colors from "$lib/utils/colors"
 
   const colorObject = colors[color]
   const style = Object.entries({
-    '--border-color': colorObject['300'],
-    '--error-border-color': colors['red']['500'],
-    '--normal-ring': `0 0 0 1px ${colorObject['300']}`,
-    '--normal-ring-focus': `0 0 0 2px ${colorObject['600']}`,
-    '--error-ring-focus': `0 0 0 2px ${colors['red']['600']}`,
-    '--text-color': colorObject['900'],
-    '--error-text-color': colors['red']['600'],
-    '--button-color': colorObject['500']
+    "--border-color": colorObject[`300`],
+    "--error-border-color": colors[`red`][`500`],
+    "--normal-ring": `0 0 0 1px ${colorObject[`300`]}`,
+    "--normal-ring-focus": `0 0 0 2px ${colorObject[`600`]}`,
+    "--error-ring-focus": `0 0 0 2px ${colors[`red`][`600`]}`,
+    "--text-color": colorObject[`900`],
+    "--error-text-color": colors[`red`][`600`],
+    "--button-color": colorObject[`500`]
   })
     .map(([key, value]) => `${key}: ${value}`)
-    .join(';')
+    .join(`;`)
 
   const classes = twMerge(
-    'wrapper relative h-fit w-auto rounded-md border p-1 shadow-sm',
+    `wrapper relative h-fit w-auto rounded-md border p-1 shadow-sm`,
     $$props.class
   )
 
@@ -49,25 +49,25 @@
   let isOptionsOpen = false
   let isActive = null
 
-  $: searchValue = options.find((option) => option.value === value)?.label || ''
+  $: searchValue = options.find((option) => option.value === value)?.label || ``
 
   // add a clear option to the list
   $: if (value) {
-    if (options.find((option) => option.value === '') === undefined) {
-      options = [{ label: 'Clear', value: '' }, ...options]
+    if (options.find((option) => option.value === ``) === undefined) {
+      options = [{ label: `Clear`, value: `` }, ...options]
     }
   } else {
     // remove clear option if value is null
-    options = options.filter((option) => option.value !== '')
+    options = options.filter((option) => option.value !== ``)
   }
 
   const dispatch = createEventDispatcher()
 
   const onSelect = (option) => {
     value = option.value
-    searchValue = option.value ? option.label : ''
+    searchValue = option.value ? option.label : ``
     inputRef.focus()
-    dispatch('select', { name, option })
+    dispatch(`select`, { name, option })
     isOptionsOpen = false
   }
 
@@ -75,7 +75,7 @@
     isOptionsOpen = false
     // reset search value if no value is selected
     if (value !== null) {
-      searchValue = options.find((option) => option.value === value)?.label || ''
+      searchValue = options.find((option) => option.value === value)?.label || ``
     }
   }
 
@@ -83,14 +83,14 @@
   const onKeyDown = (e) => {
     if (!isOptionsOpen) return
     // close on escape or tab out
-    if (e.key === 'Escape' || e.key === 'Tab') {
+    if (e.key === `Escape` || e.key === `Tab`) {
       onClose()
       return
     }
     // get all li elements
-    const options = document.querySelectorAll('#options li')
+    const options = document.querySelectorAll(`#options li`)
     // cycle focus on li elements with keyboard up or down
-    if (e.key === 'ArrowDown') {
+    if (e.key === `ArrowDown`) {
       e.preventDefault()
       if (isActive === null) {
         isActive = 0
@@ -98,7 +98,7 @@
         isActive = (isActive + 1) % options.length
       }
       options[isActive] && options[isActive].focus()
-    } else if (e.key === 'ArrowUp') {
+    } else if (e.key === `ArrowUp`) {
       e.preventDefault()
       if (isActive === null) {
         isActive = 0
@@ -108,7 +108,7 @@
       options[isActive] && options[isActive].focus()
     } else {
       // focus on input on any other except Enter
-      if (e.key !== 'Enter') {
+      if (e.key !== `Enter`) {
         inputRef.focus()
       }
     }
@@ -131,21 +131,21 @@
         bind:value={searchValue}
         on:click={() => {
           isOptionsOpen = true
-          searchValue = ''
+          searchValue = ``
         }}
         on:keyup={(e) => {
-          if (e.key === 'Escape' || e.key === 'Tab') {
+          if (e.key === `Escape` || e.key === `Tab`) {
             return
           }
           if (!isOptionsOpen) {
             isOptionsOpen = true
-            searchValue = ''
+            searchValue = ``
           }
         }}
         {placeholder}
         type="text"
         class={twMerge(
-          'w-full rounded-md border-none bg-white p-0 text-sm outline-none',
+          `w-full rounded-md border-none bg-white p-0 text-sm outline-none`,
           inputClass
         )}
         role="combobox"
@@ -165,7 +165,7 @@
           type="button"
           on:click={() => {
             isOptionsOpen = true
-            searchValue = ''
+            searchValue = ``
           }}
           class="flex items-center rounded-r-md px-2 focus:outline-none"
           tabindex="-1"
@@ -209,16 +209,16 @@
                 onSelect(option)
               }}
               on:keyup={(event) => {
-                if (event.key === 'Enter') {
+                if (event.key === `Enter`) {
                   onSelect(option)
                 }
               }}
               class:text-white={isActive === idx}
-              class:bg-blue-600={color === 'blue' && isActive === idx}
-              class:bg-red-600={color === 'red' && isActive === idx}
-              class:bg-green-600={color === 'green' && isActive === idx}
-              class:bg-yellow-600={color === 'yellow' && isActive === idx}
-              class:bg-gray-600={color === 'gray' && isActive === idx}
+              class:bg-blue-600={color === `blue` && isActive === idx}
+              class:bg-red-600={color === `red` && isActive === idx}
+              class:bg-green-600={color === `green` && isActive === idx}
+              class:bg-yellow-600={color === `yellow` && isActive === idx}
+              class:bg-gray-600={color === `gray` && isActive === idx}
               class:text-gray-900={isActive !== idx}
               id={option.label}
               role="option"
@@ -231,11 +231,11 @@
                 <span
                   class="absolute inset-y-0 right-0 flex items-center pr-4 "
                   class:text-white={isActive === idx}
-                  class:text-blue-600={color === 'blue' && isActive !== idx}
-                  class:text-red-600={color === 'red' && isActive !== idx}
-                  class:text-green-600={color === 'green' && isActive !== idx}
-                  class:text-yellow-600={color === 'yellow' && isActive !== idx}
-                  class:text-gray-600={color === 'gray' && isActive !== idx}
+                  class:text-blue-600={color === `blue` && isActive !== idx}
+                  class:text-red-600={color === `red` && isActive !== idx}
+                  class:text-green-600={color === `green` && isActive !== idx}
+                  class:text-yellow-600={color === `yellow` && isActive !== idx}
+                  class:text-gray-600={color === `gray` && isActive !== idx}
                 >
                   <CheckOutlineIcon />
                 </span>
@@ -282,7 +282,7 @@
 
   .isRequired:after {
     color: #e32;
-    content: ' *';
+    content: " *";
     display: isInline;
   }
 

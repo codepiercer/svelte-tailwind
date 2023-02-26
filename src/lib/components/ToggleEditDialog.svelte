@@ -1,36 +1,36 @@
 <script>
   export let dialog
   export let isInline = false // if true, will not show border and label
-  export let color = 'blue' // blue, red, green, yellow, gray
-  export let name = 'fieldName'
+  export let color = `blue` // blue, red, green, yellow, gray
+  export let name = `fieldName`
   export let label = name // use name if label is not provided
   export let isDisabled = false
   export let isRequired = false
   export let isLoading = false
   export let isTouched = false
-  export let error = ''
-  export let serverError = ''
-  export let value = ''
+  export let error = ``
+  export let serverError = ``
+  export let value = ``
 
-  import { createEventDispatcher } from 'svelte'
-  import { twMerge } from 'tailwind-merge'
+  import { createEventDispatcher } from "svelte"
+  import { twMerge } from "tailwind-merge"
 
-  import { ToggleInput, ToggleInputReadonly, FormDialog, Button } from '$lib'
-  import PencilSquareIcon from '$lib/icons/PencilSquareIcon.svelte'
-  import colors from '$lib/utils/colors'
+  import { ToggleInput, ToggleInputReadonly, FormDialog, Button } from "$lib"
+  import PencilSquareIcon from "$lib/icons/PencilSquareIcon.svelte"
+  import colors from "$lib/utils/colors"
 
   const colorObject = colors[color]
   const style = Object.entries({
-    '--text-color': colorObject['900'],
-    '--normal-ring': `0 0 0 1px ${colorObject['600']}`,
-    '--label-length': !isInline ? label.length + 1 + (isRequired ? 1 : 0) + 'ch' : 'auto'
+    "--text-color": colorObject[`900`],
+    "--normal-ring": `0 0 0 1px ${colorObject[`600`]}`,
+    "--label-length": !isInline ? label.length + 1 + (isRequired ? 1 : 0) + `ch` : `auto`
   })
     .map(([key, value]) => `${key}: ${value}`)
-    .join(';')
+    .join(`;`)
 
-  let classes = 'relative flex h-fit p-1 items-center justify-between gap-2 rounded-md'
+  let classes = `relative flex h-fit p-1 items-center justify-between gap-2 rounded-md`
   if (!isInline) {
-    classes = twMerge(classes, 'wrapper shadow-sm px-3 py-3')
+    classes = twMerge(classes, `wrapper shadow-sm px-3 py-3`)
   }
   classes = twMerge(classes, $$props.class)
 
@@ -40,7 +40,7 @@
 
   const onClose = () => {
     dialog.hide()
-    dispatch('close')
+    dispatch(`close`)
   }
 </script>
 
@@ -102,7 +102,7 @@
 
   .label.isRequired:after {
     color: #e32;
-    content: ' *';
+    content: " *";
     display: isInline;
   }
 </style>

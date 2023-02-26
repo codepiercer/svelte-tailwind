@@ -1,24 +1,24 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher } from "svelte"
 
-  import Button from './Button.svelte'
+  import Button from "./Button.svelte"
 
-  import ErrorAlert from './ErrorAlert.svelte'
-  import Dialog from './Dialog.svelte'
+  import ErrorAlert from "./ErrorAlert.svelte"
+  import Dialog from "./Dialog.svelte"
 
   const uniqueId = `dropdown-${Math.random()}`
   export let dialog
-  export let title = 'Form Dialog'
+  export let title = `Form Dialog`
   export let mutation
 
   const dispatch = createEventDispatcher()
 
   const onConfirm = () => {
-    dispatch('confirm')
+    dispatch(`confirm`)
   }
 
   const onClose = () => {
-    dispatch('close')
+    dispatch(`close`)
   }
 </script>
 
@@ -32,7 +32,7 @@
   <div slot="footer" class="flex flex-col gap-4">
     {#if $mutation.isError}
       <ErrorAlert>
-        {$mutation?.error?.message || 'Something went wrong'}
+        {$mutation?.error?.message || `Something went wrong`}
       </ErrorAlert>
     {/if}
     <div class="flex justify-end gap-4">

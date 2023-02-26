@@ -13,20 +13,20 @@ export function stopTyping(node) {
     // (1) the debounce logic
     if (node.contains(event.target)) {
       // (2) restrict the event to the only referring node
-      node.dispatchEvent(new CustomEvent('stopTyping')) // (3) fire the event
+      node.dispatchEvent(new CustomEvent(`stopTyping`)) // (3) fire the event
     }
   }, 500)
 
   // (4) add a generic keyup event
-  document.addEventListener('keyup', handleKeyup, true)
+  document.addEventListener(`keyup`, handleKeyup, true)
   // also handle where user copies and pastes
-  document.addEventListener('paste', handleKeyup, true)
+  document.addEventListener(`paste`, handleKeyup, true)
 
   return {
     destroy() {
       // (5) cleanup on destroy
-      document.removeEventListener('keyup', handleKeyup, true)
-      document.removeEventListener('paste', handleKeyup, true)
+      document.removeEventListener(`keyup`, handleKeyup, true)
+      document.removeEventListener(`paste`, handleKeyup, true)
     }
   }
 }
