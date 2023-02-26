@@ -50,7 +50,16 @@
   let isOptionsOpen = false
   let isActive = null
 
-  $: searchValue = options.find((option) => option.value === value)?.label || ``
+  let searchValue = options.find((option) => option.value === value)?.label || ``
+
+  $: if (options.length) {
+    if (!isOptionsOpen) {
+      const initialValue = options.find((option) => option.value === value)
+      if (initialValue) {
+        searchValue = initialValue.label
+      }
+    }
+  }
 
   // add a clear option to the list
   $: if (value) {
@@ -138,6 +147,15 @@
           if (e.key === `Escape` || e.key === `Tab`) {
             return
           }
+          if (isOptionsOpen && e.key === `Enter`) {
+            const matchingOptions = options.filter((option) =>
+              option.label.toLowerCase().startsWith(searchValue.toLowerCase())
+            )
+            if (matchingOptions.length === 1) {
+              onSelect(matchingOptions[0])
+              return
+            }
+          }
           if (!isOptionsOpen) {
             isOptionsOpen = true
             searchValue = ``
@@ -186,6 +204,8 @@
         class="options absolute z-20  max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
         class:bottom-0={direction === `top`}
         class:top-0={direction === `bottom`}
+        class:mt-8={direction === `bottom`}
+        class:mb-10={direction === `top`}
         id="options"
         role="listbox"
       >
