@@ -69,7 +69,7 @@
       editableText: yup.string().required().min(3)
     }),
     initialValues: {
-      dob: `2023-02-22`,
+      dob: `2023-02-28T04:00:00.000Z`,
       createdAt: `2023-02-27T00:00:00.000`,
       selectValue: `apple`,
       editableText: `Editable text`

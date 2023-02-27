@@ -1,10 +1,23 @@
 export const formatDate = (dateTime) => {
   // Format to YYYY-MM-DD
-  const dateTimeObject = new Date(dateTime + `T00:00:00`)
+  // if dateTime is an object, convert it to a string first
+  if (typeof dateTime === `object`) {
+    dateTime = dateTime.toISOString()
+  }
+  if (dateTime.endsWith(`Z`)) {
+    // get date after adjusting for timezone in current browser
+    dateTime = new Date(dateTime).toLocaleString(`en-US`, {
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    })
+    // convert to ISO format
+    dateTime = new Date(dateTime).toISOString()
+  }
+  const [date] = dateTime.split(`T`)
+  const dateTimeObject = new Date(date + `T00:00:00`)
   const year = dateTimeObject.getFullYear()
   const month = `0${dateTimeObject.getMonth() + 1}`.slice(-2)
-  const date = `0${dateTimeObject.getDate()}`.slice(-2)
-  return `${year}-${month}-${date}`
+  const day = `0${dateTimeObject.getDate()}`.slice(-2)
+  return `${year}-${month}-${day}`
 }
 
 export const formatTime = (dateTime) => {
