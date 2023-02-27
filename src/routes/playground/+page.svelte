@@ -69,8 +69,8 @@
       editableText: yup.string().required().min(3)
     }),
     initialValues: {
-      dob: new Date(),
-      createdAt: new Date(),
+      dob: `2023-02-22`,
+      createdAt: `2023-02-27T00:00:00.000`,
       selectValue: `apple`,
       editableText: `Editable text`
     },
@@ -126,7 +126,7 @@
       isInline
       isRequired
       name="dob"
-      type="datetime"
+      type="date"
       label="Date of Birth"
       isTouched={$touched[`dob`]}
       value={$form[`dob`]}

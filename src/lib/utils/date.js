@@ -1,6 +1,6 @@
 export const formatDate = (date) => {
   // Format date to YYYY-MM-DD
-  const d = new Date(date)
+  const d = new Date(date + `T00:00:00.000`)
   const year = d.getFullYear()
   const month = `0${d.getMonth() + 1}`.slice(-2)
   const _date = `0${d.getDate()}`.slice(-2)
@@ -11,8 +11,8 @@ export const formatTime = (date) => {
   // if date is not a date object, convert it to one first
   if (typeof date === `string`) {
     // covert a time only string to a date object: HH:MM -> 1970-01-01THH:MM
-    if (date.length === 5) {
-      date = new Date(`1970-01-01T${date}`)
+    if (date.length >= 5) {
+      date = `1970-01-01T${date}`
     }
   }
   // Format date to H:MM AM/PM
@@ -26,5 +26,6 @@ export const formatTime = (date) => {
 
 export const formatDateTime = (date) => {
   // Format date to YYYY-MM-DD, HH:MM AM/PM
-  return `${formatDate(date)}, ${formatTime(date)}`
+  const [d, t] = date.split(`T`)
+  return `${formatDate(d)}, ${formatTime(t)}`
 }

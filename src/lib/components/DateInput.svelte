@@ -52,7 +52,8 @@
         static: false,
         inline: true,
         enableTime: type === `datetime` || type === `time`,
-        noCalendar: type === `time`
+        noCalendar: type === `time`,
+        dateFormat: type === `date` ? `Y-m-d` : `Y-m-dTH:i`
       })
     })
   }

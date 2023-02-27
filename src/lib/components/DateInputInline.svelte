@@ -11,6 +11,7 @@
   export let isInline = false
   export let inputClass = ``
   export let id = `${name}-${Math.random()}`
+  export let type
 
   import { onMount } from "svelte"
   import { createEventDispatcher } from "svelte"
@@ -22,6 +23,7 @@
   import XMarkIcon from "../icons/XMarkIcon.svelte"
   import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
   import colors from "../utils/colors"
+  import { formatDate, formatTime, formatDateTime } from "../utils/date"
 
   let inputRef
 
@@ -47,7 +49,8 @@
       defaultDate: value,
       inline: !!isInline,
       static: !isInline,
-      ...options
+      ...options,
+      dateFormat: type === `date` ? `Y-m-d` : `Y-m-dTH:i`
     })
   })
 
@@ -75,12 +78,25 @@
     class:isRequired><slot name="label">{label}</slot></label
   >
   <div class="relative flex items-center justify-between gap-2" class:flex-col={isInline}>
+    <h2 class="text-md text-center text-gray-900">
+      {#if value}
+        {#if type === `date`}
+          {formatDate(value)}
+        {:else if type === `datetime`}
+          {formatDateTime(value)}
+        {:else}
+          {formatTime(value)}
+        {/if}
+      {:else}
+        No date selected
+      {/if}
+    </h2>
     <input
       {id}
       {name}
       bind:this={inputRef}
       type="text"
-      class={twMerge(`w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
+      class={twMerge(`hidden w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
       class:text-center={isInline}
       {placeholder}
       on:change
