@@ -61,9 +61,15 @@
   const dispatch = createEventDispatcher()
 
   const onClear = () => {
-    value = null
     inputRef._flatpickr.setDate(null)
     dispatch(`clear`)
+    dialog.hide()
+  }
+
+  const goToToday = () => {
+    value = new Date()
+    inputRef._flatpickr.setDate(value)
+    dispatch(`pickDate`, inputRef.value)
     dialog.hide()
   }
 </script>
@@ -130,7 +136,7 @@
     </Button>
   </div>
 
-  <div slot="content" class="-mt-4 -mb-2 flex flex-col items-center justify-center gap-2">
+  <div slot="content" class="-mt-4 -mb-2 flex flex-col items-center justify-center gap-4">
     <input
       {name}
       bind:this={inputRef}
@@ -141,7 +147,10 @@
       on:change
       on:keyup|trusted
     />
-    <Button variant="ghost" on:click={onClear}>Clear</Button>
+    <div class="flex w-full items-center justify-between">
+      <Button variant="ghost" on:click={onClear}>Clear</Button>
+      <Button variant="ghost" on:click={goToToday}>Today</Button>
+    </div>
   </div>
 </Dialog>
 
