@@ -1,6 +1,6 @@
 {
   "name": "@codepiercer/svelte-tailwind",
-  "version": "0.5.10",
+  "version": "0.5.0",
   "scripts": {
     "dev": "vite dev --host",
     "build": "npm run lint && svelte-package -o package",
@@ -257,6 +257,10 @@
     "./utils/trapUpDownFocus": {
       "types": "./package/utils/trapUpDownFocus.d.ts",
       "default": "./package/utils/trapUpDownFocus.js"
+    },
+    "./utils/date": {
+      "types": "./package/utils/date.d.ts",
+      "default": "./package/utils/date.js"
     }
   },
   "files": [
@@ -393,6 +397,9 @@
       ],
       "utils/trapUpDownFocus": [
         "./package/utils/trapUpDownFocus.d.ts"
+      ],
+      "utils/date": [
+        "./package/utils/date.d.ts"
       ]
     }
   }
