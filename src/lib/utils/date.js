@@ -1,7 +1,10 @@
 export const formatDate = (date) => {
   // Format date to YYYY-MM-DD
   const [dateOnly] = date.split(`T`)
-  const d = new Date(dateOnly + `T00:00:00.000`)
+  let d = new Date(dateOnly + `T00:00:00.000`)
+  if (date.endsWith(`Z`)) {
+    d = new Date(date)
+  }
   const year = d.getFullYear()
   const month = `0${d.getMonth() + 1}`.slice(-2)
   const _date = `0${d.getDate()}`.slice(-2)
