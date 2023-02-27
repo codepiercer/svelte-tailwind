@@ -19,7 +19,6 @@
   import { twMerge } from "tailwind-merge"
 
   import Button from "./Button.svelte"
-  import XMarkIcon from "../icons/XMarkIcon.svelte"
   import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
   import colors from "../utils/colors"
   import { formatDate, formatTime, formatDateTime } from "../utils/date"
@@ -66,12 +65,6 @@
     inputRef._flatpickr.setDate(null)
     dispatch(`clear`)
   }
-
-  const goToToday = () => {
-    value = new Date()
-    inputRef._flatpickr.setDate(value)
-    dispatch(`pickDate`, value)
-  }
 </script>
 
 <svelte:head>
@@ -109,17 +102,11 @@
       on:keyup|trusted
     />
 
-    <div class="flex w-full items-center justify-around">
-      {#if inputRef?.value}
-        <Button {color} variant="ghost" on:click={onClear}>
-          <XMarkIcon />
-          <span>Clear</span>
-        </Button>
-      {/if}
-      <Button {color} variant="ghost" on:click={goToToday}>
-        <span>Today</span>
+    {#if inputRef?.value}
+      <Button {color} variant="ghost" on:click={onClear}>
+        <span>Clear</span>
       </Button>
-    </div>
+    {/if}
 
     <slot />
 

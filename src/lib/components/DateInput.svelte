@@ -66,13 +66,6 @@
     dispatch(`clear`)
     dialog.hide()
   }
-
-  const goToToday = () => {
-    value = new Date()
-    inputRef._flatpickr.setDate(value)
-    dispatch(`pickDate`, value)
-    dialog.hide()
-  }
 </script>
 
 <svelte:head>
@@ -137,7 +130,7 @@
     </Button>
   </div>
 
-  <div slot="content" class="-mt-4 -mb-2 flex flex-col items-center justify-center gap-4">
+  <div slot="content" class="-mt-4 -mb-2 flex flex-col items-center justify-center gap-2">
     <input
       {name}
       bind:this={inputRef}
@@ -148,10 +141,7 @@
       on:change
       on:keyup|trusted
     />
-    <div class="flex w-full items-center justify-between">
-      <Button variant="ghost" on:click={onClear}>Clear</Button>
-      <Button variant="ghost" on:click={goToToday}>Today</Button>
-    </div>
+    <Button variant="ghost" on:click={onClear}>Clear</Button>
   </div>
 </Dialog>
 
