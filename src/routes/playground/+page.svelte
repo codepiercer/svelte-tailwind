@@ -360,6 +360,9 @@
       isTouched={$touched[`createdAt`]}
       on:change={handleChange}
       on:keyup={handleChange}
+      on:pickDate={(e) => {
+        $form[`createdAt`] = e.detail
+      }}
       isLoading={$sampleMutation.isLoading}
       on:submit={handleSubmit}
       label="Editable date"

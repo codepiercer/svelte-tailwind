@@ -99,6 +99,7 @@
       isInline
       on:change
       on:keyup
+      on:pickDate
       {color}
       {type}
       {label}
@@ -108,10 +109,6 @@
       {value}
       {isRequired}
       {placeholder}
-      options={{
-        enableTime: type === `datetime` || type === `time`,
-        noCalendar: type === `time`
-      }}
       {inputClass}
     />
   </div>

@@ -42,6 +42,9 @@ export const formatTime = (dateTime) => {
 
 export const formatDateTime = (dateTime) => {
   // Format to YYYY-MM-DD, HH:MM AM/PM
+  if (typeof dateTime === `object`) {
+    dateTime = dateTime.toISOString()
+  }
   const [date, time] = dateTime.split(`T`)
   return `${formatDate(date)}, ${formatTime(time)}`
 }

@@ -70,6 +70,7 @@
   const goToToday = () => {
     value = new Date()
     inputRef._flatpickr.setDate(value)
+    dispatch(`pickDate`, value)
     dialog.hide()
   }
 </script>
