@@ -133,7 +133,7 @@
       error={$errors[`dob`]}
       on:pickDate={(e) => {
         console.log(e.detail)
-        $form[`dob`] = e.detail
+        $form[`dob`] = e.detail.date
       }}
       class="min-w-[16rem]"
     >
@@ -363,7 +363,7 @@
       isTouched={$touched[`createdAt`]}
       on:pickDate={(e) => {
         console.log(e.detail)
-        $form[`createdAt`] = e.detail
+        $form[`createdAt`] = e.detail.date
       }}
       isLoading={$sampleMutation.isLoading}
       on:submit={handleSubmit}

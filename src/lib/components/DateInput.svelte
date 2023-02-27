@@ -62,18 +62,18 @@
 
   const onClear = () => {
     inputRef._flatpickr.setDate(``)
-    dispatch(`pickDate`, ``)
+    dispatch(`pickDate`, { name, date: `` })
     dialog.hide()
   }
 
   const goToToday = () => {
     inputRef._flatpickr.setDate(new Date())
-    dispatch(`pickDate`, inputRef.value)
+    dispatch(`pickDate`, { name, date: inputRef.value })
     dialog.hide()
   }
 
   const handleOnChange = () => {
-    dispatch(`pickDate`, inputRef.value)
+    dispatch(`pickDate`, { name, date: inputRef.value })
     dialog.hide()
   }
 </script>
