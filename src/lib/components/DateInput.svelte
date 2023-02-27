@@ -21,6 +21,7 @@
   import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
   import XMarkIcon from "../icons/XMarkIcon.svelte"
   import colors from "../utils/colors"
+  import { formatDate, formatTime, formatDateTime } from "../utils/date"
 
   let inputRef
   let dialog
@@ -62,11 +63,13 @@
     value = null
     inputRef._flatpickr.setDate(null)
     dispatch(`clear`)
+    dialog.hide()
   }
 
   const goToToday = () => {
     value = new Date()
     inputRef._flatpickr.setDate(value)
+    dialog.hide()
   }
 </script>
 
@@ -85,15 +88,14 @@
     <Button variant="ghost" color="gray" on:click={onOpen} class="w-full justify-start p-0 px-1">
       {#if value}
         {#if type === `date`}
-          {new Date(value).toISOString().slice(0, 10)}
+          {formatDate(value)}
         {:else if type === `datetime`}
-          {new Date(value).toISOString().slice(0, 10)},
-          {new Date(value).toLocaleTimeString(`en-US`, { hour: `numeric`, minute: `numeric` })}
+          {formatDateTime(value)}
         {:else}
-          {new Date(value).toLocaleTimeString(`en-US`, { hour: `numeric`, minute: `numeric` })}
+          {formatTime(value)}
         {/if}
       {:else}
-        Select
+        &nbsp;
       {/if}
     </Button>
 
@@ -113,18 +115,17 @@
 
 <Dialog bind:dialog size="xs" closeOnOverlayClick>
   <div slot="header" class="flex items-center justify-between">
-    <h2 class="text-center text-xl font-semibold text-gray-900">
+    <h2 class="text-md text-center font-semibold text-gray-900">
       {#if value}
         {#if type === `date`}
-          {new Date(value).toISOString().slice(0, 10)}
+          {formatDate(value)}
         {:else if type === `datetime`}
-          {new Date(value).toISOString().slice(0, 10)},
-          {new Date(value).toLocaleTimeString(`en-US`, { hour: `numeric`, minute: `numeric` })}
+          {formatDateTime(value)}
         {:else}
-          {new Date(value).toLocaleTimeString(`en-US`, { hour: `numeric`, minute: `numeric` })}
+          {formatTime(value)}
         {/if}
       {:else}
-        Select
+        No date selected
       {/if}
     </h2>
     <Button on:click={dialog.hide} variant="outlined" color="blue" class="p-1">
@@ -140,6 +141,7 @@
       type="text"
       class={twMerge(`hidden w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
       {placeholder}
+      on:change={dialog.hide}
       on:change
       on:keyup|trusted
     />

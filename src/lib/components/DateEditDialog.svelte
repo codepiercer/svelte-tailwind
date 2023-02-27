@@ -24,6 +24,7 @@
   import DateInputInline from "./DateInputInline.svelte"
   import PencilSquareIcon from "../icons/PencilSquareIcon.svelte"
   import colors from "../utils/colors"
+  import { formatDate, formatTime, formatDateTime } from "../utils/date"
 
   const colorObject = colors[color]
   const style = Object.entries({
@@ -65,12 +66,11 @@
     <span class={twMerge(`px-1 text-sm`, displayClass)}>
       {#if value}
         {#if type === `date`}
-          {new Date(value).toISOString().slice(0, 10)}
+          {formatDate(value)}
         {:else if type === `datetime`}
-          {new Date(value).toISOString().slice(0, 10)},
-          {new Date(value).toLocaleTimeString(`en-US`, { hour: `numeric`, minute: `numeric` })}
+          {formatDateTime(value)}
         {:else}
-          {new Date(value).toLocaleTimeString(`en-US`, { hour: `numeric`, minute: `numeric` })}
+          {formatTime(value)}
         {/if}
       {:else}
         -

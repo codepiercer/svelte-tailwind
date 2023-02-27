@@ -126,7 +126,7 @@
       isInline
       isRequired
       name="dob"
-      type="date"
+      type="datetime"
       label="Date of Birth"
       isTouched={$touched[`dob`]}
       value={$form[`dob`]}
