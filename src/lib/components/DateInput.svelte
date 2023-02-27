@@ -39,7 +39,7 @@
     .join(`;`)
 
   const classes = twMerge(
-    `relative rounded-md border px-1 py-[0.7rem] shadow-sm h-fit w-auto wrapper min-w-[10rem]`,
+    `relative rounded-md border px-1 py-[0.7rem] shadow-sm h-fit w-auto wrapper min-w-[7rem]`,
     $$props.class
   )
 
@@ -97,6 +97,7 @@
         {/if}
       {:else}
         &nbsp;
+        <span class="sr-only">No date selected</span>
       {/if}
     </Button>
 
