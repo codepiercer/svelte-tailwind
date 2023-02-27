@@ -62,8 +62,8 @@
   const dispatch = createEventDispatcher()
 
   const onClear = () => {
-    inputRef._flatpickr.setDate(null)
-    dispatch(`pickDate`, null)
+    inputRef._flatpickr.setDate(``)
+    dispatch(`pickDate`, ``)
   }
 
   const goToToday = () => {
