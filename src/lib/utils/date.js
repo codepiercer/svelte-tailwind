@@ -1,6 +1,6 @@
 export const formatDate = (dateTime) => {
   // Format to YYYY-MM-DD
-  const dateTimeObject = new Date(dateTime)
+  const dateTimeObject = new Date(dateTime + `T00:00:00`)
   const year = dateTimeObject.getFullYear()
   const month = `0${dateTimeObject.getMonth() + 1}`.slice(-2)
   const date = `0${dateTimeObject.getDate()}`.slice(-2)
@@ -26,5 +26,6 @@ export const formatTime = (dateTime) => {
 
 export const formatDateTime = (dateTime) => {
   // Format to YYYY-MM-DD, HH:MM AM/PM
-  return `${formatDate(dateTime)}, ${formatTime(dateTime)}`
+  const [date, time] = dateTime.split(`T`)
+  return `${formatDate(date)}, ${formatTime(time)}`
 }
