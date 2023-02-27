@@ -7,6 +7,9 @@ export const formatDate = (dateTime) => {
   if (dateTime.endsWith(`Z`)) {
     // get date after adjusting for timezone in current browser
     dateTime = new Date(dateTime).toLocaleString(`en-US`, {
+      year: `numeric`,
+      month: `2-digit`,
+      day: `2-digit`,
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
     })
     // convert to ISO format
