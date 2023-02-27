@@ -63,11 +63,15 @@
 
   const onClear = () => {
     inputRef._flatpickr.setDate(null)
-    dispatch(`clear`)
+    dispatch(`pickDate`, null)
   }
 
   const goToToday = () => {
     inputRef._flatpickr.setDate(new Date())
+    dispatch(`pickDate`, inputRef.value)
+  }
+
+  const handleOnChange = () => {
     dispatch(`pickDate`, inputRef.value)
   }
 </script>
@@ -103,8 +107,7 @@
       type="text"
       class={twMerge(`hidden w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
       {placeholder}
-      on:change
-      on:keyup|trusted
+      on:change={handleOnChange}
     />
 
     <div class="flex w-full items-center justify-around">

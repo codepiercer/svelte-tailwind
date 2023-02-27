@@ -62,13 +62,17 @@
 
   const onClear = () => {
     inputRef._flatpickr.setDate(null)
-    dispatch(`clear`)
+    dispatch(`pickDate`, null)
     dialog.hide()
   }
 
   const goToToday = () => {
-    value = new Date()
-    inputRef._flatpickr.setDate(value)
+    inputRef._flatpickr.setDate(new Date())
+    dispatch(`pickDate`, inputRef.value)
+    dialog.hide()
+  }
+
+  const handleOnChange = () => {
     dispatch(`pickDate`, inputRef.value)
     dialog.hide()
   }
@@ -143,9 +147,7 @@
       type="text"
       class={twMerge(`hidden w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
       {placeholder}
-      on:change={dialog.hide}
-      on:change
-      on:keyup|trusted
+      on:change={handleOnChange}
     />
     <div class="flex w-full items-center justify-between">
       <Button variant="ghost" on:click={onClear}>Clear</Button>

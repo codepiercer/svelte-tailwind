@@ -131,7 +131,10 @@
       isTouched={$touched[`dob`]}
       value={$form[`dob`]}
       error={$errors[`dob`]}
-      on:change={handleChange}
+      on:pickDate={(e) => {
+        console.log(e.detail)
+        $form[`dob`] = e.detail
+      }}
       class="min-w-[16rem]"
     >
       <DropdownMenu
@@ -358,9 +361,8 @@
       value={$form[`createdAt`]}
       error={$errors[`createdAt`]}
       isTouched={$touched[`createdAt`]}
-      on:change={handleChange}
-      on:keyup={handleChange}
       on:pickDate={(e) => {
+        console.log(e.detail)
         $form[`createdAt`] = e.detail
       }}
       isLoading={$sampleMutation.isLoading}
