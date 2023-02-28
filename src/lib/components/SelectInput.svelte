@@ -136,6 +136,7 @@
       <input
         {id}
         {name}
+        placeholder={options.find((option) => option.value === value)?.label || placeholder}
         bind:this={inputRef}
         required={isRequired}
         bind:value={searchValue}
@@ -161,7 +162,6 @@
             searchValue = ``
           }
         }}
-        {placeholder}
         type="text"
         class={twMerge(
           `w-full rounded-md border-none bg-white p-0 text-sm outline-none`,

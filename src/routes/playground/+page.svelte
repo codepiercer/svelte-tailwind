@@ -116,8 +116,7 @@
       isTouched={$touched[`fullName`]}
       value={$form[`fullName`]}
       error={$errors[`fullName`]}
-      on:change={handleChange}
-      on:keyup={handleChange}
+      on:stopTyping={handleChange}
       class="max-w-full"
       mask="0000-0000-0000-0000"
     />
