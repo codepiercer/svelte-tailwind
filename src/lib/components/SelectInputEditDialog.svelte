@@ -88,19 +88,21 @@
   on:close={onClose}
   class="min-h-[18rem]"
 >
-  <SelectInput
-    on:select
-    {isLoading}
-    {error}
-    {value}
-    {name}
-    {color}
-    {isRequired}
-    {label}
-    {options}
-    {inputClass}
-    {hideIcon}
-  />
+  <slot name="input">
+    <SelectInput
+      on:select
+      {isLoading}
+      {error}
+      {value}
+      {name}
+      {color}
+      {isRequired}
+      {label}
+      {options}
+      {inputClass}
+      {hideIcon}
+    />
+  </slot>
   <slot name="info" />
 </FormDialog>
 

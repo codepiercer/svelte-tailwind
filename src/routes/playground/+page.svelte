@@ -302,6 +302,7 @@
     />
 
     <SelectInputEditDialog
+      isInline
       value={$form[`selectValue`]}
       error={$errors[`selectValue`]}
       isLoading={$sampleMutation.isLoading}
@@ -324,7 +325,19 @@
       ]}
       mutation={sampleMutation}
       bind:dialog={editMenuDialog}
-    />
+    >
+      <div slot="input">
+        <SelectInputFetchData
+          name="selectValue"
+          label="Assigned To"
+          isRequired
+          value={$form[`selectValue`] || ``}
+          on:select={({ detail }) => {
+            $form[`selectValue`] = detail.option.value
+          }}
+        />
+      </div>
+    </SelectInputEditDialog>
 
     <TextEditDialog
       isInline
