@@ -100,6 +100,7 @@
       {placeholder}
       {inputClass}
     />
+    <slot />
   </div>
 </FormDialog>
 

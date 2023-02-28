@@ -102,6 +102,7 @@
       {inputClass}
       {hideIcon}
     />
+    <slot />
   </div>
 </FormDialog>
 
