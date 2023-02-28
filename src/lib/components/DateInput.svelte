@@ -111,7 +111,7 @@
         <span class="sr-only">No date selected</span>
       {/if}
     </Button>
-
+    <input {value} required={isRequired} type="text" class="sr-only w-full" />
     <slot />
 
     {#if error}
@@ -151,9 +151,8 @@
     <input
       {name}
       bind:this={inputRef}
-      required={isRequired}
       type="text"
-      class={twMerge(`hidden w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
+      class="hidden"
       {placeholder}
       on:change={handleOnChange}
     />

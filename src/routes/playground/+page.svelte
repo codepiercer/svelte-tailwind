@@ -69,7 +69,6 @@
       editableText: yup.string().required().min(3)
     }),
     initialValues: {
-      dob: `2023-02-28`,
       createdAt: `2023-02-27T00:00:00.000`,
       selectValue: `apple`,
       editableText: `Editable text`
@@ -534,11 +533,25 @@
   error={$sampleMutation?.error?.message}
   isLoading={$sampleMutation.isLoading}
   on:close={onClose}
-  isDisabled
   initialFocusID="passwordInput"
 >
   <div class="flex min-h-[26rem] flex-col gap-8">
-    <SelectInputFetchData
+    <DateInput
+      isInline
+      isRequired
+      name="dob"
+      type="date"
+      label="Date of Birth"
+      isTouched={$touched[`dob`]}
+      value={$form[`dob`]}
+      error={$errors[`dob`]}
+      on:pickDate={(e) => {
+        console.log(e.detail)
+        $form[`dob`] = e.detail.date
+      }}
+      class="min-w-[16rem]"
+    />
+    <!-- <SelectInputFetchData
       name="selectValue"
       label="Assigned To"
       isRequired
@@ -604,6 +617,6 @@
       on:keyup={handleChange}
       isRequired
       placeholder="required field"
-    />
+    /> -->
   </div>
 </FormDialog>

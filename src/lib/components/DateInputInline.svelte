@@ -106,7 +106,7 @@
       bind:this={inputRef}
       required={isRequired}
       type="text"
-      class={twMerge(`hidden w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
+      class={twMerge(`sr-only w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
       {placeholder}
       on:change={handleOnChange}
     />
