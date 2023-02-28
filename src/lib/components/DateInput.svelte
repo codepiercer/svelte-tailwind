@@ -10,7 +10,6 @@
   export let error = ``
   export let value = ``
   export let options = {}
-  export let inputClass = ``
 
   import { createEventDispatcher } from "svelte"
 

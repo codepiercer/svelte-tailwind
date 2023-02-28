@@ -551,7 +551,7 @@
       }}
       class="min-w-[16rem]"
     />
-    <!-- <SelectInputFetchData
+    <SelectInputFetchData
       name="selectValue"
       label="Assigned To"
       isRequired
@@ -617,6 +617,6 @@
       on:keyup={handleChange}
       isRequired
       placeholder="required field"
-    /> -->
+    />
   </div>
 </FormDialog>
