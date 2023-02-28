@@ -79,20 +79,18 @@
   on:submit
   on:close={onClose}
 >
-  <div class="flex flex-col gap-8">
-    <ToggleInput
-      {color}
-      {label}
-      {name}
-      {isLoading}
-      {error}
-      {value}
-      {isTouched}
-      {isRequired}
-      on:toggle
-    />
-    <slot name="info" />
-  </div>
+  <ToggleInput
+    {color}
+    {label}
+    {name}
+    {isLoading}
+    {error}
+    {value}
+    {isTouched}
+    {isRequired}
+    on:toggle
+  />
+  <slot name="info" />
 </FormDialog>
 
 <style>

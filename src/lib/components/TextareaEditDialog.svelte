@@ -85,23 +85,21 @@
   on:submit
   on:close={onClose}
 >
-  <div class="flex flex-col gap-8">
-    <TextareaInput
-      on:stopTyping
-      on:change
-      on:keyup
-      {color}
-      {label}
-      {name}
-      {isTouched}
-      {error}
-      {value}
-      {isRequired}
-      {placeholder}
-      {inputClass}
-    />
-    <slot name="info" />
-  </div>
+  <TextareaInput
+    on:stopTyping
+    on:change
+    on:keyup
+    {color}
+    {label}
+    {name}
+    {isTouched}
+    {error}
+    {value}
+    {isRequired}
+    {placeholder}
+    {inputClass}
+  />
+  <slot name="info" />
 </FormDialog>
 
 <style>

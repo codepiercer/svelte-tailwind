@@ -88,22 +88,20 @@
   on:close={onClose}
   class="min-h-[18rem]"
 >
-  <div class="flex flex-col gap-8">
-    <SelectInput
-      on:select
-      {isLoading}
-      {error}
-      {value}
-      {name}
-      {color}
-      {isRequired}
-      {label}
-      {options}
-      {inputClass}
-      {hideIcon}
-    />
-    <slot name="info" />
-  </div>
+  <SelectInput
+    on:select
+    {isLoading}
+    {error}
+    {value}
+    {name}
+    {color}
+    {isRequired}
+    {label}
+    {options}
+    {inputClass}
+    {hideIcon}
+  />
+  <slot name="info" />
 </FormDialog>
 
 <style>

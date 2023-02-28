@@ -94,22 +94,20 @@
   on:close={onClose}
   on:submit
 >
-  <div class="flex flex-col gap-8">
-    <DateInputInline
-      on:pickDate
-      {color}
-      {type}
-      {label}
-      {name}
-      {isTouched}
-      {error}
-      {value}
-      {isRequired}
-      {placeholder}
-      {inputClass}
-    />
-    <slot name="info" />
-  </div>
+  <DateInputInline
+    on:pickDate
+    {color}
+    {type}
+    {label}
+    {name}
+    {isTouched}
+    {error}
+    {value}
+    {isRequired}
+    {placeholder}
+    {inputClass}
+  />
+  <slot name="info" />
 </FormDialog>
 
 <style>

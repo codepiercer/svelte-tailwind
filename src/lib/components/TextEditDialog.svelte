@@ -85,25 +85,23 @@
   on:submit
   on:close={onClose}
 >
-  <div class="flex flex-col gap-8">
-    <TextInput
-      on:stopTyping
-      on:change
-      on:keyup
-      {color}
-      {type}
-      {label}
-      {name}
-      {isLoading}
-      {error}
-      {value}
-      {isTouched}
-      {isRequired}
-      {placeholder}
-      {inputClass}
-    />
-    <slot name="info" />
-  </div>
+  <TextInput
+    on:stopTyping
+    on:change
+    on:keyup
+    {color}
+    {type}
+    {label}
+    {name}
+    {isLoading}
+    {error}
+    {value}
+    {isTouched}
+    {isRequired}
+    {placeholder}
+    {inputClass}
+  />
+  <slot name="info" />
 </FormDialog>
 
 <style>
