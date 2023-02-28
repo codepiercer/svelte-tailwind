@@ -380,7 +380,9 @@
       on:submit={handleSubmit}
       label="Editable text area"
       bind:dialog={editDialog}
-    />
+    >
+      <div slot="info">sdasdasd</div>
+    </TextareaEditDialog>
     <ToggleEditDialog
       name="toggle"
       class="max-w-xs"

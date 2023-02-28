@@ -91,7 +91,7 @@
       {isRequired}
       on:toggle
     />
-    <slot />
+    <slot name="info" />
   </div>
 </FormDialog>
 

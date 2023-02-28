@@ -100,7 +100,7 @@
       {placeholder}
       {inputClass}
     />
-    <slot />
+    <slot name="info" />
   </div>
 </FormDialog>
 
