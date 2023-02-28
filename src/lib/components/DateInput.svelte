@@ -5,6 +5,7 @@
   export let label = name // use name if label is not provided
   export let placeholder = ``
   export let isRequired = false
+  export let isDisabled = false
   export let isTouched = false
   export let error = ``
   export let value = ``
@@ -90,7 +91,13 @@
     <slot name="label">{label}</slot>
   </div>
   <div class="relative flex items-center justify-between gap-2">
-    <Button variant="ghost" color="gray" on:click={onOpen} class="w-full justify-start p-0 px-1">
+    <Button
+      variant="ghost"
+      color="gray"
+      on:click={onOpen}
+      class="w-full justify-start p-0 px-1"
+      {isDisabled}
+    >
       {#if value}
         {#if type === `date`}
           {formatDate(value)}
@@ -144,6 +151,7 @@
     <input
       {name}
       bind:this={inputRef}
+      required={isRequired}
       type="text"
       class={twMerge(`hidden w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
       {placeholder}

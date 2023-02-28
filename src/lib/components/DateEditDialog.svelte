@@ -96,7 +96,6 @@
 >
   <div class="flex flex-col gap-8">
     <DateInputInline
-      isInline
       on:pickDate
       {color}
       {type}

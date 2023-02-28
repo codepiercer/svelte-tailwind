@@ -124,6 +124,7 @@
     />
     <DateInput
       isInline
+      isDisabled
       isRequired
       name="dob"
       type="date"
