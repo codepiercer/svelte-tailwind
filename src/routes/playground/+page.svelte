@@ -302,7 +302,6 @@
     />
 
     <SelectInputEditDialog
-      isInline
       value={$form[`selectValue`]}
       error={$errors[`selectValue`]}
       isLoading={$sampleMutation.isLoading}
@@ -325,7 +324,16 @@
       ]}
       mutation={sampleMutation}
       bind:dialog={editMenuDialog}
+    />
+
+    <SelectInputEditDialog
+      isInline
+      error={$errors[`selectValue`]}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
+      bind:dialog={editMenuDialog}
     >
+      {$form[`selectValue`] || `Select option`}
       <div slot="input">
         <SelectInputFetchData
           name="selectValue"
