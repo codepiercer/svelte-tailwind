@@ -62,13 +62,15 @@
   }
 
   // add a clear option to the list
-  $: if (value) {
-    if (options.find((option) => option.value === ``) === undefined) {
-      options = [{ label: `Clear`, value: `` }, ...options]
+  $: if (!isRequired) {
+    if (value) {
+      if (options.find((option) => option.value === ``) === undefined) {
+        options = [{ label: `Clear`, value: `` }, ...options]
+      }
+    } else {
+      // remove clear option if value is null
+      options = options.filter((option) => option.value !== ``)
     }
-  } else {
-    // remove clear option if value is null
-    options = options.filter((option) => option.value !== ``)
   }
 
   const dispatch = createEventDispatcher()

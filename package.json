@@ -1,6 +1,6 @@
 {
   "name": "@codepiercer/svelte-tailwind",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "scripts": {
     "dev": "vite dev --host",
     "build": "npm run lint && svelte-package -o package",

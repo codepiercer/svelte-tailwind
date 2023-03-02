@@ -84,6 +84,7 @@
 
 <div {style} class={classes} class:error class:pr-4={$$slots.default}>
   <label
+    for={name}
     class="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
     class:isRequired
   >
@@ -110,7 +111,7 @@
         <span class="sr-only">No date selected</span>
       {/if}
     </Button>
-    <input {value} required={isRequired} type="text" class="sr-only w-full" />
+    <input {name} {value} required={isRequired} type="text" class="sr-only w-full" />
     <slot />
 
     {#if error}
