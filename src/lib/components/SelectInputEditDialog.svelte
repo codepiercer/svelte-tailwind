@@ -15,6 +15,7 @@
   export let error = ``
   export let serverError = ``
   export let value = ``
+  export let dialogClass = ``
   export let inputClass = ``
   export let displayClass = ``
   export let hideIcon = false
@@ -86,7 +87,7 @@
   {isLoading}
   on:submit
   on:close={onClose}
-  class="min-h-[18rem]"
+  class={twMerge(`min-h-[14rem]`, dialogClass)}
 >
   <slot name="input">
     <SelectInput

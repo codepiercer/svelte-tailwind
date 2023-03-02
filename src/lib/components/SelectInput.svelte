@@ -164,7 +164,7 @@
         }}
         type="text"
         class={twMerge(
-          `w-full rounded-md border-none bg-white p-0 text-sm outline-none`,
+          `w-full rounded-md border-none bg-white p-2 text-sm outline-none`,
           inputClass
         )}
         role="combobox"
