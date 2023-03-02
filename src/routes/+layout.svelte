@@ -15,10 +15,10 @@
   })
 </script>
 
-{#if browser}
-  <Toaster />
-{/if}
-
 <QueryClientProvider client={queryClient}>
   <slot />
 </QueryClientProvider>
+
+{#if browser}
+  <Toaster />
+{/if}

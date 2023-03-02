@@ -83,12 +83,12 @@
 </svelte:head>
 
 <div {style} class={classes} class:error class:pr-4={$$slots.default}>
-  <div
-    class="label absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
+  <label
+    class="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
     class:isRequired
   >
     <slot name="label">{label}</slot>
-  </div>
+  </label>
   <div class="relative flex items-center justify-between gap-2">
     <Button
       variant="ghost"
@@ -181,11 +181,11 @@
     box-shadow: var(--error-ring-focus);
   }
 
-  .label {
+  label {
     color: var(--text-color);
   }
 
-  .label.isRequired:after {
+  label.isRequired:after {
     color: #e32;
     content: " *";
     display: inline;

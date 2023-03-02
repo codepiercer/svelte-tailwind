@@ -34,6 +34,8 @@
   import fakeFetch from "$lib/utils/fakeFetch"
   import { successToast } from "../../utils/toast"
 
+  import { Toaster } from "svelte-french-toast"
+
   let dialog
   let formDialog
   let editDialog
@@ -556,8 +558,16 @@
   isLoading={$sampleMutation.isLoading}
   on:close={onClose}
   initialFocusID="passwordInput"
+  submitLabel="Delete"
+  submitColor="red"
 >
+  <Toaster />
   <div class="flex min-h-[26rem] flex-col gap-8">
+    <Button
+      on:click={() => {
+        successToast(`Successfully edited something`)
+      }}>Test Toast</Button
+    >
     <DateInput
       isInline
       isRequired
