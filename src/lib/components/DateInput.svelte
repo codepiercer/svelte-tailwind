@@ -10,6 +10,7 @@
   export let error = ``
   export let value = ``
   export let options = {}
+  export let id = `${name}-${Math.random()}`
 
   import { createEventDispatcher } from "svelte"
 
@@ -84,7 +85,7 @@
 
 <div {style} class={classes} class:error class:pr-4={$$slots.default}>
   <label
-    for={name}
+    for={id}
     class="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium"
     class:isRequired
   >
@@ -111,7 +112,7 @@
         <span class="sr-only">No date selected</span>
       {/if}
     </Button>
-    <input {name} {value} required={isRequired} type="text" class="sr-only w-full" />
+    <input {id} {value} required={isRequired} type="text" class="sr-only w-full" />
     <slot />
 
     {#if error}
