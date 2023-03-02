@@ -1,6 +1,6 @@
 {
   "name": "@codepiercer/svelte-tailwind",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "scripts": {
     "dev": "vite dev --host",
     "build": "npm run lint && svelte-package -o package",
@@ -152,11 +152,6 @@
       "types": "./package/components/ToggleInputReadonly.svelte.d.ts",
       "svelte": "./package/components/ToggleInputReadonly.svelte",
       "default": "./package/components/ToggleInputReadonly.svelte"
-    },
-    "./components/Tooltip.svelte": {
-      "types": "./package/components/Tooltip.svelte.d.ts",
-      "svelte": "./package/components/Tooltip.svelte",
-      "default": "./package/components/Tooltip.svelte"
     },
     "./config.cjs": "./package/config.cjs",
     "./icons/CalendarIcon.svelte": {
@@ -331,9 +326,6 @@
       ],
       "components/ToggleInputReadonly.svelte": [
         "./package/components/ToggleInputReadonly.svelte.d.ts"
-      ],
-      "components/Tooltip.svelte": [
-        "./package/components/Tooltip.svelte.d.ts"
       ],
       "icons/CalendarIcon.svelte": [
         "./package/icons/CalendarIcon.svelte.d.ts"

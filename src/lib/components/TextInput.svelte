@@ -16,7 +16,6 @@
   import { stopTyping } from "../utils/stopTyping.js"
   import { imask } from "@imask/svelte"
 
-  import Tooltip from "./Tooltip.svelte"
   import ExclamationCircleIcon from "../icons/ExclamationCircleIcon.svelte"
   import EyeIcon from "../icons/EyeIcon.svelte"
   import EyeSlashIcon from "../icons/EyeSlashIcon.svelte"
@@ -82,15 +81,11 @@
         }}
       >
         {#if inputRef && inputRef.type === `text`}
-          <Tooltip>
-            <EyeSlashIcon slot="tooltip-slot" />
-            <span>Hide password</span>
-          </Tooltip>
+          <EyeSlashIcon />
+          <span class="sr-only">Hide password</span>
         {:else}
-          <Tooltip>
-            <EyeIcon slot="tooltip-slot" />
-            <span>Show password</span>
-          </Tooltip>
+          <EyeIcon />
+          <span class="sr-only">Show password</span>
         {/if}
       </button>
     {/if}

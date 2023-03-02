@@ -16,7 +16,6 @@
     DateEditDialog,
     TextareaEditDialog,
     ToggleInput,
-    Tooltip,
     ToggleEditDialog,
     ConfirmationDialog
   } from "$lib"
@@ -92,12 +91,14 @@
 </script>
 
 <div class="h-screen px-4">
-  <Button href="/" size="sm" variant="outlined" class="mt-2 max-w-full">
-    <span class="mr-1" aria-hidden="true">&larr;</span>
-    <span class="">Home</span>
-  </Button>
-
+  <div class="flex flex-wrap gap-8">
+    <Button href="/" size="sm" variant="outlined" class="mt-2 max-w-full">
+      <span class="mr-1" aria-hidden="true">&larr;</span>
+      <span class="">Home</span>
+    </Button>
+  </div>
   <div class="mt-4 flex flex-wrap gap-8">
+    <Button class="max-w-full" color="red" size="sm" variant="primary"><TrashIcon /></Button>
     <Button>blue primary Button</Button>
     <Button color="yellow" variant="secondary" isLoading class="">yellow secondary loading</Button>
     <Button color="green" variant="outlined">green outline Button</Button>
@@ -479,12 +480,7 @@
       </DropdownMenu>
     </div>
     <Button class="" color="green" size="sm" variant="outlined"><PencilSquareIcon /></Button>
-    <Tooltip>
-      <Button slot="tooltip-slot" class="max-w-full" color="red" size="sm" variant="primary"
-        ><TrashIcon /></Button
-      >
-      <p>View on Github</p>
-    </Tooltip>
+    <Button class="max-w-full" color="red" size="sm" variant="primary"><TrashIcon /></Button>
     <Button class="max-w-full" color="blue" size="sm" variant="outlined"><PlusIcon /></Button>
     <Button class="max-w-full" color="yellow" size="sm" variant="outlined"
       ><ClipboardDocumentIcon /></Button
