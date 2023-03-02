@@ -8,7 +8,6 @@
   export let placeholder = ``
   export let isDisabled = false
   export let isRequired = false
-  export let isTouched = false
   export let error = ``
   export let serverError = ``
   export let value = ``
@@ -100,7 +99,6 @@
     {type}
     {label}
     {name}
-    {isTouched}
     {error}
     {value}
     {isRequired}

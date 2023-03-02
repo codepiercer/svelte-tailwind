@@ -4,7 +4,6 @@
   export let label = name // use name if label is not provided
   export let placeholder = ``
   export let isRequired = false
-  export let isTouched = false
   export let error = ``
   export let value = ``
   export let options = {}
@@ -130,7 +129,7 @@
     {/if}
   </div>
 
-  {#if error && isTouched}
+  {#if error}
     <p class="mt-2 text-xs text-red-600">
       {error}
     </p>
