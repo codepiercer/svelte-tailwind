@@ -1,6 +1,7 @@
 export { default as Button } from "./components/Button.svelte"
 export { default as TextInput } from "./components/TextInput.svelte"
 export { default as DateInput } from "./components/DateInput.svelte"
+export { default as DateInputInline } from "./components/DateInputInline.svelte"
 export { default as TextareaInput } from "./components/TextareaInput.svelte"
 export { default as ToggleInput } from "./components/ToggleInput.svelte"
 export { default as ToggleInputReadonly } from "./components/ToggleInputReadonly.svelte"

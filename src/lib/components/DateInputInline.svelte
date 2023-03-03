@@ -1,6 +1,7 @@
 <script>
   export let color = `blue` // blue, red, green, yellow, gray
   export let name = `fieldName`
+  export let type = `datetime` // date, datetime, time
   export let label = name // use name if label is not provided
   export let placeholder = ``
   export let isRequired = false
@@ -9,7 +10,6 @@
   export let options = {}
   export let inputClass = ``
   export let id = `${name}-${Math.random()}`
-  export let type
 
   import { onMount } from "svelte"
   import { createEventDispatcher } from "svelte"
