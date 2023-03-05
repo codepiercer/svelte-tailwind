@@ -35,7 +35,7 @@
     .map(([key, value]) => `${key}: ${value}`)
     .join(`;`)
 
-  let classes = `relative flex h-fit items-center justify-between gap-2 rounded-md`
+  let classes = `relative flex h-fit items-center justify-between gap-2 rounded-md w-full`
   if (!isInline) {
     classes = twMerge(classes, `wrapper shadow-sm px-3 py-3`)
   }

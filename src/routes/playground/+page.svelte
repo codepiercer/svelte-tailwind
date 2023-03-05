@@ -55,6 +55,7 @@
   const { form, errors, touched, handleChange, handleReset, handleSubmit } = createForm({
     validationSchema: yup.object().shape({
       fullName: yup.string().required().min(3),
+      color: yup.string(),
       age: yup.number().typeError(`Age must be a number`).required().min(18),
       dob: yup.date().typeError(`dob must be a date`).required(),
       createdAt: yup.date().typeError(`createdAt must be a date`).required(),
@@ -70,6 +71,7 @@
       editableText: yup.string().required().min(3)
     }),
     initialValues: {
+      color: `#ff0000`,
       createdAt: `2023-02-27T00:00:00.000`,
       selectValue: `apple`,
       editableText: `Editable text`
@@ -122,6 +124,16 @@
       on:stopTyping={handleChange}
       class="max-w-full"
       mask="0000-0000-0000-0000"
+    />
+    <TextInput
+      type="color"
+      name="color"
+      label="Color"
+      isTouched={$touched[`color`]}
+      value={$form[`color`]}
+      error={$errors[`color`]}
+      on:stopTyping={handleChange}
+      class="min-w-[8rem] max-w-full"
     />
     <DateInput
       isInline
@@ -362,6 +374,21 @@
       isLoading={$sampleMutation.isLoading}
       on:submit={handleSubmit}
       label="Editable text"
+      bind:dialog={editDialog}
+    />
+    <TextEditDialog
+      isInline
+      type="color"
+      name="color"
+      color="green"
+      value={$form[`color`]}
+      error={$errors[`color`]}
+      isTouched={$touched[`color`]}
+      on:change={handleChange}
+      on:keyup={handleChange}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
+      label="Editable color"
       bind:dialog={editDialog}
     />
     <TextEditDialog
