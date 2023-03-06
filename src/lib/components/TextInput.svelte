@@ -10,6 +10,7 @@
   export let value = ``
   export let mask = null
   export let inputClass = ``
+  export let inputProps = {}
   export let id = `${name}-${Math.random()}`
 
   import { twMerge } from "tailwind-merge"
@@ -69,6 +70,7 @@
       bind:value
       class={twMerge(`block w-full border-0 p-0 text-sm text-gray-900`, inputClass)}
       {placeholder}
+      {...inputProps}
     />
 
     {#if type === `password`}
