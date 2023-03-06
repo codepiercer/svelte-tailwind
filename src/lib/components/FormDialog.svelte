@@ -14,6 +14,7 @@
   export let initialFocusID = null
   export let submitLabel = `Submit`
   export let submitColor = `blue`
+  export let size = `md`
 
   const dispatch = createEventDispatcher()
 
@@ -22,7 +23,7 @@
   }
 </script>
 
-<Dialog bind:dialog closeOnEscape={false} class={$$props.class} {initialFocusID}>
+<Dialog bind:dialog closeOnEscape={false} class={$$props.class} {initialFocusID} {size}>
   <h2 slot="header" class="text-xl font-semibold text-gray-900">{title}</h2>
 
   <form slot="content" {id} on:submit|preventDefault>
