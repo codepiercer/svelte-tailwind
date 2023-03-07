@@ -14,6 +14,7 @@
   export let isLoading = false
   export let inputClass = ``
   export let displayClass = ``
+  export let options = {}
 
   import { createEventDispatcher } from "svelte"
   import { twMerge } from "tailwind-merge"
@@ -104,6 +105,7 @@
     {isRequired}
     {placeholder}
     {inputClass}
+    {options}
   />
   <slot name="info" />
 </FormDialog>
