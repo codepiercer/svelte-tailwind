@@ -16,6 +16,7 @@
   export let inputClass = ``
   export let displayClass = ``
   export let mask = null
+  export let inputProps = {}
 
   import { createEventDispatcher } from "svelte"
   import { twMerge } from "tailwind-merge"
@@ -102,6 +103,7 @@
     {placeholder}
     {inputClass}
     {mask}
+    {inputProps}
   />
   <slot name="info" />
 </FormDialog>
