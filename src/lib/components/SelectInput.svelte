@@ -20,6 +20,7 @@
   import { createEventDispatcher } from "svelte"
   import { twMerge } from "tailwind-merge"
   import clickOutside from "../utils/clickOutside"
+  import { stopTyping } from "../utils/stopTyping.js"
 
   import CheckOutlineIcon from "../icons/CheckOutlineIcon.svelte"
   import ChevronUpDownIcon from "../icons/ChevronUpDownIcon.svelte"
@@ -138,6 +139,8 @@
       <input
         {id}
         {name}
+        use:stopTyping
+        on:stopTyping
         placeholder={options.find((option) => option.value === value)?.label || placeholder}
         bind:this={inputRef}
         required={isRequired}
