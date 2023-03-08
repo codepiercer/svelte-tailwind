@@ -10,8 +10,9 @@
   export let value = ``
   export let options = {}
   export let id = `${name}-${Math.random()}`
+  export let noClear = false
 
-  import { createEventDispatcher } from "svelte"
+  import { createEventDispatcher, tick } from "svelte"
 
   import flatpickr from "flatpickr"
   import { twMerge } from "tailwind-merge"
@@ -66,8 +67,9 @@
     dialog.hide()
   }
 
-  const goToToday = () => {
+  const goToToday = async () => {
     inputRef._flatpickr.setDate(new Date())
+    await tick()
     dispatch(`pickDate`, { name, date: inputRef.value })
     dialog.hide()
   }
@@ -156,8 +158,10 @@
       {placeholder}
       on:change={handleOnChange}
     />
-    <div class="flex w-full items-center justify-between">
-      <Button variant="ghost" on:click={onClear}>Clear</Button>
+    <div class="flex w-full items-center justify-around">
+      {#if !noClear}
+        <Button variant="ghost" on:click={onClear}>Clear</Button>
+      {/if}
       <Button variant="ghost" on:click={goToToday}>Today</Button>
     </div>
   </div>

@@ -11,7 +11,7 @@
   export let inputClass = ``
   export let id = `${name}-${Math.random()}`
 
-  import { onMount } from "svelte"
+  import { onMount, tick } from "svelte"
   import { createEventDispatcher } from "svelte"
 
   import flatpickr from "flatpickr"
@@ -60,13 +60,15 @@
 
   const dispatch = createEventDispatcher()
 
-  const onClear = () => {
+  const onClear = async () => {
     inputRef._flatpickr.setDate(``)
+    await tick()
     dispatch(`pickDate`, { name, date: `` })
   }
 
-  const goToToday = () => {
+  const goToToday = async () => {
     inputRef._flatpickr.setDate(new Date())
+    await tick()
     dispatch(`pickDate`, { name, date: inputRef.value })
   }
 
