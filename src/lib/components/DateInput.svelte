@@ -12,7 +12,7 @@
   export let id = `${name}-${Math.random()}`
   export let noClear = false
 
-  import { createEventDispatcher, tick } from "svelte"
+  import { createEventDispatcher } from "svelte"
 
   import flatpickr from "flatpickr"
   import { twMerge } from "tailwind-merge"
