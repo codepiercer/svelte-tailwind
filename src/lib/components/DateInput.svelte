@@ -67,13 +67,6 @@
     dialog.hide()
   }
 
-  const goToToday = async () => {
-    inputRef._flatpickr.setDate(new Date())
-    await tick()
-    dispatch(`pickDate`, { name, date: inputRef.value })
-    dialog.hide()
-  }
-
   const handleOnChange = () => {
     dispatch(`pickDate`, { name, date: inputRef.value })
     dialog.hide()
@@ -162,7 +155,6 @@
       {#if !noClear}
         <Button variant="ghost" on:click={onClear}>Clear</Button>
       {/if}
-      <Button variant="ghost" on:click={goToToday}>Today</Button>
     </div>
   </div>
 </Dialog>

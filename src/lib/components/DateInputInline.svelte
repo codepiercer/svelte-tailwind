@@ -66,12 +66,6 @@
     dispatch(`pickDate`, { name, date: `` })
   }
 
-  const goToToday = async () => {
-    inputRef._flatpickr.setDate(new Date())
-    await tick()
-    dispatch(`pickDate`, { name, date: inputRef.value })
-  }
-
   const handleOnChange = () => {
     dispatch(`pickDate`, { name, date: inputRef.value })
   }
@@ -119,9 +113,6 @@
           <span>Clear</span>
         </Button>
       {/if}
-      <Button {color} variant="ghost" on:click={goToToday}>
-        <span>Today</span>
-      </Button>
     </div>
 
     <slot />
