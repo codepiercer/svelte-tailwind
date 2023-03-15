@@ -41,8 +41,6 @@
         value: user.id
       }))
     : []
-
-  $: console.log(searchValue)
 </script>
 
 <SelectInput

@@ -36,6 +36,12 @@
     let scrollX
     dialog.show = () => {
       dialog.showModal()
+      if (!closeOnEscape) {
+        // check closeOnEscape prop
+        dialog.addEventListener(`cancel`, (event) => {
+          event.preventDefault()
+        })
+      }
       dialog.addEventListener(`keydown`, trapFocus)
       // save the current scroll position
       scrollY = document.documentElement.scrollTop
@@ -92,10 +98,6 @@
         e.preventDefault()
         lastElement.focus()
       }
-    }
-    // check closeOnEscape prop
-    if (!closeOnEscape && e.key === `Escape`) {
-      e.preventDefault()
     }
   }
 </script>
