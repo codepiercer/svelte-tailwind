@@ -9,5 +9,7 @@ services:
     stdin_open: true
     env_file:
       - .env
+    environment:
+      - PORT=4005
     ports:
-      - 4000:4000
+      - 4005:4005

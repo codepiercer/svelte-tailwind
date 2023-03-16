@@ -11,6 +11,8 @@
     FormDialog,
     SelectInput,
     SelectInputEditDialog,
+    MultiSelectInput,
+    MultiSelectInputEditDialog,
     DropdownMenu,
     TextEditDialog,
     DateEditDialog,
@@ -68,12 +70,14 @@
         .min(3)
         .oneOf([yup.ref(`password`), null], `Passwords must match`),
       selectValue: yup.string().required(),
+      selectValues: yup.array().of(yup.string()),
       editableText: yup.string().required().min(3)
     }),
     initialValues: {
       color: `#ff0000`,
       createdAt: `2023-02-27T00:00:00.000`,
       selectValue: `apple`,
+      selectValues: [`apple`, `orange`],
       editableText: `Editable text`
     },
     onSubmit: () => {
@@ -315,6 +319,31 @@
         { label: `Dog`, value: `dog` }
       ]}
     />
+    <MultiSelectInput
+      direction="top"
+      values={$form[`selectValues`]}
+      error={$errors[`selectValues`].find((e) => !e)}
+      on:select={({ detail }) => {
+        $form[detail.name] = detail.options.map((o) => o.value)
+      }}
+      class="max-w-full p-2"
+      inputClass="text-xs"
+      name="selectValues"
+      color="yellow"
+      isRequired
+      label="Multi Select menu"
+      options={[
+        { label: `Apple`, value: `apple` },
+        { label: `Banana`, value: `banana` },
+        { label: `Orange`, value: `orange` },
+        { label: `Pineapple`, value: `pineapple` },
+        { label: `Strawberry`, value: `strawberry` },
+        { label: `Watermelon`, value: `watermelon` },
+        { label: `Monkey`, value: `monkey` },
+        { label: `Money`, value: `money` },
+        { label: `Dog`, value: `dog` }
+      ]}
+    />
 
     <SelectInputEditDialog
       value={$form[`selectValue`]}
@@ -339,6 +368,33 @@
       ]}
       mutation={sampleMutation}
       bind:dialog={editMenuDialog}
+    />
+
+    <MultiSelectInputEditDialog
+      values={$form[`selectValues`]}
+      error={$errors[`selectValues`].find((e) => !e)}
+      on:select={({ detail }) => {
+        $form[detail.name] = detail.options.map((o) => o.value)
+      }}
+      isLoading={$sampleMutation.isLoading}
+      on:submit={handleSubmit}
+      class="max-w-full"
+      name="selectValues"
+      color="yellow"
+      isRequired
+      label="Multi Select menu"
+      options={[
+        { label: `Apple`, value: `apple` },
+        { label: `Banana`, value: `banana` },
+        { label: `Orange`, value: `orange` },
+        { label: `Pineapple`, value: `pineapple` },
+        { label: `Strawberry`, value: `strawberry` },
+        { label: `Watermelon`, value: `watermelon` },
+        { label: `Monkey`, value: `monkey` },
+        { label: `Money`, value: `money` },
+        { label: `Dog`, value: `dog` }
+      ]}
+      mutation={sampleMutation}
     />
 
     <SelectInputEditDialog

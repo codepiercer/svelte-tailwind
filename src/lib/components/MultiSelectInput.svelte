@@ -6,7 +6,7 @@
   export let label = `Select menu`
   export let isLoading = false
   export let error = ``
-  export let value = `apple`
+  export let values = [`apple`] // or ['apple', 'banana']
   export let options = [
     { label: `Apple`, value: `apple` },
     { label: `Banana`, value: `banana` },
@@ -51,45 +51,25 @@
   let isOptionsOpen = false
   let isActive = null
 
-  let searchValue = options.find((option) => option.value === value)?.label || ``
-
-  $: if (options.length) {
-    if (!isOptionsOpen) {
-      const initialValue = options.find((option) => option.value === value)
-      if (initialValue) {
-        searchValue = initialValue.label
-      }
-    }
-  }
-
-  // add a clear option to the list
-  $: if (!isRequired) {
-    if (value) {
-      if (options.find((option) => option.value === ``) === undefined) {
-        options = [{ label: `Clear`, value: `` }, ...options]
-      }
-    } else {
-      // remove clear option if value is null
-      options = options.filter((option) => option.value !== ``)
-    }
-  }
+  let searchValue = ``
 
   const dispatch = createEventDispatcher()
 
   const onSelect = (option) => {
-    value = option.value
-    searchValue = option.value ? option.label : ``
+    if (values.includes(option.value)) {
+      values = values.filter((v) => v !== option.value)
+    } else {
+      values = [...values, option.value]
+    }
+    searchValue = ``
     inputRef.focus()
-    dispatch(`select`, { name, option })
+    dispatch(`select`, { name, options: options.filter((option) => values.includes(option.value)) })
     isOptionsOpen = false
   }
 
   const onClose = () => {
     isOptionsOpen = false
-    // reset search value if no value is selected
-    if (value !== null) {
-      searchValue = options.find((option) => option.value === value)?.label || ``
-    }
+    searchValue = ``
   }
 
   // cycle focus on li options with keyboard up or down
@@ -141,13 +121,15 @@
         {name}
         use:stopTyping
         on:stopTyping
-        placeholder={options.find((option) => option.value === value)?.label || placeholder}
+        placeholder={options
+          .filter((option) => values.includes(option.value))
+          .map((option) => option.label)
+          .join(`, `) || placeholder}
         bind:this={inputRef}
         required={isRequired}
         bind:value={searchValue}
         on:click={() => {
           isOptionsOpen = true
-          searchValue = ``
         }}
         on:keyup={(e) => {
           if (e.key === `Escape` || e.key === `Tab`) {
@@ -164,7 +146,6 @@
           }
           if (!isOptionsOpen) {
             isOptionsOpen = true
-            searchValue = ``
           }
         }}
         type="text"
@@ -189,7 +170,6 @@
           type="button"
           on:click={() => {
             isOptionsOpen = true
-            searchValue = ``
           }}
           class="flex items-center rounded-r-md px-2 focus:outline-none"
           tabindex="-1"
@@ -227,7 +207,7 @@
               .toLowerCase()
               .trim()
               .startsWith(searchValue.toLowerCase().trim())) as option, idx (option.value)}
-            {@const isSelected = option.value === value}
+            {@const isSelected = values.includes(option.value)}
             <li
               class="relative cursor-default select-none rounded-md py-2 pl-3 pr-9 focus:outline-none"
               on:mouseenter={() => (isActive = idx)}
