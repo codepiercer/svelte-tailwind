@@ -102,6 +102,7 @@
       {options}
       {inputClass}
       {hideIcon}
+      {isDisabled}
     />
   </slot>
   <slot name="info" />

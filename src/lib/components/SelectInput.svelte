@@ -5,6 +5,7 @@
   export let isRequired = false
   export let label = `Select menu`
   export let isLoading = false
+  export let isDisabled = false
   export let error = ``
   export let value = `apple`
   export let options = [
@@ -137,6 +138,7 @@
   <div class="relative">
     <div class="flex items-center justify-between">
       <input
+        disabled={isDisabled}
         {id}
         {name}
         use:stopTyping
@@ -186,6 +188,7 @@
       {/if}
       {#if !hideIcon}
         <button
+          disabled={isDisabled}
           type="button"
           on:click={() => {
             isOptionsOpen = true
@@ -275,6 +278,13 @@
                 No options found
               </div>
             </li>
+            {#if $$slots.addNew}
+              <li
+                class="relative cursor-default select-none rounded-md py-2 pl-3 pr-9 focus:outline-none"
+              >
+                <slot name="addNew" {searchValue} {onClose} />
+              </li>
+            {/if}
           {/each}
         {/if}
       </ul>
