@@ -148,8 +148,10 @@
         required={isRequired}
         bind:value={searchValue}
         on:click={() => {
-          isOptionsOpen = true
-          searchValue = ``
+          if (!isOptionsOpen) {
+            isOptionsOpen = true
+            searchValue = ``
+          }
         }}
         on:keyup={(e) => {
           if (e.key === `Escape` || e.key === `Tab`) {
@@ -157,7 +159,7 @@
           }
           if (isOptionsOpen && e.key === `Enter`) {
             const matchingOptions = options.filter((option) =>
-              option.label.toLowerCase().startsWith(searchValue.toLowerCase())
+              option.label.toLowerCase().includes(searchValue.toLowerCase())
             )
             if (matchingOptions.length === 1) {
               onSelect(matchingOptions[0])
@@ -229,7 +231,7 @@
           {#each options.filter(({ label }) => label
               .toLowerCase()
               .trim()
-              .startsWith(searchValue.toLowerCase().trim())) as option, idx (option.value)}
+              .includes(searchValue.toLowerCase().trim())) as option, idx (option.value)}
             {@const isSelected = option.value === value}
             <li
               class="relative cursor-default select-none rounded-md py-2 pl-3 pr-9 focus:outline-none"
