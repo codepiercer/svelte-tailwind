@@ -54,19 +54,9 @@
 
   let searchValue = options.find((option) => option.value === value)?.label || ``
 
-  $: if (options.length) {
-    if (!isOptionsOpen) {
-      let initialValue = options.find((option) => option.value === value)
-      if (initialValue) {
-        searchValue = initialValue.label
-      } else {
-        // search by option.label
-        initialValue = options.find((option) => option.label === value)
-        if (initialValue) {
-          searchValue = initialValue.label
-        }
-      }
-    }
+  $: if (options.length || value) {
+    searchValue =
+      options.find((option) => option.value === value || option.label === value)?.label || ``
   }
 
   // add a clear option to the list
@@ -95,7 +85,8 @@
     isOptionsOpen = false
     // reset search value if no value is selected
     if (value !== null) {
-      searchValue = options.find((option) => option.value === value)?.label || ``
+      searchValue =
+        options.find((option) => option.value === value || option.label === value)?.label || ``
     }
   }
 
