@@ -46,7 +46,7 @@
         </svg>
       </span>
       <span
-        class="absolute inset-0 flex h-full w-full items-center justify-center  transition-opacity"
+        class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
         class:opacity-0={!value}
         class:ease-out={!value}
         class:duration-100={!value}

@@ -370,32 +370,34 @@
       bind:dialog={editMenuDialog}
     />
 
-    <MultiSelectInputEditDialog
-      values={$form[`selectValues`]}
-      error={$errors[`selectValues`].find((e) => !e)}
-      on:select={({ detail }) => {
-        $form[detail.name] = detail.options.map((o) => o.value)
-      }}
-      isLoading={$sampleMutation.isLoading}
-      on:submit={handleSubmit}
-      class="max-w-full"
-      name="selectValues"
-      color="yellow"
-      isRequired
-      label="Multi Select menu"
-      options={[
-        { label: `Apple`, value: `apple` },
-        { label: `Banana`, value: `banana` },
-        { label: `Orange`, value: `orange` },
-        { label: `Pineapple`, value: `pineapple` },
-        { label: `Strawberry`, value: `strawberry` },
-        { label: `Watermelon`, value: `watermelon` },
-        { label: `Monkey`, value: `monkey` },
-        { label: `Money`, value: `money` },
-        { label: `Dog`, value: `dog` }
-      ]}
-      mutation={sampleMutation}
-    />
+    <div class="">
+      <MultiSelectInputEditDialog
+        values={$form[`selectValues`]}
+        error={$errors[`selectValues`].find((e) => !e)}
+        on:select={({ detail }) => {
+          $form[detail.name] = detail.options.map((o) => o.value)
+        }}
+        isLoading={$sampleMutation.isLoading}
+        on:submit={handleSubmit}
+        class="max-w-full"
+        name="selectValues"
+        color="yellow"
+        isRequired
+        label="Multi Select menu"
+        options={[
+          { label: `Apple`, value: `apple` },
+          { label: `Banana`, value: `banana` },
+          { label: `Orange`, value: `orange` },
+          { label: `Pineapple`, value: `pineapple` },
+          { label: `Strawberry`, value: `strawberry` },
+          { label: `Watermelon`, value: `watermelon` },
+          { label: `Monkey`, value: `monkey` },
+          { label: `Money`, value: `money` },
+          { label: `Dog`, value: `dog` }
+        ]}
+        mutation={sampleMutation}
+      />
+    </div>
 
     <SelectInputEditDialog
       isInline
@@ -418,20 +420,22 @@
       </div>
     </SelectInputEditDialog>
 
-    <TextEditDialog
-      isInline
-      name="editableText"
-      color="green"
-      value={$form[`editableText`]}
-      error={$errors[`editableText`]}
-      isTouched={$touched[`editableText`]}
-      on:change={handleChange}
-      on:keyup={handleChange}
-      isLoading={$sampleMutation.isLoading}
-      on:submit={handleSubmit}
-      label="Editable text"
-      bind:dialog={editDialog}
-    />
+    <div class="max-w-sm">
+      <TextEditDialog
+        isInline
+        name="editableText"
+        color="green"
+        value={$form[`editableText`]}
+        error={$errors[`editableText`]}
+        isTouched={$touched[`editableText`]}
+        on:change={handleChange}
+        on:keyup={handleChange}
+        isLoading={$sampleMutation.isLoading}
+        on:submit={handleSubmit}
+        label="Editable text"
+        bind:dialog={editDialog}
+      />
+    </div>
     <TextEditDialog
       isInline
       type="color"

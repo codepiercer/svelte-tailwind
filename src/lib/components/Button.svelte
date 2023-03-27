@@ -73,6 +73,8 @@
 {:else}
   <button
     on:click
+    on:mouseleave
+    on:mouseenter
     type="button"
     disabled={isDisabled || isLoading}
     {style}

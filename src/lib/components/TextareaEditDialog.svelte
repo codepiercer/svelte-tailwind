@@ -33,7 +33,7 @@
     .map(([key, value]) => `${key}: ${value}`)
     .join(`;`)
 
-  let classes = `relative flex h-fit items-center justify-between gap-2 rounded-md w-full`
+  let classes = `relative flex h-fit items-center justify-between gap-2 rounded-md`
   if (!isInline) {
     classes = twMerge(classes, `wrapper shadow-sm px-3 py-3`)
   }
@@ -63,14 +63,22 @@
     >
   {/if}
 
-  <slot>
-    <span class={twMerge(`px-1 text-sm`, displayClass)}>
-      {value || `-`}
-    </span>
-  </slot>
+  <div class="pr-8">
+    <slot>
+      <span class={twMerge(`px-1 text-sm`, displayClass)}>
+        {value || `-`}
+      </span>
+    </slot>
+  </div>
 
   {#if isVisible}
-    <Button size="small" variant="outlined" on:click={dialog.show} {color} {isDisabled}
+    <Button
+      class={isInline ? `absolute right-0` : ``}
+      size="small"
+      variant="outlined"
+      on:click={dialog.show}
+      {color}
+      {isDisabled}
       ><PencilSquareIcon />
       <span class="sr-only">Edit</span>
     </Button>

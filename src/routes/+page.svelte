@@ -24,7 +24,7 @@
 
     <Button href="/playground" variant="outlined">
       <span class="text-base font-semibold leading-7">Playground</span>
-      <span class="ml-1 text-base " aria-hidden="true">&rarr;</span>
+      <span class="ml-1 text-base" aria-hidden="true">&rarr;</span>
     </Button>
 
     <div

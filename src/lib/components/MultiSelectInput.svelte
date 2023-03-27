@@ -186,7 +186,7 @@
 
     {#if isOptionsOpen}
       <ul
-        class="options absolute z-20  max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
+        class="options absolute z-20 max-h-48 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
         class:bottom-0={direction === `top`}
         class:top-0={direction === `bottom`}
         class:mt-8={direction === `bottom`}
@@ -234,7 +234,7 @@
 
               {#if isSelected && option?.value}
                 <span
-                  class="absolute inset-y-0 right-0 flex items-center pr-4 "
+                  class="absolute inset-y-0 right-0 flex items-center pr-4"
                   class:text-white={isActive === idx}
                   class:text-blue-600={color === `blue` && isActive !== idx}
                   class:text-red-600={color === `red` && isActive !== idx}
