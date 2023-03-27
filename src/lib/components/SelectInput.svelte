@@ -54,24 +54,22 @@
 
   let searchValue = options.find((option) => option.value === value)?.label || ``
 
-  $: if (options.length) {
-    if (!isOptionsOpen) {
-      const initialValue = options.find((option) => option.value === value)
-      if (initialValue) {
-        searchValue = initialValue.label
-      }
+  $: if (!isLoading && !searchValue && !isOptionsOpen) {
+    const initialValue = options.find((option) => option.value === value)
+    if (initialValue) {
+      searchValue = initialValue.label
     }
   }
 
   // add a clear option to the list
-  $: if (!isRequired) {
+  $: if (isRequired && isOptionsOpen) {
     if (value) {
       if (options.find((option) => option.value === ``) === undefined) {
         options = [{ label: `Clear`, value: `` }, ...options]
       }
     } else {
       // remove clear option if value is null
-      options = options.filter((option) => option.value !== ``)
+      options = options.filter((option) => option.label !== `Clear`)
     }
   }
 
@@ -81,6 +79,9 @@
     value = option.value
     searchValue = option.value ? option.label : ``
     inputRef.focus()
+    if (option.label === `Clear`) {
+      options = options.filter((option) => option.label !== `Clear`)
+    }
     dispatch(`select`, { name, option })
     isOptionsOpen = false
   }
@@ -137,49 +138,64 @@
   >
   <div class="relative">
     <div class="flex items-center justify-between">
-      <input
-        disabled={isDisabled}
-        {id}
-        {name}
-        use:stopTyping
-        on:stopTyping
-        placeholder={options.find((option) => option.value === value)?.label || placeholder}
-        bind:this={inputRef}
-        required={isRequired}
-        bind:value={searchValue}
-        on:click={() => {
-          if (!isOptionsOpen) {
-            isOptionsOpen = true
-            searchValue = ``
-          }
-        }}
-        on:keyup={(e) => {
-          if (e.key === `Escape` || e.key === `Tab`) {
-            return
-          }
-          if (isOptionsOpen && e.key === `Enter`) {
-            const matchingOptions = options.filter((option) =>
-              option.label.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            if (matchingOptions.length === 1) {
-              onSelect(matchingOptions[0])
+      {#if options.length > 0}
+        <input
+          disabled={isDisabled}
+          {id}
+          {name}
+          use:stopTyping
+          on:stopTyping
+          placeholder={options.find((option) => option.value === value)?.label || placeholder}
+          bind:this={inputRef}
+          required={isRequired}
+          bind:value={searchValue}
+          on:click={() => {
+            if (!isOptionsOpen) {
+              isOptionsOpen = true
+              searchValue = ``
+            }
+          }}
+          on:keyup={(e) => {
+            if (e.key === `Escape` || e.key === `Tab`) {
               return
             }
-          }
-          if (!isOptionsOpen) {
-            isOptionsOpen = true
-            searchValue = ``
-          }
-        }}
-        type="text"
-        class={twMerge(
-          `w-full rounded-md border-none bg-white p-2 text-sm outline-none`,
-          inputClass
-        )}
-        role="combobox"
-        aria-controls="options"
-        aria-expanded="false"
-      />
+            if (isOptionsOpen && e.key === `Enter`) {
+              const matchingOptions = options.filter((option) =>
+                option.label.toLowerCase().includes(searchValue.toLowerCase())
+              )
+              if (matchingOptions.length === 1) {
+                onSelect(matchingOptions[0])
+                return
+              }
+            }
+            if (!isOptionsOpen) {
+              isOptionsOpen = true
+              searchValue = ``
+            }
+          }}
+          type="text"
+          class={twMerge(
+            `w-full rounded-md border-none bg-white p-2 text-sm outline-none`,
+            inputClass
+          )}
+          role="combobox"
+          aria-controls="options"
+          aria-expanded="false"
+        />
+      {:else if isLoading}
+        <div class="flex items-center gap-1 py-1.5 text-sm text-gray-500">
+          <LoadingSpinnerIcon class="text-{color}-500 mr-2" />
+          Loading options...
+        </div>
+      {:else}
+        <div class="flex items-center gap-1 py-1.5 text-sm text-gray-500">
+          <ExclamationCircleIcon class="text-red-500" />
+          No options available
+        </div>
+        {#if $$slots.addNew}
+          <slot name="addNew" {searchValue} {onClose} />
+        {/if}
+      {/if}
 
       <slot />
 
@@ -189,18 +205,7 @@
         </div>
       {/if}
       {#if !hideIcon}
-        <button
-          disabled={isDisabled}
-          type="button"
-          on:click={() => {
-            isOptionsOpen = true
-            searchValue = ``
-          }}
-          class="flex items-center rounded-r-md px-2 focus:outline-none"
-          tabindex="-1"
-        >
-          <ChevronUpDownIcon class="text-{color}-400" />
-        </button>
+        <ChevronUpDownIcon class="text-{color}-400" />
       {/if}
     </div>
     {#if error}
@@ -321,10 +326,6 @@
     color: #e32;
     content: " *";
     display: isInline;
-  }
-
-  button {
-    color: var(--button-color);
   }
 
   .options {
