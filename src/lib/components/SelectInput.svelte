@@ -55,9 +55,15 @@
   let searchValue = options.find((option) => option.value === value)?.label || ``
 
   $: if (!isLoading && !searchValue && !isOptionsOpen) {
-    const initialValue = options.find((option) => option.value === value)
+    let initialValue = options.find((option) => option.value === value)
     if (initialValue) {
       searchValue = initialValue.label
+    } else {
+      // find with option.label if value is not found
+      initialValue = options.find((option) => option.label === value)
+      if (initialValue) {
+        searchValue = initialValue.label
+      }
     }
   }
 
