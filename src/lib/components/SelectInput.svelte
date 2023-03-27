@@ -54,7 +54,7 @@
 
   let searchValue = options.find((option) => option.value === value)?.label || ``
 
-  $: if (options.length || value) {
+  $: if (options.length && !isOptionsOpen) {
     searchValue =
       options.find((option) => option.value === value || option.label === value)?.label || ``
   }
