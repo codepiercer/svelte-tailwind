@@ -67,7 +67,7 @@
     >
   {/if}
 
-  <div class="pr-8">
+  <div class={twMerge(`pr-8`, displayClass)}>
     <slot>
       <span class={twMerge(`px-1 text-sm`, displayClass)}>
         {options
