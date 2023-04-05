@@ -66,7 +66,7 @@
     let:searchValue
     let:onClose
     on:click={() => onAddNew(searchValue)}
-    ><PlusIcon class="mr-1 -ml-2" />
+    ><PlusIcon class="-ml-2 mr-1" />
     add value: {searchValue}</Button
   >
 </SelectInput>

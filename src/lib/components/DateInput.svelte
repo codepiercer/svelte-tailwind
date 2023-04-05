@@ -142,7 +142,7 @@
     </Button>
   </div>
 
-  <div slot="content" class="-mt-4 -mb-2 flex flex-col items-center justify-center gap-4">
+  <div slot="content" class="-mb-2 -mt-4 flex flex-col items-center justify-center gap-4">
     <input
       {name}
       bind:this={inputRef}

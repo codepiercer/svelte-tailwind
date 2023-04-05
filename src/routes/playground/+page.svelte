@@ -532,7 +532,7 @@
       >
         <Button slot="trigger" on:click={onOpen} {...triggerProps} color="green" variant="outlined">
           <span>Open Menu</span>
-          <ChevronDownIcon class="ml-2 -mr-1" aria-hidden="true" />
+          <ChevronDownIcon class="-mr-1 ml-2" aria-hidden="true" />
         </Button>
         <div slot="content" class="min-w-[12rem]">
           <div class="mb-1 divide-y divide-gray-100" role="none">
