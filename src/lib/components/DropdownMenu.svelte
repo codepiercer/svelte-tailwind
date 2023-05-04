@@ -2,6 +2,7 @@
   export let isOpen = false
   export let color = `blue` // blue, red, green, yellow, gray
   export let placement = `bottom-left` // top-left, top-center, top-right, bottom-left, bottom-center, bottom-right
+  export let menuItemClasses = ``
 
   import { cubicOut } from "svelte/easing"
   import { twMerge } from "tailwind-merge"
@@ -27,7 +28,6 @@
   }
 
   const onClose = () => {
-    document.getElementById(id).focus()
     isOpen = false
   }
 
@@ -113,7 +113,10 @@
       <slot
         name="content"
         menuItemProps={{
-          class: `menu-item block rounded-md px-4 py-3 m-1 text-sm focus:outline-none active:bg-gray-100`,
+          class: twMerge(
+            `menu-item block rounded-md px-4 py-3 m-1 text-sm focus:outline-none active:bg-gray-100`,
+            menuItemClasses
+          ),
           tabindex: `-1`,
           role: `menuitem`
         }}
