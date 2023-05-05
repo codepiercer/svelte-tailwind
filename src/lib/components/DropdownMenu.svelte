@@ -85,7 +85,7 @@
   }
 </script>
 
-<div class="relative inline-flex items-center justify-center" on:keydown={onKeyDown}>
+<div class="relative inline-flex flex-1 items-center justify-center" on:keydown={onKeyDown}>
   <slot
     name="trigger"
     triggerProps={{
